@@ -1,0 +1,115 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(cd:*)",
+      "Bash(chmod:*)",
+      "Bash(chmod:*)",
+      "Bash(cp:*)",
+      "Bash(curl:*)",
+      "Bash(diff:*)",
+      "Bash(docker:*)",
+      "Bash(du:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(gh:*)",
+      "Bash(git:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(less:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(pip3:*)",
+      "Bash(pip:*)",
+      "Bash(pwd:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(rm:*)",
+      "Bash(tail:*)",
+      "Bash(touch:*)",
+      "Bash(tree:*)",
+      "Bash(tree:*)",
+      "Bash(tsx:*)",
+      "Bash(wc:*)",
+      "Bash(wget:*)",
+      "Bash(which:*)",
+      "BashOutput(*)",
+      "Edit(*)",
+      "ExitPlanMode(*)",
+      "Fetch(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "KillShell(*)",
+      "Ls(*)",
+      "MultiEdit(*)",
+      "NotebookEdit(*)",
+      "Read(*)",
+      "SlashCommand(*)",
+      "Task(*)",
+      "TodoRead(*)",
+      "TodoWrite(*)",
+      "Update(*)",
+      "Write(*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./build)"
+    ]
+  },
+  "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "beads@beads-marketplace": true,
+    "git-workflow@claude-code-templates": true,
+    "pr-review-toolkit@claude-code-plugins": true,
+    "commit-commands@claude-code-plugins": true
+  },
+  "alwaysThinkingEnabled": true,
+  "mcpServers": {
+    "private-journal": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "github:obra/private-journal-mcp"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {},
+      "type": "stdio"
+    },
+    "groundcover": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@0.1.8",
+        "https://mcp.groundcover.com/api/mcp",
+        "54278",
+        "--header",
+        "X-Timezone:Europe/London",
+        "--header",
+        "X-Tenant-UUID:042b3cb9-ab4a-492b-9d88-9551d7ebcf6f",
+        "--header",
+        "X-Backend-Id:groundcover"
+      ],
+      "env": {}
+    }
+  }
+}

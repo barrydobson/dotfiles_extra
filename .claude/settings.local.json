@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fd:*)",
+      "Bash(rg:*)",
+      "Bash(make:*)",
+      "Bash(zsh -c 'source ~/.config/zsh/.zshrc && alias | grep -E \"\"^(g|lg|gs|vi|k|ta)=\"\" | head -10')",
+      "Bash(zsh -c 'source ~/.config/zsh/.zshrc && echo \"\"=== Testing aliases ===\"\" && alias | grep -E \"\"^(g|lg|vi|k)=\"\" | head -5 && echo -e \"\"\\n=== Testing environment ===\"\" && echo \"\"EDITOR=$EDITOR\"\" && echo \"\"XDG_CONFIG_HOME=$XDG_CONFIG_HOME\"\" && echo -e \"\"\\n=== Testing tools ===\"\" && command -v zoxide && command -v starship && echo -e \"\"\\n=== Shell loaded successfully ===\"\" ')",
+      "Bash(zsh -c 'source ~/.config/zsh/.zshrc 2>&1 && echo \"\"=== Testing aliases ===\"\" && alias | grep -E \"\"^(g|lg|vi|ls|cat)=\"\" | head -6 && echo -e \"\"\\n=== Testing environment ===\"\" && echo \"\"EDITOR=$EDITOR\"\" && echo \"\"HISTSIZE=$HISTSIZE\"\" && echo -e \"\"\\n=== Testing tools ===\"\" && command -v zoxide >/dev/null && echo \"\"✓ zoxide\"\" && command -v starship >/dev/null && echo \"\"✓ starship\"\" && echo -e \"\"\\n=== Testing NVM lazy-load ===\"\" && type nvm | head -1 && echo -e \"\"\\n=== Shell loaded successfully ===\"\" ')"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

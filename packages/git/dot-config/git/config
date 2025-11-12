@@ -1,0 +1,83 @@
+# -----------------------------------------------------------------------------
+# Repository Initialization
+# -----------------------------------------------------------------------------
+[init]
+	# Set the default branch name for new repositories
+	defaultBranch = main
+
+# -----------------------------------------------------------------------------
+# Core Git Settings
+# -----------------------------------------------------------------------------
+[core]
+	# Specify a global ignore file
+	excludesfile = ~/.config/git/.gitignore_global
+	# Use delta as the pager for improved diff display
+	pager = delta
+
+# -----------------------------------------------------------------------------
+# Diff and Merge Configuration
+# -----------------------------------------------------------------------------
+[diff]
+	# Detect and highlight moved lines in diffs
+	colorMoved = default
+
+[merge]
+	# Show conflicts in merge style for better conflict resolution
+	conflictstyle = merge
+
+# -----------------------------------------------------------------------------
+# Delta Pager Configuration
+# -----------------------------------------------------------------------------
+[delta]
+	# Enable navigation in delta diff viewer
+	navigate = true
+	# Show diffs side by side instead of unified view
+	side-by-side = true
+	# Use the catppuccin-mocha theme for delta
+	features = catppuccin-mocha
+
+[interactive]
+	# Configure delta for interactive mode with color
+	diffFilter = delta --color-only
+
+# -----------------------------------------------------------------------------
+# Git Operations Behavior
+# -----------------------------------------------------------------------------
+[pull]
+	# Always rebase when pulling instead of merging to maintain linear history
+	rebase = true
+
+[fetch]
+  prune = true
+
+[push]
+  autoSetupRemote = true
+  default = upstream
+  followTags = true
+
+[rebase]
+  autosquash = true
+
+# -----------------------------------------------------------------------------
+# Security and Signing
+# -----------------------------------------------------------------------------
+[gpg]
+	# Use SSH format for GPG signing
+	format = ssh
+
+[commit]
+	# Enable GPG signing for all commits
+	gpgsign = true
+
+# -----------------------------------------------------------------------------
+# External Configuration Includes
+# -----------------------------------------------------------------------------
+[include]
+	# Include aliases from a separate file
+	path = ~/.config/git/.gitalias
+	# Include delta color theme configuration
+	path = ~/.config/delta/themes/catppuccin.gitconfig
+	# Include local configuration
+	path = ~/.config/git/.gitconfig-local
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers

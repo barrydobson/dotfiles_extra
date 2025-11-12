@@ -1,0 +1,8 @@
+[[ssh-keys]]
+item = "Git Authentication Key"
+vault = "work"
+
+# Add my Git signing key from my Work vault
+[[ssh-keys]]
+item = "Git Signing Key"
+vault = "work"

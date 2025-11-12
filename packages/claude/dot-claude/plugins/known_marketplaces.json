@@ -1,0 +1,50 @@
+{
+  "claude-code-workflows": {
+    "source": {
+      "source": "github",
+      "repo": "wshobson/agents"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-workflows",
+    "lastUpdated": "2025-11-10T10:02:03.982Z"
+  },
+  "claude-code-templates": {
+    "source": {
+      "source": "github",
+      "repo": "davila7/claude-code-templates"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-templates",
+    "lastUpdated": "2025-11-12T14:39:14.317Z"
+  },
+  "beads-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "steveyegge/beads"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/beads-marketplace",
+    "lastUpdated": "2025-11-12T14:39:10.145Z"
+  },
+  "superpowers-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "obra/superpowers-marketplace"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/superpowers-marketplace",
+    "lastUpdated": "2025-11-10T12:08:21.263Z"
+  },
+  "claudeforge-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "claudeforge/marketplace"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claudeforge-marketplace",
+    "lastUpdated": "2025-11-10T13:44:30.120Z"
+  },
+  "claude-code-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-code"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-plugins",
+    "lastUpdated": "2025-11-12T14:39:17.908Z"
+  }
+}

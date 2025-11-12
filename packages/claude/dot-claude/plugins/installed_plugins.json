@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "plugins": {
+    "beads@beads-marketplace": {
+      "version": "0.23.1",
+      "installedAt": "2025-11-10T09:59:53.994Z",
+      "lastUpdated": "2025-11-10T09:59:53.994Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/beads-marketplace/",
+      "gitCommitSha": "deaa463d2917a18d5d60985c05f2773b4e0f8147",
+      "isLocal": true
+    },
+    "git-workflow@claude-code-templates": {
+      "version": "unknown",
+      "installedAt": "2025-11-10T09:59:53.994Z",
+      "lastUpdated": "2025-11-10T09:59:53.994Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-templates/",
+      "gitCommitSha": "40cd2c9ec03af022d4629c3a74b242b01f8ddf48",
+      "isLocal": true
+    },
+    "javascript-typescript@claude-code-workflows": {
+      "version": "unknown",
+      "installedAt": "2025-11-10T10:27:42.904Z",
+      "lastUpdated": "2025-11-10T10:27:42.904Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-workflows/plugins/javascript-typescript",
+      "gitCommitSha": "75811421044c96883ec6fdca2aa7c18c92373831",
+      "isLocal": true
+    },
+    "pr-review-toolkit@claude-code-plugins": {
+      "version": "1.0.0",
+      "installedAt": "2025-11-10T15:11:33.931Z",
+      "lastUpdated": "2025-11-10T15:11:33.931Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-plugins/plugins/pr-review-toolkit",
+      "gitCommitSha": "970fff49e23a1da4d6790dada89d688435986970",
+      "isLocal": true
+    },
+    "commit-commands@claude-code-plugins": {
+      "version": "1.0.0",
+      "installedAt": "2025-11-10T17:16:30.758Z",
+      "lastUpdated": "2025-11-10T17:16:30.758Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-plugins/plugins/commit-commands",
+      "gitCommitSha": "970fff49e23a1da4d6790dada89d688435986970",
+      "isLocal": true
+    },
+    "code-refactoring@claude-code-workflows": {
+      "version": "unknown",
+      "installedAt": "2025-11-11T08:08:01.146Z",
+      "lastUpdated": "2025-11-11T08:08:01.146Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-workflows/plugins/code-refactoring",
+      "gitCommitSha": "75811421044c96883ec6fdca2aa7c18c92373831",
+      "isLocal": true
+    },
+    "docker-specialist@claudeforge-marketplace": {
+      "version": "1.0.0",
+      "installedAt": "2025-11-11T09:48:52.627Z",
+      "lastUpdated": "2025-11-11T09:48:52.627Z",
+      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/claudeforge-marketplace/plugins/agents/docker-specialist",
+      "gitCommitSha": "8c0ddf7bcd8ed4072ffefc7098a116160a133927",
+      "isLocal": true
+    }
+  }
+}

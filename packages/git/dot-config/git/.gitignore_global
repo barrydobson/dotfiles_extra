@@ -7,3 +7,5 @@ out/
 *.hprof
 *.hprof.*
 .java-version
+.mise.local.toml
+.claude/settings.local.json

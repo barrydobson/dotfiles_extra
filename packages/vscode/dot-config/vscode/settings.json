@@ -29,7 +29,7 @@
   },
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.fontSize": 13,
   "editor.formatOnPaste": true,
@@ -73,7 +73,7 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.enablePersistentSessions": false,
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.macOptionClickForcesSelection": true,
   "terminal.integrated.profiles.linux": {

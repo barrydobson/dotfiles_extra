@@ -1,5 +1,5 @@
 k9s:
-  liveViewAutoRefresh: false
+  liveViewAutoRefresh: true
   refreshRate: 2
   maxConnRetry: 5
   readOnly: false
@@ -7,9 +7,9 @@ k9s:
   ui:
     enableMouse: true
     headless: false
-    logoless: false
-    crumbsless: false
-    reactive: false
+    logoless: true
+    crumbsless: true
+    reactive: true
     noIcons: false
     skin: catppuccin-mocha
   skipLatestRevCheck: false

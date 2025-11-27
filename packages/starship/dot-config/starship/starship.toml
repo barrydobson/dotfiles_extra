@@ -1,46 +1,172 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+format = """$env_var$os$username$hostname$directory $fill\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$kubernetes\
+$docker_context\
+$golang\
+$helm\
+$nodejs\
+$python\
+$terraform\
+$aws\
+$direnv\
+$custom\
+$cmd_duration\
+$status\
+$container\
+$shell
+$character
+"""
 add_newline = false
-# A minimal left prompt
-format = """$directory$character"""
 palette = "catppuccin_mocha"
-# move the rest of the prompt to the right
-right_format = """$all"""
+# right_format = """
+# $git_branch\
+# $git_commit\
+# $git_state\
+# $git_metrics\
+# $git_status\
+# $kubernetes\
+# $docker_context\
+# $golang\
+# $helm\
+# $nodejs\
+# $python\
+# $terraform\
+# $aws\
+# $direnv\
+# $custom\
+# $cmd_duration\
+# $status\
+# $container\
+# $shell
+# """
+
 command_timeout = 1000
 
+[fill]
+symbol = ' '
+style = ''
+
 [character]
-success_symbol = '[➜](bold green)'
+success_symbol = "╰⎯"
+error_symbol = "╰⎯"
+# ╭╴ ╰─
 
-[directory.substitutions]
+[env_var]
+symbol = "╭╴"
+variable = 'SHELL'
+format = "$symbol"
+disabled = false
 
+[os]
+format = '[$symbol](bold white) '
+disabled = false
+
+[os.symbols]
+Windows = ' '
+Arch = '󰣇'
+Ubuntu = ''
+Macos = '󰀵'
+Unknown = '󰠥'
+
+# Shows the username
+[username]
+style_user = 'yellow bold'
+style_root = 'black bold'
+format = '[//](black bold) [$user](#2883ff) ' # 2883ff
+disabled = false
+show_always = false
+
+# Shows the hostname
+[hostname]
+ssh_only = true
+format = '[//](black bold) [$hostname](bold blue) '
+disabled = false
+
+# Shows current directory
+[directory]
+# truncation_length = 0
+truncation_symbol = '…/'
+home_symbol = '~'
+read_only = '  '
+format = '[//](black bold) [$path]($style)[$read_only]($read_only_style) '
+style = '#7ed1fb' # yellow bold
+
+# Shows current git branch
 [git_branch]
-format =  '[$symbol$branch(:$remote_branch)]($style)'
+symbol = ' '
+format = '[//](black bold) [$symbol\[$branch\](:$remote_branch)]($style) '
+# truncation_length = 0
+# truncation_symbol = '…/'
+style = 'bold green'
 
+# Shows current git status
 [git_status]
+disabled = true
+format = '[$all_status $ahead_behind]($style) '
+style = 'bold green'
+conflicted = ' 🏳'
+up_to_date = ''
+untracked = ' '
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
-format = '([\[$all_status$ahead_behind\]]($style) )'
+stashed = ' '
+modified = ' '
+staged = '[++\($count\)](green)'
+renamed = ' 襁'
+deleted = ' '
+
+# Shows kubernetes context and namespace
+[kubernetes]
+symbol = ' '
+format = '[//](black bold) [$symbol$context\($namespace\)](bold red) '
+disabled = false
+# contexts = []
 
 [aws]
-format = '[$symbol$profile]($style)'
+format = '[//](black bold) [$symbol$profile]($style)'
 disabled = false
-style = 'bold blue'
-symbol = " "
+style = 'bold peach'
+symbol = " "
 
 [golang]
-format = '[ ](bold cyan)'
+format = '[//](black bold) [ ](bold cyan)'
 
-[kubernetes]
-symbol = '☸ '
+[vagrant]
 disabled = true
-detect_files = ['Dockerfile']
-format = '[$symbol$context( \($namespace\))]($style) '
-contexts = [
-]
 
 [docker_context]
 disabled = true
+
+[helm]
+disabled = true
+
+[python]
+symbol = '󰌠'
+python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
+format = '[//](black bold) [${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '
+
+[nodejs]
+disabled = false
+format = '[//](black bold) [$symbol($version )](bold yellow)'
+
+[ruby]
+disabled = true
+
+[terraform]
+disabled = true
+
+[custom.claude]
+detect_files = ["CLAUDE.md"]
+detect_folders = [".claude"]
+symbol = "󱙺"
+format = '[//](black bold) [$symbol Claude](#d97757) '
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

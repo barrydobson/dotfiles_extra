@@ -20,7 +20,6 @@ Rule #1: If you want exception to ANY rule, YOU MUST STOP and get explicit permi
 - Be boring in your implementation!  An expert should be able to read the implementation and think "obviously this is how it's done"
 - Do NOT guess!  Search the web if you're unsure, or ASK
 - Do NOT skip steps or ignore work so you can move to the next task!  It's better to stop completely than to continue doing work that is incorrect.
-- We track work in Beads instead of Markdown. Run bd quickstart to see how.
 
 ## Our relationship
 
@@ -257,7 +256,6 @@ Follow these guidelines when writing the body of the pull request:
 - Do not include a "Summary" heading
 - Do not mention the test plan
 - Include a section in the PR body called "Testing locally" that includes instructions for cloning the repo with gh, checking out the branch, setting up the environment, and reproducing the changes from the PR.
-- Include a section at the end of the PR body called "Prompts" that combines all user prompts verbatim from the Claude Code session as a blockquote
 - If there is a Linear ticket or GitHub issue, include a link to the ticket or issue in the PR body.
 
 ## Style guide

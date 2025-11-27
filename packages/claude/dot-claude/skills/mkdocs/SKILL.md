@@ -1,3 +1,8 @@
+---
+name: mkdocs
+description: Best practices for developing documentation using mkdocs.
+---
+
 # mkdocs Best Practices
 
 This document provides comprehensive guidelines for developing documentation using mkdocs. It covers various aspects including code organization, common patterns, performance, security, testing, common pitfalls, and tooling.

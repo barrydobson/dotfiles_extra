@@ -15,14 +15,6 @@
     "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-templates",
     "lastUpdated": "2025-11-12T14:39:14.317Z"
   },
-  "beads-marketplace": {
-    "source": {
-      "source": "github",
-      "repo": "steveyegge/beads"
-    },
-    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/beads-marketplace",
-    "lastUpdated": "2025-11-12T14:39:10.145Z"
-  },
   "superpowers-marketplace": {
     "source": {
       "source": "github",

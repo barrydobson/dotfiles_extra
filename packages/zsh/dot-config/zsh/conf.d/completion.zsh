@@ -65,6 +65,11 @@ setup_completions() {
     command -v docker >/dev/null 2>&1 && docker completion zsh > "$comp_dir/_docker"
     command -v helm >/dev/null 2>&1 && helm completion zsh > "$comp_dir/_helm"
 
+    # Other Tools
+    command -v uv >/dev/null 2>&1 && uv generate-shell-completion zsh > "$comp_dir/_uv"
+    command -v uvx >/dev/null 2>&1 && uvx --generate-shell-completion zsh > "$comp_dir/_uvx"
+    command -v mise >/dev/null 2>&1 && mise completion zsh > "$comp_dir/_mise"
+
     # Uncomment if you use these tools:
     # command -v kubectx >/dev/null 2>&1 && kubectx completion zsh > "$comp_dir/_kubectx"
     # command -v kubens >/dev/null 2>&1 && kubens completion zsh > "$comp_dir/_kubens"
@@ -72,9 +77,6 @@ setup_completions() {
 
     # AWS tools (will be set up by OMZP::aws plugin in plugins.zsh)
     # Note: AWS completions are handled by Oh My Zsh aws plugin
-
-    # JavaScript package managers
-    command -v pnpm >/dev/null 2>&1 && pnpm install-completion >/dev/null 2>&1
 
     # Add completion directory to fpath
     fpath=("$comp_dir" $fpath)
@@ -121,19 +123,3 @@ bindkey '^[f' forward-word
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
-#=============================================================================
-# Utility Functions
-#=============================================================================
-
-# Smart package manager runner - detects lockfile and uses appropriate tool
-run() {
-    if [[ -f pnpm-lock.yaml ]]; then
-        command pnpm "$@"
-    elif [[ -f yarn.lock ]]; then
-        command yarn "$@"
-    elif [[ -f package-lock.json ]]; then
-        command npm "$@"
-    else
-        command pnpm "$@"  # Default to pnpm
-    fi
-}

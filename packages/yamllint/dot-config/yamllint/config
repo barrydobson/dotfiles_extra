@@ -1,0 +1,11 @@
+---
+locale: en_GB.UTF-8
+extends: default
+
+rules:
+  document-start: disable
+  line-length:
+    max: 100
+    level: warning
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true

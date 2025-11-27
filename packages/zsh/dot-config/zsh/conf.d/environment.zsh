@@ -60,10 +60,6 @@ add_to_path "/opt/nvim/bin"
 add_to_path "$HOME/go/bin"
 add_to_path "/opt/homebrew/bin"
 
-# Package manager paths
-export PNPM_HOME="$HOME/.local/share/pnpm"
-add_to_path "$PNPM_HOME"
-
 #=============================================================================
 # Local Environment
 #=============================================================================

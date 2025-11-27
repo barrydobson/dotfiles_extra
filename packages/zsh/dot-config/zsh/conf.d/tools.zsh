@@ -17,11 +17,6 @@ if command -v atuin >/dev/null 2>&1; then
     eval "$(atuin init zsh)"
 fi
 
-# Initialize direnv (per-directory environment variables)
-if command -v direnv >/dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
-fi
-
 # Initialize fzf (fuzzy finder)
 if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
@@ -43,53 +38,6 @@ if command -v fd >/dev/null 2>&1; then
 fi
 
 #=============================================================================
-# Version Managers (Lazy-Loaded)
-#=============================================================================
-
-# Lazy-load NVM (Node Version Manager) - only loads when nvm/node/npm is first used
-# This saves 200-500ms on shell startup
-if [[ -d "$HOME/.config/nvm" ]]; then
-    export NVM_DIR="$HOME/.config/nvm"
-
-    # Lazy-load function
-    nvm() {
-        unset -f nvm node npm npx
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-        nvm "$@"
-    }
-
-    # Also lazy-load node, npm, npx
-    node() {
-        unset -f nvm node npm npx
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-        node "$@"
-    }
-
-    npm() {
-        unset -f nvm node npm npx
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-        npm "$@"
-    }
-
-    npx() {
-        unset -f nvm node npm npx
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-        npx "$@"
-    }
-fi
-
-# Load asdf or other version manager environment
-# Note: This appears to be loading from $HOME/.local/bin/env
-# If this causes issues or is no longer needed, it can be removed
-if [[ -f "$HOME/.local/bin/env" ]]; then
-    source "$HOME/.local/bin/env"
-fi
-
-#=============================================================================
 # Load Aliases
 #=============================================================================
 
@@ -98,4 +46,16 @@ if [[ -d $ZDOTDIR/aliases ]]; then
     for alias_file in $ZDOTDIR/aliases/*.zsh; do
         [[ -f "$alias_file" ]] && source "$alias_file"
     done
+fi
+
+if [[ "$TERM_PROGRAM" == "vscode" ]] && command -v code >/dev/null 2>&1; then
+  source "$(code --locate-shell-integration-path zsh)"
+elif [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+fi
+
+if [[ -x "$(command -v mise)" ]]; then
+  export MISE_NODE_COREPACK=1
+
+  eval "$(mise activate zsh)"
 fi

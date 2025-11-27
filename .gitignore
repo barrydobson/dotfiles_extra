@@ -19,6 +19,7 @@ packages/claude/dot-claude/*
 !packages/claude/dot-claude/commands
 !packages/claude/dot-claude/plugins
 !packages/claude/dot-claude/skills
+packages/claude/dot-claude/plugins/marketplaces/*
 
 packages/ccstatusline/**/*.bak
 

@@ -4,7 +4,8 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(cd:*)",
-      "Bash(chmod:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
       "Bash(chmod:*)",
       "Bash(cp:*)",
       "Bash(curl:*)",
@@ -54,7 +55,8 @@
       "TodoRead(*)",
       "TodoWrite(*)",
       "Update(*)",
-      "Write(*)"
+      "Write(*)",
+      "Bash(~/.claude/skills/getting-started/skills-search *)"
     ],
     "deny": [
       "Read(./.env)",
@@ -71,12 +73,11 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "beads@beads-marketplace": true,
     "git-workflow@claude-code-templates": true,
     "pr-review-toolkit@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true
   },
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "mcpServers": {
     "private-journal": {
       "type": "stdio",
@@ -93,23 +94,6 @@
       ],
       "env": {},
       "type": "stdio"
-    },
-    "groundcover": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote@0.1.8",
-        "https://mcp.groundcover.com/api/mcp",
-        "54278",
-        "--header",
-        "X-Timezone:Europe/London",
-        "--header",
-        "X-Tenant-UUID:042b3cb9-ab4a-492b-9d88-9551d7ebcf6f",
-        "--header",
-        "X-Backend-Id:groundcover"
-      ],
-      "env": {}
     }
   }
 }

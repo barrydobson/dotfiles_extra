@@ -1,14 +1,6 @@
 {
   "version": 1,
   "plugins": {
-    "beads@beads-marketplace": {
-      "version": "0.23.1",
-      "installedAt": "2025-11-10T09:59:53.994Z",
-      "lastUpdated": "2025-11-10T09:59:53.994Z",
-      "installPath": "/Users/barrydobson/.claude/plugins/marketplaces/beads-marketplace/",
-      "gitCommitSha": "deaa463d2917a18d5d60985c05f2773b4e0f8147",
-      "isLocal": true
-    },
     "git-workflow@claude-code-templates": {
       "version": "unknown",
       "installedAt": "2025-11-10T09:59:53.994Z",

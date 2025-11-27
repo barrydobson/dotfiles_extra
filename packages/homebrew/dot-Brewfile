@@ -1,64 +1,59 @@
 tap "aws/tap"
 tap "fluxcd/tap"
 tap "homebrew/autoupdate"
-tap "steveyegge/beads"
+# tap "felixkratz/formulae" # Sketchybar tap
 
 # Core system tools
-brew "zsh"                      # Z shell (though macOS has it by default)
-brew "make"                     # Build tool
-brew "stow"                     # Symlink farm manager
-brew "git"                      # Version control
-brew "curl"                     # HTTP client
-brew "wget"                     # File downloader
 brew "cmake"                    # Build system
-brew "gcc"                      # C compiler
-brew "pinentry-mac"             # Pinentry for GPG
 brew "coreutils"                # GNU core utilities
+brew "curl"                     # HTTP client
+brew "gcc"                      # C compiler
+brew "git"                      # Version control
 brew "gnu-getopt", link: true   # GNU getopt
 brew "gnu-sed"                  # GNU sed
 brew "gnupg"                    # GPG for signing commits
 brew "imagemagick"              # Image conversion and editing
+brew "make"                     # Build tool
+brew "pinentry-mac"             # Pinentry for GPG
+brew "stow"                     # Symlink farm manager
+brew "wget"                     # File downloader
+brew "zsh"                      # Z shell (though macOS has it by default)
+brew "zsh-autosuggestions"      # Zsh autosuggestions
 brew "zsh-completions"          # Zsh completions
 brew "zsh-syntax-highlighting"  # Zsh syntax highlighting
-brew "zsh-autosuggestions"      # Zsh autosuggestions
 
 # Modern CLI tools (replacements for standard tools)
-brew "bat"                # Enhanced cat with syntax highlighting
-brew "eza"                # Modern ls replacement
-brew "zoxide"             # Smart cd command
 brew "atuin"              # Enhanced history manager
-brew "ripgrep"            # Fast grep replacement
-brew "fd"                 # Fast find replacement
-brew "dust"               # Better du replacement
-brew "duf"                # Better df replacement
+brew "bat"                # Enhanced cat with syntax highlighting
 brew "btop"               # Better top replacement
-brew "fzf"                # Fuzzy finder
 brew "doge"               # Modern dig alternative
-brew "starship"           # Cross-shell prompt
+brew "duf"                # Better df replacement
+brew "dust"               # Better du replacement
+brew "eza"                # Modern ls replacement
+brew "fd"                 # Fast find replacement
+brew "fzf"                # Fuzzy finder
 brew "grpcurl"            # cURL for gRPC services
-brew "websocat"           # socat for WebSockets
 brew "procs"              # Process viewer
+brew "ripgrep"            # Fast grep replacement
+brew "starship"           # Cross-shell prompt
+brew "websocat"           # socat for WebSockets
+brew "zoxide"             # Smart cd command
 
 # Development tools
-brew "neovim"             # Text editor
-brew "tmux"               # Terminal multiplexer
-brew "direnv"             # Environment switcher
 brew "git-delta"          # Better git diffs
-brew "python3"            # Python interpreter
 brew "jq"                 # JSON processor
-brew "yq"                 # YAML processor
-brew "asdf"               # Version manager
-brew "lazygit"            # Git UI
-brew "oras"               # OCI registry tool
 brew "k9s"                # Kubernetes CLI UI
+brew "lazygit"            # Git UI
+brew "mise"               # CLI tool to manage tool versions
+brew "neovim"             # Text editor
+brew "oras"               # OCI registry tool
+brew "tmux"               # Terminal multiplexer
+brew "uv"                 # Python version management utility
+brew "yq"                 # YAML processor
 
 # Programming languages and runtimes
-brew "node"               # Node.js (includes npm)
-brew "yarn"               # Yarn package manager
-brew "pnpm"               # PNPM package manager
-brew "typescript"         # TypeScript
-brew "prettier"           # Code formatter
 brew "go"                 # Go language
+brew "prettier"           # Code formatter
 
 # Code quality tools
 brew "shellcheck"         # Shell script linter
@@ -69,9 +64,7 @@ brew "yamllint"           # YAML linter
 brew "awscli"             # AWS CLI
 brew "gh"
 brew "mas"                 # Mac App Store CLI
-
-brew "bd"
-brew "felixkratz/formulae/sketchybar"
+# brew "sketchybar"
 
 # GUI applications
 
@@ -79,17 +72,20 @@ brew "felixkratz/formulae/sketchybar"
 cask "1password"
 cask "1password-cli"
 cask "ghostty"
-cask "visual-studio-code"
+cask "obsidian"
 cask "orbstack"
+cask "raycast"
+cask "visual-studio-code"
 
 # AI
 cask "claude-code"
 
 # Fonts
-cask "font-jetbrains-mono-nerd-font"  # Primary programming font
+cask "font-damion"                    # Design/display font
 cask "font-fira-code-nerd-font"       # Alternative programming font
 cask "font-hack-nerd-font"            # Alternative programming font
-cask "font-damion"                    # Design/display font
+cask "font-jetbrains-mono-nerd-font"  # Primary programming font
+
 
 # cask "httpie-desktop"
 # cask "iterm2"
@@ -101,12 +97,10 @@ cask "font-damion"                    # Design/display font
 
 # mas "1Password for Safari", id: 1569813296
 # mas "CleanMyMac", id: 1339170533
-# mas "djay Pro", id: 450527929
 # mas "FileZilla Pro", id: 1298486723
 # mas "GarageBand", id: 682658836
-# mas "HP", id: 1474276998
 # mas "HP Smart", id: 1474276998
-# mas "iMovie", id: 408981434
+# mas "HP", id: 1474276998
 # mas "Keynote", id: 409183694
 # mas "Microsoft To Do", id: 1274495053
 # mas "Numbers", id: 409203825
@@ -117,47 +111,20 @@ cask "font-damion"                    # Design/display font
 # mas "Xcode", id: 497799835
 # mas "Xerox Print and Scan Experience", id: 6443456959
 # mas "Yubico Authenticator", id: 1497506650
+# mas "djay Pro", id: 450527929
+# mas "iMovie", id: 408981434
 
-vscode "1password.op-vscode"
 vscode "adrientoub.base64utils"
-vscode "ahebrank.yaml2json"
-vscode "bierner.github-markdown-preview"
 vscode "catppuccin.catppuccin-vsc"
 vscode "catppuccin.catppuccin-vsc-icons"
-vscode "cybai.yaml-key-viewer"
-vscode "davidanson.vscode-markdownlint"
-vscode "dbaeumer.vscode-eslint"
 vscode "docker.docker"
-vscode "dotenv.dotenv-vscode"
 vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
-vscode "esbenp.prettier-vscode"
-vscode "flesler.url-encode"
-vscode "fnando.linter"
-vscode "foxundermoon.shell-format"
 vscode "github.copilot"
 vscode "github.copilot-chat"
-vscode "github.remotehub"
-vscode "golang.go"
-vscode "hashicorp.hcl"
-vscode "hashicorp.terraform"
-vscode "humao.rest-client"
-vscode "jinliming2.vscode-go-template"
 vscode "kamikillerto.vscode-colorize"
-vscode "miguelsolorio.fluent-icons"
-vscode "milovidov.escape-quotes"
 vscode "ms-azuretools.vscode-containers"
-vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode-remote.vscode-remote-extensionpack"
-vscode "ms-vscode.makefile-tools"
-vscode "ms-vscode.remote-explorer"
-vscode "ms-vscode.remote-repositories"
-vscode "ms-vscode.remote-server"
 vscode "redhat.vscode-yaml"
 vscode "richie5um2.vscode-sort-json"
-vscode "ronnidc.nunjucks"
-vscode "sanjulaganepola.github-local-actions"
 vscode "tyriar.sort-lines"

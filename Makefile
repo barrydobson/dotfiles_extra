@@ -20,7 +20,8 @@ MODULES ?=
 TARGETS := $(if $(strip $(MODULES)),$(MODULES),$(SUBDIRS))
 
 # Default stow args (override with: make STOW_ARGS="-v -t ~")
-STOW_ARGS ?= -v
+# Always target home directory explicitly
+STOW_ARGS ?= -v -t $(HOME)
 
 #=============================================================================
 # Targets

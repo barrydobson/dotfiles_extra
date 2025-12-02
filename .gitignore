@@ -4,24 +4,26 @@ brew-installed*
 Session.vim
 **/Session.vim
 
-**/dot-config/git/.gitconfig-private
-**/dot-config/git/.gitconfig-local
+**/.config/git/.gitconfig-private
+**/.config/git/.gitconfig-local
 
-packages/tmux/dot-config/tmux/plugins/*
-packages/tmux/dot-config/tmux/resurrect
-!packages/tmux/dot-config/tmux/plugins/tpm
-packages/tmux/dot-config/tmux/notify/*.pid
+packages/tmux/.config/tmux/plugins/*
+packages/tmux/.config/tmux/resurrect
+!packages/tmux/.config/tmux/plugins/tpm
+packages/tmux/.config/tmux/notify/*.pid
 
-packages/claude/dot-claude/*
-!packages/claude/dot-claude/settings.json
-!packages/claude/dot-claude/CLAUDE.md
-!packages/claude/dot-claude/agents
-!packages/claude/dot-claude/commands
-!packages/claude/dot-claude/plugins
-!packages/claude/dot-claude/skills
-packages/claude/dot-claude/plugins/marketplaces/*
+packages/claude/.claude/*
+!packages/claude/.claude/settings.json
+!packages/claude/.claude/CLAUDE.md
+!packages/claude/.claude/agents
+!packages/claude/.claude/commands
+!packages/claude/.claude/plugins
+!packages/claude/.claude/skills
+packages/claude/.claude/plugins/marketplaces/*
 
 packages/ccstatusline/**/*.bak
 
-packages/zsh/dot-config/zsh/.zsh_history
-packages/zsh/dot-config/zsh/.zprofile
+packages/zsh/.config/zsh/.zsh_history
+packages/zsh/.config/zsh/.zprofile
+
+.claude/settings.local.json

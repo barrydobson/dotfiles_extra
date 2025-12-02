@@ -166,8 +166,8 @@ install_official_packages() {
     local all_packages=(
         "${core_packages[@]}"
         "${cli_tools[@]}"
-        "${dev_tools[@]}"
-        "${terminals[@]}"
+        # "${dev_tools[@]}"      # Commented out above
+        # "${terminals[@]}"       # Commented out above
         "${fonts[@]}"
         "${git_tools[@]}"
     )
@@ -530,9 +530,15 @@ post_install_setup() {
 
     # Change default shell to zsh if not already set
     if [[ "${SHELL}" != */zsh ]]; then
-        print_status "Changing default shell to zsh..."
-        chsh -s "$(which zsh)"
-        print_success "Default shell changed to zsh (restart required)"
+        print_status "Attempting to change default shell to zsh..."
+        local zsh_path
+        zsh_path=$(command -v zsh)
+        if chsh -s "${zsh_path}" 2>/dev/null; then
+            print_success "Default shell changed to zsh (restart required)"
+        else
+            print_warning "Could not change default shell automatically (requires authentication)"
+            print_warning "To change shell manually, run: chsh -s ${zsh_path}"
+        fi
     else
         print_status "Default shell is already zsh"
     fi
@@ -544,19 +550,25 @@ post_install_setup() {
 
     # Create symlinks for commands that have different names on Ubuntu
     if [[ ! -L "${HOME}/.local/bin/fd" ]] && command -v fdfind >/dev/null 2>&1; then
-        ln -s "$(which fdfind)" "${HOME}/.local/bin/fd"
+        local fdfind_path
+        fdfind_path=$(command -v fdfind)
+        ln -s "${fdfind_path}" "${HOME}/.local/bin/fd"
         print_status "Created symlink: fd -> fdfind"
     fi
 
     if [[ ! -L "${HOME}/.local/bin/bat" ]] && command -v batcat >/dev/null 2>&1 && ! command -v bat >/dev/null 2>&1; then
-        ln -s "$(which batcat)" "${HOME}/.local/bin/bat"
+        local batcat_path
+        batcat_path=$(command -v batcat)
+        ln -s "${batcat_path}" "${HOME}/.local/bin/bat"
         print_status "Created symlink: bat -> batcat"
     fi
 
     # Create global symlinks if we have sudo access and they don't exist
     if check_sudo_access; then
         if [[ ! -L "/usr/bin/bat" ]] && command -v batcat >/dev/null 2>&1 && ! command -v bat >/dev/null 2>&1; then
-            sudo ln -s "$(which batcat)" /usr/bin/bat
+            local batcat_path
+            batcat_path=$(command -v batcat)
+            sudo ln -s "${batcat_path}" /usr/bin/bat
             print_status "Created global symlink: bat -> batcat"
         fi
     fi

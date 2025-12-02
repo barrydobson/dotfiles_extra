@@ -16,3 +16,4 @@ helmfile = '1.1.9'
 kustomize = '5.8.0'
 kubectx =  '0.9.5'
 kubens = '0.9.5'
+helm = "3.19.2"

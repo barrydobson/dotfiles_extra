@@ -576,14 +576,14 @@ main() {
 
     # Install packages
     install_official_packages
-    install_nodejs
+    # install_nodejs
     install_additional_packages
 
     # Configure tools
     install_node_tools
     install_catppuccin_bat
-    install_lua_lsp
-    install_stylua
+    # install_lua_lsp
+    # install_stylua
 
     # Install additional tools
     install_zinit

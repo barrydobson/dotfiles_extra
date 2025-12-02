@@ -96,4 +96,29 @@ chmod +x "${INSTALL_SCRIPT}"
 # Run the platform-specific installation script
 print_status "Executing: ${INSTALL_SCRIPT}"
 echo ""
-exec "${INSTALL_SCRIPT}" "$@"
+
+if ! "${INSTALL_SCRIPT}" "$@"; then
+    print_error "Platform installation script failed"
+    exit 1
+fi
+
+# Run make stow to deploy dotfiles
+print_status "Deploying dotfiles with 'make stow'..."
+echo ""
+
+if [[ -f "${SCRIPT_DIR}/Makefile" ]]; then
+    if make -C "${SCRIPT_DIR}" stow; then
+        print_success "Dotfiles deployed successfully!"
+    else
+        print_error "Failed to deploy dotfiles with 'make stow'"
+        print_warning "You can manually run: make stow"
+        exit 1
+    fi
+else
+    print_error "Makefile not found in ${SCRIPT_DIR}"
+    print_warning "Please run 'make stow' manually from the dotfiles directory"
+    exit 1
+fi
+
+print_success "Installation complete!"
+print_warning "Note: You may need to restart your terminal or log out/in for all changes to take effect."

@@ -580,7 +580,7 @@ main() {
     install_additional_packages
 
     # Configure tools
-    install_node_tools
+    # install_node_tools
     install_catppuccin_bat
     # install_lua_lsp
     # install_stylua
@@ -588,7 +588,7 @@ main() {
     # Install additional tools
     install_zinit
     install_fzf
-    install_tpm
+    # install_tpm
     install_nerd_font
 
     # Post-installation setup

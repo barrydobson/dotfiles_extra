@@ -73,11 +73,25 @@ check_sudo_access() {
     fi
 }
 
-# Check if running on Ubuntu
-check_ubuntu() {
-    if [[ ! -f /etc/lsb-release ]] || ! grep -q "Ubuntu" /etc/lsb-release; then
-        print_error "This script is designed for Ubuntu only."
+# Check if running on a Debian-based system
+check_debian_based() {
+    if ! command -v apt >/dev/null 2>&1; then
+        print_error "This script requires apt package manager (Debian/Ubuntu-based system)."
         exit 1
+    fi
+
+    # Warn if not Ubuntu/Debian, but don't fail
+    if [[ -f /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        case "${ID}" in
+            ubuntu|debian)
+                print_status "Detected ${PRETTY_NAME:-${ID}}"
+                ;;
+            *)
+                print_warning "Not Ubuntu/Debian, but apt is available. Proceeding..."
+                ;;
+        esac
     fi
 }
 
@@ -119,24 +133,24 @@ install_official_packages() {
         "fd-find"            # Fast find replacement (note: command is fdfind)
         "duf"                # Better df replacement
         "fzf"                # Fuzzy finder
-        "zoxide"             # Smart cd command
+        # "zoxide"             # Smart cd command
         "eza"                # Modern ls replacement (from newer Ubuntu versions)
     )
 
     # Development tools
-    local dev_tools=(
-        "neovim"             # Text editor
-        "tmux"               # Terminal multiplexer
-        "direnv"             # Environment switcher
-        "python3"            # Python interpreter
-        "python3-pip"        # Python package manager
-        "luarocks"           # Lua package manager
-    )
+    # local dev_tools=(
+    #     "neovim"             # Text editor
+    #     "tmux"               # Terminal multiplexer
+    #     "direnv"             # Environment switcher
+    #     "python3"            # Python interpreter
+    #     "python3-pip"        # Python package manager
+    #     "luarocks"           # Lua package manager
+    # )
 
     # Terminal emulators
-    local terminals=(
-        "alacritty"          # GPU-accelerated terminal
-    )
+    # local terminals=(
+    #     "alacritty"          # GPU-accelerated terminal
+    # )
 
     # Fonts
     local fonts=(
@@ -263,8 +277,10 @@ install_additional_packages() {
     # Install lazygit
     if ! command -v lazygit >/dev/null 2>&1; then
         print_status "Installing lazygit..."
-        local lazygit_version=$(get_latest_release "jesseduffield/lazygit")
-        local arch_name=$(detect_arch)
+        local lazygit_version
+        lazygit_version=$(get_latest_release "jesseduffield/lazygit")
+        local arch_name
+        arch_name=$(detect_arch)
         wget -O /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${lazygit_version}/lazygit_${lazygit_version}_Linux_${arch_name}.tar.gz"
         tar -xzf /tmp/lazygit.tar.gz -C /tmp
         if check_sudo_access; then
@@ -550,10 +566,10 @@ post_install_setup() {
 
 # Main execution
 main() {
-    print_status "Starting Ubuntu dotfiles dependencies installation..."
+    print_status "Starting dotfiles dependencies installation..."
 
     # Check prerequisites
-    check_ubuntu
+    check_debian_based
 
     # Update system
     update_system

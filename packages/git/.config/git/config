@@ -13,6 +13,7 @@
 	excludesfile = ~/.config/git/.gitignore_global
 	# Use delta as the pager for improved diff display
 	pager = delta
+	editor = code --wait
 
 # -----------------------------------------------------------------------------
 # Diff and Merge Configuration

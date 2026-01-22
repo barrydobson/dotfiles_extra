@@ -18,12 +18,18 @@ packages/claude/.claude/*
 !packages/claude/.claude/agents
 !packages/claude/.claude/commands
 !packages/claude/.claude/plugins
+packages/claude/.claude/plugins/cache
+packages/claude/.claude/plugins/marketplaces
 !packages/claude/.claude/skills
+!packages/claude/.claude/hooks
+!packages/claude/.claude/rules
+packages/claude/.claude/skills/.search-log.jsonl
 packages/claude/.claude/plugins/marketplaces/*
 
 packages/ccstatusline/**/*.bak
 
 packages/zsh/.config/zsh/.zsh_history
 packages/zsh/.config/zsh/.zprofile
+packages/zsh/.config/zsh/.zsh_sessions
 
 .claude/settings.local.json

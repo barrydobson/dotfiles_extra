@@ -1,6 +1,6 @@
 ---
 name: 'go-developer'
-description: 'Instructions for writing Go code following idiomatic Go practices and community standards'
+description: 'Instructions for writing Go code following idiomatic Go practices and community standards. Use this when writing or reviewing any code written in Go (Golang).'
 ---
 
 # Go Development Instructions
@@ -185,7 +185,7 @@ Follow idiomatic Go practices and community standards when writing Go code. Thes
   wg.Wait()
   ```
 
- 	- If `go < 1.25`, use the classic `Add`/`Done` pattern
+  - If `go < 1.25`, use the classic `Add`/`Done` pattern
 
 ## Error Handling Patterns
 

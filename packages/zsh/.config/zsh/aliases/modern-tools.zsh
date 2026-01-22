@@ -52,5 +52,7 @@ if [ -x "$(command -v procs)" ]; then
 fi
 
 # doge - modern replacement for dig/dog
-alias dog="doge"
-alias dig="doge"
+if [ -x "$(command -v doge)" ]; then
+  alias dig='doge'
+  alias dog='doge'
+fi

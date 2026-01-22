@@ -4,6 +4,7 @@ tap "homebrew/autoupdate"
 # tap "felixkratz/formulae" # Sketchybar tap
 
 # Core system tools
+brew "ca-certificates"          # CA certificates
 brew "cmake"                    # Build system
 brew "coreutils"                # GNU core utilities
 brew "curl"                     # HTTP client
@@ -24,13 +25,8 @@ brew "zsh-syntax-highlighting"  # Zsh syntax highlighting
 
 # Modern CLI tools (replacements for standard tools)
 brew "atuin"              # Enhanced history manager
-brew "bat"                # Enhanced cat with syntax highlighting
-brew "btop"               # Better top replacement
 brew "doge"               # Modern dig alternative
-brew "duf"                # Better df replacement
-brew "dust"               # Better du replacement
 brew "eza"                # Modern ls replacement
-brew "fd"                 # Fast find replacement
 brew "fzf"                # Fuzzy finder
 brew "grpcurl"            # cURL for gRPC services
 brew "procs"              # Process viewer
@@ -40,30 +36,28 @@ brew "websocat"           # socat for WebSockets
 brew "zoxide"             # Smart cd command
 
 # Development tools
-brew "git-delta"          # Better git diffs
 brew "jq"                 # JSON processor
 brew "k9s"                # Kubernetes CLI UI
-brew "lazygit"            # Git UI
 brew "mise"               # CLI tool to manage tool versions
 brew "neovim"             # Text editor
 brew "oras"               # OCI registry tool
 brew "tmux"               # Terminal multiplexer
 brew "uv"                 # Python version management utility
 brew "yq"                 # YAML processor
+brew "dyff"               # YAML diff tool
 
 # Programming languages and runtimes
 brew "go"                 # Go language
-brew "prettier"           # Code formatter
+brew "golangci-lint"      # Go linter
 
 # Code quality tools
 brew "shellcheck"         # Shell script linter
 brew "shfmt"              # Shell script formatter
-brew "yamllint"           # YAML linter
 
 # Cloud tools (optional)
 brew "awscli"             # AWS CLI
 brew "gh"
-brew "mas"                 # Mac App Store CLI
+brew "mas"                # Mac App Store CLI
 # brew "sketchybar"
 
 # GUI applications
@@ -113,18 +107,3 @@ cask "font-jetbrains-mono-nerd-font"  # Primary programming font
 # mas "Yubico Authenticator", id: 1497506650
 # mas "djay Pro", id: 450527929
 # mas "iMovie", id: 408981434
-
-vscode "adrientoub.base64utils"
-vscode "catppuccin.catppuccin-vsc"
-vscode "catppuccin.catppuccin-vsc-icons"
-vscode "docker.docker"
-vscode "eamodio.gitlens"
-vscode "editorconfig.editorconfig"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "kamikillerto.vscode-colorize"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-vscode-remote.remote-containers"
-vscode "redhat.vscode-yaml"
-vscode "richie5um2.vscode-sort-json"
-vscode "tyriar.sort-lines"

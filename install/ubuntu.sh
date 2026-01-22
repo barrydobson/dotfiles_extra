@@ -413,6 +413,17 @@ install_fzf() {
     fi
 }
 
+install_starship() {
+    print_status "Installing Starship prompt..."
+
+    if ! command -v starship >/dev/null 2>&1; then
+        curl -sS https://starship.rs/install.sh | sh -s -- -y
+        print_success "Starship installed"
+    else
+        print_status "Starship is already installed"
+    fi
+}
+
 # Install TPM (Tmux Plugin Manager)
 install_tpm() {
     print_status "Installing TPM (Tmux Plugin Manager)..."
@@ -602,6 +613,7 @@ main() {
     install_fzf
     # install_tpm
     install_nerd_font
+    install_starship
 
     # Post-installation setup
     post_install_setup

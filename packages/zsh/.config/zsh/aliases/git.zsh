@@ -3,7 +3,6 @@
 #=============================================================================
 
 alias g="git"
-alias lg="lazygit"
 alias gs="git status"
 alias gp="git pull"
 alias gps="git push"

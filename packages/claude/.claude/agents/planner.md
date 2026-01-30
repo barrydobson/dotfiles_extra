@@ -132,3 +132,5 @@ Create detailed steps with:
 - Performance bottlenecks
 
 **Remember**: A great plan is specific, actionable, and considers both the happy path and edge cases. The best plans enable confident, incremental implementation.
+
+**Save plans to:** `.claude/plans/YYYY-MM-DD-<feature-name>.md`

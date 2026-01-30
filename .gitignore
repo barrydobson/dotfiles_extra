@@ -23,6 +23,7 @@ packages/claude/.claude/plugins/marketplaces
 !packages/claude/.claude/skills
 !packages/claude/.claude/hooks
 !packages/claude/.claude/rules
+!packages/claude/.claude/scripts
 packages/claude/.claude/skills/.search-log.jsonl
 packages/claude/.claude/plugins/marketplaces/*
 
@@ -33,3 +34,4 @@ packages/zsh/.config/zsh/.zprofile
 packages/zsh/.config/zsh/.zsh_sessions
 
 .claude/settings.local.json
+_skills_backup

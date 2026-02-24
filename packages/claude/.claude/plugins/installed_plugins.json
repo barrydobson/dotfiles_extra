@@ -90,6 +90,27 @@
         "lastUpdated": "2026-01-22T13:11:26.305Z",
         "gitCommitSha": "1135ac606247648d9e4724f027280d4114282858"
       }
+    ],
+    "obsidian@obsidian-skills": [
+      {
+        "scope": "project",
+        "projectPath": "/Users/barrydobson/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
+        "installPath": "/Users/barrydobson/.claude/plugins/cache/obsidian-skills/obsidian/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-02-10T09:31:34.267Z",
+        "lastUpdated": "2026-02-10T09:31:34.267Z",
+        "gitCommitSha": "34c2cda8b29eaeec6793e342b8b56e96ac29f15c"
+      }
+    ],
+    "example-skills@anthropic-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/barrydobson/.claude/plugins/cache/anthropic-agent-skills/example-skills/1ed29a03dc85",
+        "version": "1ed29a03dc85",
+        "installedAt": "2026-02-16T08:39:29.670Z",
+        "lastUpdated": "2026-02-16T08:39:29.670Z",
+        "gitCommitSha": "1ed29a03dc852d30fa6ef2ca53a67dc2c2c2c563"
+      }
     ]
   }
 }

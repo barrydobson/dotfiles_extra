@@ -37,6 +37,22 @@
       "repo": "anthropics/claude-code"
     },
     "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/claude-code-plugins",
-    "lastUpdated": "2026-01-30T09:13:33.229Z"
+    "lastUpdated": "2026-02-24T08:41:54.101Z"
+  },
+  "obsidian-skills": {
+    "source": {
+      "source": "github",
+      "repo": "kepano/obsidian-skills"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/obsidian-skills",
+    "lastUpdated": "2026-02-10T09:31:21.481Z"
+  },
+  "anthropic-agent-skills": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/skills"
+    },
+    "installLocation": "/Users/barrydobson/.claude/plugins/marketplaces/anthropic-agent-skills",
+    "lastUpdated": "2026-02-16T08:38:49.338Z"
   }
 }

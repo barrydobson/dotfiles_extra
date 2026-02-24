@@ -128,12 +128,8 @@ install_official_packages() {
 
     # Modern CLI tools (replacements for standard tools)
     local cli_tools=(
-        "bat"                # Enhanced cat with syntax highlighting (note: command is batcat)
         "ripgrep"            # Fast grep replacement
-        "fd-find"            # Fast find replacement (note: command is fdfind)
-        "duf"                # Better df replacement
         "fzf"                # Fuzzy finder
-        # "zoxide"             # Smart cd command
         "eza"                # Modern ls replacement (from newer Ubuntu versions)
     )
 

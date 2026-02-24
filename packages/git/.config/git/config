@@ -12,7 +12,7 @@
 	# Specify a global ignore file
 	excludesfile = ~/.config/git/.gitignore_global
 	# Use delta as the pager for improved diff display
-	pager = delta
+	# pager = delta
 	editor = code --wait
 
 # -----------------------------------------------------------------------------
@@ -39,7 +39,7 @@
 
 [interactive]
 	# Configure delta for interactive mode with color
-	diffFilter = delta --color-only
+	# diffFilter = delta --color-only
 
 # -----------------------------------------------------------------------------
 # Git Operations Behavior

@@ -23,6 +23,9 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
 export WORDCHARS=''
 
+export W_PROJECTS_DIR="$HOME/_git"
+export W_WORKTREES_DIR="$HOME/_git-worktrees"
+
 # History configuration
 HISTSIZE=10000000
 HISTFILE=~/.zsh_history
@@ -59,6 +62,7 @@ add_to_path "$HOME/.local/bin"
 add_to_path "/opt/nvim/bin"
 add_to_path "$HOME/go/bin"
 add_to_path "/opt/homebrew/bin"
+add_to_path "${KREW_ROOT:-$HOME/.krew}/bin"
 
 #=============================================================================
 # Local Environment

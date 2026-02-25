@@ -1,5 +1,4 @@
 tap "aws/tap"
-tap "homebrew/bundle"
 tap "homebrew/autoupdate"
 # tap "felixkratz/formulae" # Sketchybar tap
 

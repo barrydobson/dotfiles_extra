@@ -24,6 +24,7 @@ packages/claude/.claude/cache/
 packages/claude/.claude/ide/
 packages/claude/.claude/downloads/
 packages/claude/.claude/plugins/
+packages/claude/.claude/mcp-needs-auth-cache.json
 
 brew-installed*
 *-bak

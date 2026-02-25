@@ -45,7 +45,7 @@ fi
 # kubectl — also registers 'k' alias completion via atload
 zinit ice lucid wait has'kubectl' id-as'kubectl-completion' \
   atclone'kubectl completion zsh > _kubectl' \
-  atpull'%atclone' as'completion' nocompile \
+  atpull'%atclone' as'completion' nocompile
 zinit light zdharma-continuum/null
 
 zinit ice lucid wait has'helm' id-as'helm-completion' \

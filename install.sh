@@ -1,124 +1,147 @@
 #!/bin/bash
 
 # =============================================================================
-# Dotfiles Installation Dispatcher
+# Dotfiles Bootstrap
 # =============================================================================
-# Detects OS and runs the appropriate platform-specific installation script
+# Detects the OS, installs dependencies, stows configs, and installs tools.
 
-set -e  # Exit on any error
+set -e
 
-# Color codes for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./install/common.sh
+source "${DOTFILES_DIR}/install/common.sh"
 
-# Helper functions
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
+# Packages stowed on every platform
+COMMON_PACKAGES=(
+    atuin
+    editorconfig
+    eza
+    git
+    mise
+    nvim
+    starship
+    tmux
+    yamllint
+    zsh
+)
 
-print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
+# Packages stowed on macOS only
+MAC_PACKAGES=(
+    1Password
+    ccstatusline
+    claude
+    homebrew
+    ghostty
+    k9s
+    sketchybar
+    ssh
+    vscode
+)
 
-print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
+GLOBAL_NPM_PACKAGES=(
+    ccstatusline
+)
 
-print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
-
-# Get the directory where this script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="${SCRIPT_DIR}/install"
-
-# Detect OS
-OS_NAME=$(uname -s)
-OS_NAME=$(echo "${OS_NAME}" | tr '[:upper:]' '[:lower:]')
-OS_ARCH=$(uname -m)
-
-print_status "Detected OS: ${OS_NAME} (${OS_ARCH})"
-
-# Determine which installation script to run
-case "${OS_NAME}" in
-    darwin)
-        print_status "Running macOS installation script..."
-        INSTALL_SCRIPT="${INSTALL_DIR}/mac.sh"
-        ;;
-    linux)
-        # Detect Linux distribution
-        if [[ -f /etc/os-release ]]; then
-            # shellcheck disable=SC1091
-            source /etc/os-release
-            DISTRO="${ID:-unknown}"
-
-            case "${DISTRO}" in
-                ubuntu|debian)
-                    print_status "Running Ubuntu/Debian installation script..."
-                    INSTALL_SCRIPT="${INSTALL_DIR}/ubuntu.sh"
-                    ;;
-                arch|manjaro)
-                    print_status "Running Arch Linux installation script..."
-                    INSTALL_SCRIPT="${INSTALL_DIR}/arch-linux.sh"
-                    ;;
-                *)
-                    print_warning "Distribution '${DISTRO}' not directly supported"
-                    print_status "Attempting Ubuntu script (may work for Debian-based distros)..."
-                    INSTALL_SCRIPT="${INSTALL_DIR}/ubuntu.sh"
-                    ;;
-            esac
-        else
-            print_error "Cannot detect Linux distribution (/etc/os-release not found)"
-            print_status "Please run the appropriate script manually from ${INSTALL_DIR}/"
-            exit 1
-        fi
-        ;;
-    *)
-        print_error "Unsupported operating system: ${OS_NAME}"
-        print_status "Supported systems: macOS (darwin), Linux (Ubuntu/Debian/Arch)"
-        print_status "Please run the appropriate script manually from ${INSTALL_DIR}/"
-        exit 1
-        ;;
-esac
-
-# Verify the installation script exists
-if [[ ! -f "${INSTALL_SCRIPT}" ]]; then
-    print_error "Installation script not found: ${INSTALL_SCRIPT}"
-    exit 1
-fi
-
-# Make sure the script is executable
-chmod +x "${INSTALL_SCRIPT}"
-
-# Run the platform-specific installation script
-print_status "Executing: ${INSTALL_SCRIPT}"
-echo ""
-
-if ! "${INSTALL_SCRIPT}" "$@"; then
-    print_error "Platform installation script failed"
-    exit 1
-fi
-
-# Run make stow to deploy dotfiles
-print_status "Deploying dotfiles with 'make stow'..."
-echo ""
-
-if [[ -f "${SCRIPT_DIR}/Makefile" ]]; then
-    if make -C "${SCRIPT_DIR}" stow; then
-        print_success "Dotfiles deployed successfully!"
+detect_os() {
+    if [[ "$(uname)" == "Darwin" ]]; then
+        echo "macos"
+    elif [[ -f /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        echo "${ID}"
     else
-        print_error "Failed to deploy dotfiles with 'make stow'"
-        print_warning "You can manually run: make stow"
+        print_error "Cannot detect OS"
         exit 1
     fi
-else
-    print_error "Makefile not found in ${SCRIPT_DIR}"
-    print_warning "Please run 'make stow' manually from the dotfiles directory"
-    exit 1
-fi
+}
 
-print_success "Installation complete!"
-print_warning "Note: You may need to restart your terminal or log out/in for all changes to take effect."
+stow_packages() {
+    local packages=("$@")
+    print_status "Stowing: ${packages[*]}"
+    cd "${DOTFILES_DIR}/packages" && stow -v -t "${HOME}" "${packages[@]}"
+    cd "${DOTFILES_DIR}"
+    print_success "Packages stowed"
+}
+
+# Install packages from Homebrew. This is called after stowing, so the Brewfile should be in place.
+install_homebrew_packages() {
+    print_status "Installing packages from Homebrew..."
+    local brewfile_path=""
+
+    if [[ -f "${HOME}/.Brewfile" ]]; then
+        brewfile_path="${HOME}/.Brewfile"
+    else
+        print_warning "No Brewfile found, skipping package installation"
+        return
+    fi
+    brew bundle check --file "${brewfile_path}" || brew bundle install --file "${brewfile_path}"
+
+    print_success "Homebrew packages installation completed"
+}
+
+setup_macos_1password() {
+    if command -v op >/dev/null 2>&1; then
+        print_status "1Password CLI is available"
+        return 0
+    else
+        print_warning "1Password CLI is not installed"
+        return 1
+    fi
+    mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+}
+
+install_other_linux() {
+    print_status "Installing tools from mise config..."
+    export PATH="${HOME}/.local/bin:${PATH}"
+    install_starship
+    install_zoxide
+    install_1password_cli
+}
+
+install_npm_packages() {
+    print_status "Installing global npm packages..."
+    mise exec node@lts -- npm install -g "${GLOBAL_NPM_PACKAGES[@]}"
+    # if ! command -v npm >/dev/null 2>&1; then
+    #     print_warning "npm is not installed, skipping global npm packages installation"
+    #     return
+    # fi
+    # npm install -g "${GLOBAL_NPM_PACKAGES[@]}"
+    print_success "Global npm packages installation completed"
+}
+
+main() {
+    local os
+    os=$(detect_os)
+    print_status "Detected OS: ${os}"
+
+    case "${os}" in
+        macos)
+            bash "${DOTFILES_DIR}/install/mac.sh"
+            stow_packages "${COMMON_PACKAGES[@]}" "${MAC_PACKAGES[@]}"
+            install_homebrew_packages
+            setup_macos_1password
+            ;;
+        ubuntu|debian)
+            bash "${DOTFILES_DIR}/install/ubuntu.sh"
+            stow_packages "${COMMON_PACKAGES[@]}"
+            install_other_linux
+            ;;
+        arch|manjaro)
+            bash "${DOTFILES_DIR}/install/arch-linux.sh"
+            stow_packages "${COMMON_PACKAGES[@]}"
+            install_other_linux
+            ;;
+        *)
+            print_error "Unsupported OS: ${os}. Supported: macos, ubuntu, debian, arch"
+            exit 1
+            ;;
+    esac
+
+    install_zinit
+    install_tpm
+    MISE_AQUA_GITHUB_ATTESTATIONS=false mise install
+    # install_npm_packages
+    print_success "Done! Restart your terminal or run: exec zsh"
+}
+
+main "$@"

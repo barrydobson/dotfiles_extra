@@ -1,3 +1,30 @@
+**/.credentials.json
+**/.env
+**/*.key
+**/*.pem
+**/secrets.*
+
+# Claude Code runtime data (machine-specific, ephemeral)
+packages/claude/.claude/history.jsonl
+packages/claude/.claude/stats-cache.json
+packages/claude/.claude/projects/
+packages/claude/.claude/todos/
+packages/claude/.claude/tasks/
+packages/claude/.claude/teams/
+packages/claude/.claude/debug/
+packages/claude/.claude/file-history/
+packages/claude/.claude/shell-snapshots/
+packages/claude/.claude/session-env/
+packages/claude/.claude/sessions/
+packages/claude/.claude/backups/
+packages/claude/.claude/telemetry/
+packages/claude/.claude/statsig/
+packages/claude/.claude/paste-cache/
+packages/claude/.claude/cache/
+packages/claude/.claude/ide/
+packages/claude/.claude/downloads/
+packages/claude/.claude/plugins/
+
 brew-installed*
 *-bak
 
@@ -12,28 +39,29 @@ packages/tmux/.config/tmux/resurrect
 !packages/tmux/.config/tmux/plugins/tpm
 packages/tmux/.config/tmux/notify/*.pid
 
-packages/claude/.claude/*
-!packages/claude/.claude/settings.json
-!packages/claude/.claude/CLAUDE.md
-!packages/claude/.claude/agents
-!packages/claude/.claude/commands
-!packages/claude/.claude/plugins
-packages/claude/.claude/plugins/cache
-packages/claude/.claude/plugins/marketplaces
-!packages/claude/.claude/skills
-!packages/claude/.claude/hooks
-!packages/claude/.claude/rules
-!packages/claude/.claude/scripts
-packages/claude/.claude/skills/.search-log.jsonl
-packages/claude/.claude/plugins/marketplaces/*
+# packages/claude/.claude/*
+# !packages/claude/.claude/settings.json
+# !packages/claude/.claude/CLAUDE.md
+# !packages/claude/.claude/agents
+# !packages/claude/.claude/commands
+# !packages/claude/.claude/plugins
+# packages/claude/.claude/plugins/cache
+# packages/claude/.claude/plugins/marketplaces
+# !packages/claude/.claude/skills
+# !packages/claude/.claude/hooks
+# !packages/claude/.claude/rules
+# !packages/claude/.claude/scripts
+# packages/claude/.claude/skills/.search-log.jsonl
+# packages/claude/.claude/plugins/marketplaces/*
 
 packages/ccstatusline/**/*.bak
 
 packages/zsh/.config/zsh/.zsh_history
 packages/zsh/.config/zsh/.zprofile
 packages/zsh/.config/zsh/.zsh_sessions
+packages/zsh/.config/zsh/.zcompdump
 
 .claude/settings.local.json
 _skills_backup
 
-private-environment.zsh
+99_private-environment.zsh

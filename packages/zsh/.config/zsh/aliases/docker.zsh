@@ -4,7 +4,6 @@
 
 alias d="docker"
 alias dc="docker compose"
-alias dps="docker ps"
 alias di="docker images"
 alias dex="docker exec -it"
 alias dprune="docker system prune -af"

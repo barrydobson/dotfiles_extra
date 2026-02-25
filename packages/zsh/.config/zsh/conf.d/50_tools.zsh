@@ -12,17 +12,15 @@ if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
 
-# Initialize atuin (shell history)
-if command -v atuin >/dev/null 2>&1; then
-    eval "$(atuin init zsh)"
-fi
-
-# Initialize fzf (fuzzy finder)
-if [ -f ~/.fzf.zsh ]; then
+# fzf — key bindings (CTRL-T, ALT-C) and fd-backed completion helpers.
+# Must load before atuin so atuin's CTRL-R binding takes precedence.
+if [[ -n "$HOMEBREW_PREFIX" ]] && [[ -d "$HOMEBREW_PREFIX/opt/fzf" ]]; then
+    source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh" 2>/dev/null
+    source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2>/dev/null
+elif [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
 
-# Configure fd for fzf
 if command -v fd >/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -37,25 +35,26 @@ if command -v fd >/dev/null 2>&1; then
     }
 fi
 
-#=============================================================================
-# Load Aliases
-#=============================================================================
-
-# Load all alias files
-if [[ -d $ZDOTDIR/aliases ]]; then
-    for alias_file in $ZDOTDIR/aliases/*.zsh; do
-        [[ -f "$alias_file" ]] && source "$alias_file"
-    done
+# Initialize atuin (shell history) — loads after fzf so its CTRL-R binding wins
+if command -v atuin >/dev/null 2>&1; then
+    eval "$(atuin init zsh)"
 fi
+
+#=============================================================================
+# Terminal Integration
+#=============================================================================
 
 if [[ "$TERM_PROGRAM" == "vscode" ]] && command -v code >/dev/null 2>&1; then
-  source "$(code --locate-shell-integration-path zsh)"
+    source "$(code --locate-shell-integration-path zsh)"
 elif [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+    source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
 fi
 
-if [[ -x "$(command -v mise)" ]]; then
-  export MISE_NODE_COREPACK=1
+#=============================================================================
+# mise (runtime version manager)
+#=============================================================================
 
-  eval "$(mise activate zsh)"
+if command -v mise >/dev/null 2>&1; then
+    export MISE_NODE_COREPACK=1
+    eval "$(mise activate zsh)"
 fi

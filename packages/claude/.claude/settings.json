@@ -2,116 +2,21 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": [
-      "Bash(cat:*)",
-      "Bash(cd:*)",
-      "Bash(rg:*)",
-      "Bash(fd:*)",
-      "Bash(chmod:*)",
-      "Bash(cp:*)",
-      "Bash(curl:*)",
-      "Bash(diff:*)",
-      "Bash(docker:*)",
-      "Bash(du:*)",
-      "Bash(echo:*)",
-      "Bash(find:*)",
-      "Bash(gh:*)",
-      "Bash(git:*)",
-      "Bash(grep:*)",
-      "Bash(head:*)",
-      "Bash(less:*)",
-      "Bash(ls:*)",
-      "Bash(mkdir:*)",
-      "Bash(mv:*)",
-      "Bash(node:*)",
-      "Bash(npm:*)",
-      "Bash(npx:*)",
-      "Bash(pip3:*)",
-      "Bash(pip:*)",
-      "Bash(pwd:*)",
-      "Bash(python3:*)",
-      "Bash(python:*)",
-      "Bash(rm:*)",
-      "Bash(tail:*)",
-      "Bash(touch:*)",
-      "Bash(tree:*)",
-      "Bash(tsx:*)",
-      "Bash(wc:*)",
-      "Bash(wget:*)",
-      "Bash(which:*)",
-      "BashOutput",
-      "Edit",
-      "ExitPlanMode",
-      "Glob",
-      "Grep",
-      "KillShell",
-      "NotebookEdit",
-      "Read",
-      "SlashCommand",
-      "Task",
-      "TodoWrite",
-      "Write",
-      "Bash(~/.claude/skills/getting-started/skills-search *)"
-    ],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./secrets/**)",
-      "Read(./config/credentials.json)",
-      "Read(./build)"
-    ]
+    "allow": [],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)", "Read(./config/credentials.json)", "Read(./build)"]
   },
   "model": "sonnet",
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "tool == \"Edit\" || tool == \"Write\"",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/strategic-compact/suggest-compact.sh"
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/memory-persistence/pre-compact.sh"
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/memory-persistence/session-start.sh"
-          }
-        ]
-      }
-    ],
+    "PreToolUse": [],
+    "PreCompact": [],
+    "SessionStart": [],
     "Stop": [
       {
         "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/memory-persistence/session-end.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/skills/claudeception/scripts/claudeception-activator.sh"
+            "command": "~/.claude/scripts/session-log.sh"
           }
         ]
       }
@@ -123,14 +28,15 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "git-workflow@claude-code-templates": false,
-    "pr-review-toolkit@claude-code-plugins": true,
-    "commit-commands@claude-code-plugins": true,
-    "code-documentation@claude-code-workflows": true,
-    "debugging-toolkit@claude-code-workflows": true,
-    "git-pr-workflows@claude-code-workflows": true,
-    "example-skills@anthropic-agent-skills": true
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "code-documentation@claude-code-workflows": true
   },
   "plansDirectory": ".claude/plans",
+  "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true
 }

@@ -11,9 +11,15 @@ experimental = true
 idiomatic_version_file_enable_tools = []
 
 [tools]
-node = '22'
-helmfile = '1.1.9'
-kustomize = "5.7.1"
-kubectx =  '0.9.5'
-kubens = '0.9.5'
-helm = "3.19.2"
+atuin = { version = "latest", os = ["linux"] }
+ripgrep = { version = "latest", os = ["linux"] }
+eza = { version = "latest", os = ["linux"] }
+zoxide = { version = "latest", os = ["linux"] }
+jq = { version = "latest", os = ["linux"] }
+yq = { version = "latest", os = ["linux"] }
+github-cli = { version = "latest", os = ["linux"] }
+kubectx = { version = "latest", os = ["macos"] }
+kubens = { version = "latest", os = ["macos"] }
+usage = 'latest'
+node = 'lts'
+"npm:ccstatusline" = 'latest'

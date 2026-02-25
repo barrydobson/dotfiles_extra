@@ -23,7 +23,13 @@
         "color": "cyan"
       }
     ],
-    [],
+    [
+      {
+        "id": "cf613d21-3c1f-4729-a16e-c4f44de30501",
+        "type": "tokens-total",
+        "backgroundColor": "bgBrightMagenta"
+      }
+    ],
     []
   ],
   "flexMode": "full-minus-40",

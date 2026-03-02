@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+## Mounts External Drives
+
+# -----------------------
+# Utilities
+# -----------------------
+_w_die()  { print -r -- "$*" >&2; return 1 }
+_w_info() { print -r -- "$*" }
+
+_mnt_detect_sudo() {
+  if [[ $EUID -ne 0 ]]; then
+    _w_info "This command may require sudo privileges. You may be prompted for your password."
+    return 0
+  fi
+  return 1
+}
+
+_mnt_diskid() {
+  local diskid
+  diskid="$(diskutil info "$1" | awk -F: '/Device Identifier/ {print $2}' | xargs)"
+  if [[ -z "$diskid" ]]; then
+    _w_die "Could not find disk identifier for '$1'"
+    return 1
+  fi
+  echo "$diskid"
+}
+
+mnt() {
+
+  # If absolutely no args, fail fast before any path logic
+  if (( $# == 0 )); then
+    _w_die "Usage: mnt <drive_name>"
+    return 1
+  fi
+
+  # Normal usage: mnt <drive_name>
+  local drivename="$1"; shift || true
+  if [[ -z "$drivename" ]]; then
+    _w_die "Usage: mnt <drive_name>"
+    return 1
+  fi
+
+  _mnt_detect_sudo
+
+  local diskid
+  diskid="$(_mnt_diskid "$drivename")" || return 1
+
+  sudo mkdir -p "/Volumes/$drivename"
+
+  if ! mount | grep -q "/Volumes/$drivename"; then
+    sudo mount -t auto "/dev/$diskid" "/Volumes/$drivename"
+    if [[ $? -ne 0 ]]; then
+      _w_die "Failed to mount '$drivename' at '/Volumes/$drivename'"
+      return 1
+    fi
+    _w_info "Mounted '$drivename' at '/Volumes/$drivename'"
+  else
+    _w_info "'$drivename' is already mounted at '/Volumes/$drivename'"
+  fi
+}
+
+mnt "$@"

@@ -26,17 +26,6 @@
 	# Show conflicts in merge style for better conflict resolution
 	conflictstyle = merge
 
-# -----------------------------------------------------------------------------
-# Delta Pager Configuration
-# -----------------------------------------------------------------------------
-[delta]
-	# Enable navigation in delta diff viewer
-	navigate = true
-	# Show diffs side by side instead of unified view
-	side-by-side = true
-	# Use the catppuccin-mocha theme for delta
-	features = catppuccin-mocha
-
 [interactive]
 	# Configure delta for interactive mode with color
 	# diffFilter = delta --color-only
@@ -76,8 +65,6 @@
 [include]
 	# Include aliases from a separate file
 	path = ~/.config/git/.gitalias
-	# Include delta color theme configuration
-	path = ~/.config/delta/themes/catppuccin.gitconfig
 	# Include local configuration
 	path = ~/.config/git/.gitconfig-local
 [gpg "ssh"]

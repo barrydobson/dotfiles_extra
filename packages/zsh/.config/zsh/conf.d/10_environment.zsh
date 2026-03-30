@@ -23,9 +23,6 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
 export WORDCHARS=''
 
-export W_PROJECTS_DIR="$HOME/_git"
-export W_WORKTREES_DIR="$HOME/_git-worktrees"
-
 # History configuration
 HISTSIZE=10000000
 HISTFILE=~/.zsh_history

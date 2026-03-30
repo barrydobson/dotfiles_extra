@@ -1,0 +1,40 @@
+# Claude Code runtime data (machine-specific, ephemeral)
+.claude/history.jsonl
+.claude/stats-cache.json
+.claude/projects/
+.claude/todos/
+.claude/tasks/
+.claude/teams/
+.claude/debug/
+.claude/file-history/
+.claude/shell-snapshots/
+.claude/session-env/
+.claude/sessions/
+.claude/backups/
+.claude/telemetry/
+.claude/statsig/
+.claude/paste-cache/
+.claude/cache/
+.claude/ide/
+.claude/downloads/
+.claude/plugins/
+.claude/mcp-needs-auth-cache.json
+# .claude/*
+# !.claude/settings.json
+# !.claude/CLAUDE.md
+# !.claude/agents
+# !.claude/commands
+# !.claude/plugins
+# .claude/plugins/cache
+# .claude/plugins/marketplaces
+# !.claude/skills
+# !.claude/hooks
+# !.claude/rules
+# !.claude/scripts
+# .claude/skills/.search-log.jsonl
+# .claude/plugins/marketplaces/*
+
+.claude/skills/gstack/
+.claude/skills/gstack-*
+usage-data/
+*.bak

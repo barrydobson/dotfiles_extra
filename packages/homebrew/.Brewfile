@@ -32,6 +32,7 @@ brew "fzf"                # Fuzzy finder
 brew "procs"              # Process viewer
 brew "ripgrep"            # Fast grep replacement
 brew "gnu-sed"            # GNU sed
+brew "ast-grep"           # AST-based code search tool
 
 # Development tools
 brew "jq"                 # JSON processor
@@ -51,8 +52,10 @@ brew "gh"
 brew "go"                 # Go language
 brew "golangci-lint"      # Go linter
 brew "awscli"             # AWS CLI
+brew "worktrunk"          # Git Worktree management
+brew "prek"               # pre-commit tool (Rust implementation, no Python)
 
-brew "mas"                # Mac App Store CLI
+# brew "mas"                # Mac App Store CLI
 # brew "sketchybar"
 
 # GUI applications

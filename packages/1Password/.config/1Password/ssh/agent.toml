@@ -6,3 +6,11 @@ vault = "Dotfiles"
 [[ssh-keys]]
 item = "Git Signing Key"
 vault = "work"
+
+[[ssh-keys]]
+item = "Hetzner"
+vault = "Personal"
+
+[[ssh-keys]]
+item = "openclaw"
+vault = "OpenClaw"

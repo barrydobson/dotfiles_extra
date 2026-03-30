@@ -37,6 +37,9 @@ if [[ -d "$HOME/.zsh/completion" ]]; then
     fpath=($HOME/.zsh/completion $fpath)
 fi
 
+# bun completions
+[ -s "/Users/barrydobson/.bun/_bun" ] && source "/Users/barrydobson/.bun/_bun"
+
 #=============================================================================
 # Tool Completions (Zinit)
 # Generated once at install via atclone, refreshed explicitly with: zinit update

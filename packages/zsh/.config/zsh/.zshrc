@@ -20,3 +20,6 @@ if [[ -d "${ZDOTDIR}/aliases" ]]; then
 fi
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# bun completions
+[ -s "/Users/barrydobson/.bun/_bun" ] && source "/Users/barrydobson/.bun/_bun"

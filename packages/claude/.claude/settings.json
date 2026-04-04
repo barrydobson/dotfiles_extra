@@ -7,8 +7,6 @@
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "enableAllProjectMcpServers": false,
-  "alwaysThinkingEnabled": true,
   "includeCoAuthoredBy": false,
   "permissions": {
     "deny": [
@@ -22,11 +20,9 @@
       "Bash(git push --force*)",
       "Bash(git push *--force*)",
       "Bash(git reset --hard*)",
-
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)",
-
       "Read(~/.ssh/**)",
       "Read(~/.gnupg/**)",
       "Read(~/.aws/**)",
@@ -48,6 +44,7 @@
       "Read(~/Library/Application Support/**/solflare*/**)"
     ]
   },
+  "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [
       {
@@ -71,14 +68,41 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "claude-code-setup@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
+    "claude-md-management@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "honcho@honcho": true
   },
-  "extraKnownMarketplaces": {},
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "skills-curated": {
+      "source": {
+        "source": "github",
+        "repo": "thetote/skills-curated"
+      }
+    },
+    "thetote": {
+      "source": {
+        "source": "github",
+        "repo": "thetote/skills"
+      }
+    },
+    "honcho": {
+      "source": {
+        "source": "github",
+        "repo": "plastic-labs/claude-honcho"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
   "plansDirectory": ".claude/plans",
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true

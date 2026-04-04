@@ -11,6 +11,3 @@ vault = "work"
 item = "Hetzner"
 vault = "Personal"
 
-[[ssh-keys]]
-item = "openclaw"
-vault = "OpenClaw"

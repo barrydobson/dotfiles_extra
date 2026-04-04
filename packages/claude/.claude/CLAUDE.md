@@ -115,6 +115,28 @@ Describe what the code does now — not discarded approaches, prior iterations, 
 
 Use plain, factual language. A bug fix is a bug fix, not a "critical stability improvement." Avoid: critical, crucial, essential, significant, comprehensive, robust, elegant.
 
+## Honcho Memory
+
+You have persistent memory via Honcho. Context about me, my preferences,
+and our past work is loaded automatically at the start of every session.
+
+## How to use it
+
+- Trust the Honcho context injected at session start. It contains what you
+  know about me — act on it. Do not ignore it or ask me things you already know.
+- Use `chat` or `search` mid-conversation when you need context beyond what
+  was loaded at startup.
+- Use `create_conclusion` to save new insights as you learn them: my preferences,
+  decisions, patterns I like, things I've asked you not to do.
+- I should never have to repeat myself. If I've told you something before,
+  you should already know it.
+
+## Honcho Integration for Projects
+
+- When working on a Python or TypeScript project that involves AI agents or
+  LLM chat but lacks persistent memory, use the `/honcho-integration` skill
+  to add Honcho. Don't wait to be asked — suggest it early.
+
 ---
 
 ## Common Pitfalls to Avoid

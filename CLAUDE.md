@@ -11,41 +11,45 @@ This is a **stow-based dotfiles repository** managing cross-platform configurati
 ```
 packages/
 ├── <app-name>/
-│   └── dot-config/          # Stows to ~/.config/
+│   └── .config/             # Stows to ~/.config/
 │       └── <app-name>/
-│   └── dot-<filename>       # Stows to ~/.<filename>
+│   └── .<filename>          # Stows to ~/.<filename>
 ```
 
-**Key principle**: The `dot-` prefix gets converted to `.` by Stow. For example:
-- `packages/zsh/dot-zshrc` → `~/.zshrc`
-- `packages/nvim/dot-config/nvim/init.lua` → `~/.config/nvim/init.lua`
+**Key principle**: Packages use real dotfile names. Stow is invoked with `-t "${HOME}"` so the directory structure mirrors home directly. For example:
+- `packages/zsh/.zshenv` → `~/.zshenv`
+- `packages/nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
 ### Major Components
 
-- **Shell**: Zsh with Zinit plugin management and Powerlevel10k prompt
+- **Shell**: Zsh with Zinit plugin management and Starship prompt
 - **Editor**: Neovim (LazyVim-based) with CodeCompanion AI integration
-- **Terminal**: Alacritty and Ghostty configs with Catppuccin Mocha theme
+- **Terminal**: Ghostty and Warp configs with Catppuccin Mocha theme
 - **Git**: Modular config with Delta diffs and extensive aliases from GitAlias.com
-- **Tools**: Modern CLI replacements (eza, bat, fd, ripgrep, delta, zoxide)
-- **Claude**: Skills wiki at `packages/claude/dot-claude/skills/` with development methodologies
+- **Tools**: Modern CLI replacements (eza, bat, fd, ripgrep, delta, zoxide, atuin, mise)
+- **Claude**: Config and skills at `packages/claude/.claude/`
+- **Other**: 1Password, k9s, sketchybar, tmux, starship, ssh, vscode
 
 ## Common Development Commands
 
-### Package Management
+### Deployment
 
 ```bash
-make stow              # Deploy all packages to home directory
-make unstow            # Remove all package symlinks
-make restow            # Redeploy (unstow + stow)
-make MODULES="git zsh" stow   # Deploy only specific packages
-make check             # Verify prerequisites installed
+./install.sh           # Bootstrap: detect OS, stow configs, install tools
 ```
 
-### Development Workflow
+For manually stowing specific packages:
 
 ```bash
-make lint              # Run shellcheck on install scripts
-shellcheck install/*.sh packages/**/*.sh  # Lint specific scripts
+cd packages && stow -v -t "${HOME}" git zsh   # Stow specific packages
+stow -v -D -t "${HOME}" git                   # Unstow a package
+stow -v -R -t "${HOME}" git                   # Restow (unstow + stow)
+```
+
+### Linting
+
+```bash
+shellcheck install/*.sh   # Lint install scripts
 ```
 
 ### Platform-Specific Installation
@@ -61,7 +65,8 @@ shellcheck install/*.sh packages/**/*.sh  # Lint specific scripts
 ### Git Configuration
 
 Git config is **modular**:
-- `packages/git/dot-config/git/config` - Main config with conditional includes
+
+- `packages/git/.config/git/config` - Main config with conditional includes
 - `.gitconfig-local` - Machine-specific overrides (gitignored)
 - `.gitconfig-private` - Personal/work context switching (gitignored)
 
@@ -69,7 +74,8 @@ When modifying git config, preserve the conditional include structure.
 
 ### Neovim Configuration
 
-Built on LazyVim with custom plugins in `packages/nvim/dot-config/nvim/`:
+Built on LazyVim with custom plugins in `packages/nvim/.config/nvim/`:
+
 - `init.lua` - Entry point
 - `lazy-lock.json` - Plugin versions (commit this)
 - Key AI features via CodeCompanion (Anthropic Claude integration)
@@ -78,17 +84,20 @@ See `KEYMAPS.md` for complete keymap reference.
 
 ### Zsh Configuration
 
-Shell setup in `packages/zsh/dot-config/zsh/`:
-- `.zshrc` - Main config with Zinit plugin loading
-- `.aliases.zsh` - Modern CLI tool aliases
+Shell setup in `packages/zsh/.config/zsh/`:
+
+- `conf.d/` - Numbered config files loaded in order (environment, tools, etc.)
+- `aliases/` - Per-topic alias files (git, docker, modern-tools, etc.)
+- `functions/` - Shell functions including `w` (worktree manager)
 - `.zprofile` - Environment setup
-- `functions/` - Shell functions
+- `.zshenv` at `packages/zsh/.zshenv` - Sets `ZDOTDIR`
 
 Aliases map traditional tools to modern alternatives (e.g., `ls` → `eza`, `cat` → `bat`).
 
 ### LazyGit Integration
 
 LazyGit has **AI-powered commit message generation** via Claude Code:
+
 - Press `C` in LazyGit to generate contextual commit messages
 - Analyzes staged changes to create meaningful descriptions
 
@@ -97,9 +106,9 @@ LazyGit has **AI-powered commit message generation** via Claude Code:
 ### When Adding New Packages
 
 1. Create `packages/<app-name>/` directory
-2. Add configs with `dot-` prefix for dotfiles or `dot-config/` for XDG configs
+2. Add configs using real dotfile names (`.config/<app>/` for XDG, `.<filename>` for home-dir dotfiles)
 3. Add installation commands to appropriate `install/*.sh` script
-4. Run `make restow` to deploy
+4. Stow the new package: `cd packages && stow -v -t "${HOME}" <app-name>`
 5. Document in README.md if user-facing
 
 ### When Modifying Install Scripts
@@ -120,7 +129,7 @@ LazyGit has **AI-powered commit message generation** via Claude Code:
 
 Before committing changes to configs:
 
-1. **Test deployment**: `make restow` (or `make MODULES="<package>"` restow for specific packages)
+1. **Test deployment**: `cd packages && stow -v -R -t "${HOME}" <package>`
 2. **Verify symlinks**: Check that files appear in correct locations (`ls -la ~/.<config>`)
 3. **Test functionality**: Open relevant application and verify config loads
 4. **Check for conflicts**: Stow will error if files already exist without symlinks
@@ -130,22 +139,16 @@ Before committing changes to configs:
 ### Why Stow?
 
 GNU Stow provides:
+
 - Clean separation of configs per tool
 - Easy deployment/rollback via symlinks
-- Selective package management via `MODULES` variable
 - No custom scripts needed for symlinking logic
 
 ### Why Packages Structure?
 
 Each tool is self-contained, making it easy to:
+
 - Add/remove tools independently
 - Share configs between machines selectively
 - Understand what files belong to which tool
 - Maintain tool-specific documentation
-
-### Why dot- Prefix?
-
-Stow doesn't create dotfiles by default. The `dot-` prefix naming convention:
-- Makes dotfiles visible in the repo (no hidden files)
-- Automatically converts to `.` when stowing
-- Standard pattern in dotfiles repos

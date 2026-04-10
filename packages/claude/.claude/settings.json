@@ -74,7 +74,9 @@
     "claude-md-management@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
-    "honcho@honcho": true
+    "honcho@honcho": true,
+    "personal-brand@barrydobson": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -100,10 +102,28 @@
         "source": "github",
         "repo": "plastic-labs/claude-honcho"
       }
+    },
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    },
+    "barrydobson": {
+      "source": {
+        "source": "github",
+        "repo": "barrydobson/claude-plugins"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "plansDirectory": ".claude/plans",
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
   "autoMemoryEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "sonnet"
 }

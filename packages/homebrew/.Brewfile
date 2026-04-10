@@ -70,7 +70,7 @@ cask "raycast"
 cask "visual-studio-code"
 
 # AI
-cask "claude-code"
+# cask "claude-code"
 
 # Fonts
 cask "font-damion"                    # Design/display font

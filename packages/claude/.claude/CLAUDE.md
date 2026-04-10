@@ -4,6 +4,7 @@ Global instructions for all projects. Project-specific CLAUDE.md files override 
 
 - Prefer Exa AI (`mcp__exa__web_search_exa`) over `WebSearch` for all web searches
 - Use skills proactively when they match the task — suggest relevant ones, don't block on them
+- You have a skill to help navigate my personal knowledge base `/vault-query` - use it when relevant to surface what I already know
 
 ## Philosophy
 
@@ -141,7 +142,7 @@ and our past work is loaded automatically at the start of every session.
 
 ## Common Pitfalls to Avoid
 
-- **Time estimates** → ❌ "~2 hours", "Phase 1: 1 day" ✅ "Steps: 1. X, 2. Y, 3. Z"
+- **Time estimates** → NEVER. Time is a human construct, not a technical one. Estimating time is inherently unreliable and encourages a focus on speed over quality. Instead, break tasks into clear, testable outcomes and focus on delivering those.
 - Committing without explicit request
 - Proactive file creation
 - Assuming project structure without checking

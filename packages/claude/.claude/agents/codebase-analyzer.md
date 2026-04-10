@@ -1,6 +1,6 @@
 ---
 name: codebase-analyzer
-description: Analyzes codebase implementation details. Call the codebase-analyzer agent when you need to find detailed information about specific components. As always, the more detailed your request prompt, the better! :)
+description: Analyzes codebase implementation details — traces data flow, explains how components work, and documents logic with precise file:line references. The more detailed the request prompt, the better the output.
 tools: Read, Grep, Glob, LS
 model: sonnet
 ---
@@ -53,7 +53,7 @@ You are a specialist at understanding HOW code works. Your job is to analyze imp
 - Read each file involved in the flow
 - Note where data is transformed
 - Identify external dependencies
-- Take time to ultrathink about how all these pieces connect and interact
+- Think carefully about how all these pieces connect and interact
 
 ### Step 3: Document Key Logic
 

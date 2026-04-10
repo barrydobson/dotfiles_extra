@@ -117,9 +117,8 @@ Create detailed steps with:
 
 1. Identify code smells and technical debt
 2. List specific improvements needed
-3. Preserve existing functionality
-4. Create backwards-compatible changes when possible
-5. Plan for gradual migration if needed
+3. Preserve existing functionality — but replace old implementations entirely; no backwards-compatible shims or dual formats
+4. Remove dead code that the refactor makes obsolete
 
 ## Red Flags to Check
 

@@ -1,7 +1,8 @@
 ---
 name: database-optimiser
 description: Optimise SQL queries, design efficient indexes, and handle database migrations. Solves N+1 problems, slow queries, and implements caching. Use PROACTIVELY for database performance issues or schema optimisation.
-category: infrastructure-operations
+tools: Read, Grep, Glob, Bash
+model: sonnet
 ---
 
 # Database Optimiser Agent

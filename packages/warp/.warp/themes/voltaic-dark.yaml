@@ -1,0 +1,27 @@
+# Voltaic Dark — Personal brand theme
+# Warm near-black base with lime accent
+name: Voltaic Dark
+accent: "#CAEA28"
+cursor: "#CAEA28"
+background: "#09090B"
+details: darker
+foreground: "#D4D4D8"
+terminal_colors:
+  bright:
+    black: "#52525B"
+    red: "#FF9E9E"
+    green: "#A3E635"
+    yellow: "#E0AF68"
+    blue: "#A9C4FF"
+    magenta: "#D4BFF0"
+    cyan: "#73DACA"
+    white: "#FAFAFA"
+  normal:
+    black: "#0C0A09"
+    red: "#F7768E"
+    green: "#CAEA28"
+    yellow: "#E0AF68"
+    blue: "#7AA2F7"
+    magenta: "#BB9AF7"
+    cyan: "#73DACA"
+    white: "#D4D4D8"

@@ -19,6 +19,7 @@
 .claude/downloads/
 .claude/plugins/
 .claude/mcp-needs-auth-cache.json
+.claude/remote-settings.json
 # .claude/*
 # !.claude/settings.json
 # !.claude/CLAUDE.md

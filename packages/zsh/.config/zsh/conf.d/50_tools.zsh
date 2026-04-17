@@ -47,7 +47,7 @@ fi
 if [[ "$TERM_PROGRAM" == "vscode" ]] && command -v code >/dev/null 2>&1; then
     source "$(code --locate-shell-integration-path zsh)"
 elif [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-    source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+    source "$HOME"/Applications/Ghostty.app/Contents/Resources/ghostty/shell-integration/zsh/ghostty-integration
 fi
 
 #=============================================================================

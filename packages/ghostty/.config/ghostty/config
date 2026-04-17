@@ -1,4 +1,4 @@
-theme = Catppuccin Mocha
+theme = dark:voltaic-dark,light:voltaic-light
 font-family = JetBrainsMono Nerd Font Mono
 
 font-size = 16

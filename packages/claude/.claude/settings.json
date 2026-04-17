@@ -76,7 +76,9 @@
     "claude-code-setup@claude-plugins-official": true,
     "honcho@honcho": true,
     "personal-brand@barrydobson": true,
-    "gopls-lsp@claude-plugins-official": true
+    "parallel@parallel-agent-skills": true,
+    "claude-mem@thedotmack": false,
+    "warp@claude-code-warp": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -114,16 +116,28 @@
         "source": "github",
         "repo": "barrydobson/claude-plugins"
       }
+    },
+    "parallel-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "parallel-web/parallel-agent-skills"
+      }
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "plansDirectory": ".claude/plans",
-  "voiceEnabled": true,
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "model": "sonnet"
+  "voiceEnabled": true,
+  "autoUpdatesChannel": "latest"
 }

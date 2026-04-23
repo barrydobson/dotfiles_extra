@@ -30,6 +30,7 @@ MAC_PACKAGES=(
     1Password
     ccstatusline
     claude
+    claude-mem
     homebrew
     ghostty
     k9s

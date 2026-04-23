@@ -39,3 +39,5 @@
 .claude/skills/gstack-*
 usage-data/
 *.bak
+CLAUDE.local.md
+*.db

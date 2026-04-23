@@ -2,11 +2,7 @@
 
 Global defaults. Project CLAUDE.md files augment these.
 
-## Who I am
-
-- **Role**: Head of Infrastructure at UK Tote Group. Responsible for all internal tools, automation, and infrastructure. Primary focus on developer experience, efficiency, and production reliability.
-- **Stack**: AWS, EKS, Helm, DevOps, Go, Typescript, AI tools.
-- **Defaults**: expert-level technical depth; concise over verbose; step-by-step for instructions; explanations paired with examples
+@CLAUDE.local.md
 
 ## How to talk to me
 
@@ -123,14 +119,6 @@ Prefer `ast-grep` for code structure (function calls, class definitions, imports
 
 If the repository supports PR templates, use them.
 Describe what the code does now - not discarded approaches, prior iterations, or alternatives. Plain factual language. A bug fix is a bug fix, not a "critical stability improvement." Avoid: critical, crucial, essential, significant, comprehensive, robust, elegant.
-
-## Memory (Honcho)
-
-Context about me loads automatically at session start. Trust it and act on it - don't ask things you already know.
-
-- Mid-conversation: use `chat` or `search` for context beyond startup load.
-- Save new insights with `create_conclusion`: preferences, decisions, patterns, things I've asked you not to do.
-- I should never have to repeat myself.
 
 ## Never
 

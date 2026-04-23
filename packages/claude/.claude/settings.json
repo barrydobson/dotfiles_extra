@@ -9,6 +9,36 @@
   },
   "includeCoAuthoredBy": false,
   "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:docs.n8n.io)",
+      "WebFetch(domain:docs.github.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:htdocs.dev)",
+      "WebFetch(domain:community.n8n.io)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:n8n-docs.teamlab.info)",
+      "Bash(ls:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__n8n-mcp__search_nodes",
+      "mcp__n8n-mcp__get_node",
+      "mcp__n8n-mcp__n8n_create_workflow",
+      "mcp__n8n-mcp__n8n_validate_workflow",
+      "mcp__n8n-mcp__n8n_get_workflow",
+      "mcp__n8n-mcp__n8n_update_partial_workflow",
+      "mcp__n8n-mcp__n8n_executions",
+      "mcp__n8n-mcp__n8n_update_full_workflow",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "mcp__n8n-mcp__n8n_list_workflows",
+      "Bash(python3 -c \"import sys,json; json.load\\(sys.stdin\\); print\\('valid JSON'\\)\")",
+      "mcp__n8n-mcp__validate_workflow",
+      "Bash(python3:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)"
+    ],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -42,7 +72,8 @@
       "Read(~/Library/Application Support/**/exodus*/**)",
       "Read(~/Library/Application Support/**/phantom*/**)",
       "Read(~/Library/Application Support/**/solflare*/**)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
   "hooks": {
@@ -74,11 +105,9 @@
     "claude-md-management@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
-    "honcho@honcho": true,
     "personal-brand@barrydobson": true,
     "parallel@parallel-agent-skills": true,
-    "claude-mem@thedotmack": false,
-    "warp@claude-code-warp": true
+    "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -99,12 +128,6 @@
         "repo": "thetote/skills"
       }
     },
-    "honcho": {
-      "source": {
-        "source": "github",
-        "repo": "plastic-labs/claude-honcho"
-      }
-    },
     "obsidian-skills": {
       "source": {
         "source": "github",
@@ -123,14 +146,15 @@
         "repo": "parallel-web/parallel-agent-skills"
       }
     },
-    "claude-code-warp": {
+    "thedotmack": {
       "source": {
         "source": "github",
-        "repo": "warpdotdev/claude-code-warp"
+        "repo": "thedotmack/claude-mem"
       }
     }
   },
   "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
   "plansDirectory": ".claude/plans",
   "voice": {
     "enabled": true,
@@ -138,6 +162,7 @@
   },
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "autoUpdatesChannel": "latest"
+  "model": "sonnet"
 }

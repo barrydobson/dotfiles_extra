@@ -17,6 +17,7 @@ DEVCONTAINER_PACKAGES=(
     starship
     zsh
     claude
+    ccstatusline
 )
 
 check_prerequisites() {

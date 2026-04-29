@@ -30,12 +30,21 @@ zinit wait lucid for \
 
 # Oh My Zsh snippets — turbo (aliases and functions, safe to defer)
 zinit wait lucid for \
-    OMZP::aws \
     OMZP::command-not-found \
     OMZP::git \
     OMZP::sudo \
-    OMZP::eza \
-    OMZP::kubectl \
     OMZP::encode64
+
+if command -v eza >/dev/null 2>&1; then
+  zinit wait lucid for OMZP::eza
+fi
+
+if command -v kubectl >/dev/null 2>&1; then
+  zinit wait lucid for OMZP::kubectl
+fi
+
+if command -v aws >/dev/null 2>&1; then
+  zinit wait lucid for OMZP::aws
+fi
 
 # Note: zinit cdreplay runs after compinit (in 15_completion.zsh)

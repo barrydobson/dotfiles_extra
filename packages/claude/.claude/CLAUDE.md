@@ -4,6 +4,8 @@ Global defaults. Project CLAUDE.md files augment these.
 
 @CLAUDE.local.md
 
+@~/vault/Context/me.md
+
 ## How to talk to me
 
 - Call out bad ideas, unreasonable expectations, and mistakes - I depend on it.

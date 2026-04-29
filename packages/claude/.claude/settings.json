@@ -106,8 +106,10 @@
     "skill-creator@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
     "personal-brand@barrydobson": true,
+    "knowledge-capture@barrydobson": true,
     "parallel@parallel-agent-skills": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": false,
+    "tote-github-skills@tote-skills": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -138,7 +140,8 @@
       "source": {
         "source": "github",
         "repo": "barrydobson/claude-plugins"
-      }
+      },
+      "autoUpdate": true
     },
     "parallel-agent-skills": {
       "source": {
@@ -151,9 +154,16 @@
         "source": "github",
         "repo": "thedotmack/claude-mem"
       }
+    },
+    "tote-skills": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/barrydobson/_git/tote/skills"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "plansDirectory": ".claude/plans",
   "voice": {
@@ -162,6 +172,7 @@
   },
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
+  "theme": "custom:voltaic-dark",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
   "model": "sonnet"

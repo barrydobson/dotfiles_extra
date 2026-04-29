@@ -16,6 +16,7 @@ source "${DOTFILES_DIR}/install/common.sh"
 DEVCONTAINER_PACKAGES=(
     starship
     zsh
+    claude
 )
 
 check_prerequisites() {

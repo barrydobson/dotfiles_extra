@@ -95,7 +95,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
+    "command": "bunx --silent ccstatusline@latest",
     "padding": 0
   },
   "enabledPlugins": {
@@ -175,5 +175,5 @@
   "theme": "custom:voltaic-dark",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "model": "sonnet"
+  "model": "opus"
 }

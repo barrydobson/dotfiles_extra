@@ -57,6 +57,7 @@ main() {
         install_homebrew
     fi
     install_system_packages
+    install_tavily_cli
     post_install_setup
 
 }

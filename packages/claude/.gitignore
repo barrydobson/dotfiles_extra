@@ -20,6 +20,11 @@
 .claude/plugins/
 .claude/mcp-needs-auth-cache.json
 .claude/remote-settings.json
+.claude/chrome
+.claude/.last-cleanup
+.claude/.caveman-active
+.claude/policy-limits.json
+
 # .claude/*
 # !.claude/settings.json
 # !.claude/CLAUDE.md

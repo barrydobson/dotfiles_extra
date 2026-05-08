@@ -227,6 +227,10 @@ make stow      # Redeploy
 - Reload shell: `exec zsh`
 - Check plugin installation in `~/.zinit`
 
+## Notes
+
+- **Caveman Hooks Only**: `bash <(curl -s <https://raw.githubusercontent.com/JuliusBrussee/caveman/main/hooks/install.sh>)`
+
 ## Contributing
 
 This is a personal dotfiles repository, but suggestions and improvements are welcome:

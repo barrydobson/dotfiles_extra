@@ -11,34 +11,14 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
-      "WebSearch",
-      "WebFetch(domain:docs.n8n.io)",
-      "WebFetch(domain:docs.github.com)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:htdocs.dev)",
-      "WebFetch(domain:community.n8n.io)",
-      "WebFetch(domain:deepwiki.com)",
-      "WebFetch(domain:www.npmjs.com)",
-      "WebFetch(domain:n8n-docs.teamlab.info)",
       "Bash(ls:*)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "mcp__n8n-mcp__search_nodes",
-      "mcp__n8n-mcp__get_node",
-      "mcp__n8n-mcp__n8n_create_workflow",
-      "mcp__n8n-mcp__n8n_validate_workflow",
-      "mcp__n8n-mcp__n8n_get_workflow",
-      "mcp__n8n-mcp__n8n_update_partial_workflow",
-      "mcp__n8n-mcp__n8n_executions",
-      "mcp__n8n-mcp__n8n_update_full_workflow",
       "mcp__context7__resolve-library-id",
       "mcp__context7__query-docs",
-      "mcp__n8n-mcp__n8n_list_workflows",
-      "Bash(python3 -c \"import sys,json; json.load\\(sys.stdin\\); print\\('valid JSON'\\)\")",
-      "mcp__n8n-mcp__validate_workflow",
       "Bash(python3:*)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(curl *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -80,15 +60,44 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash",
+        "matcher": "EnterWorktree",
         "hooks": [
           {
             "type": "command",
-            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qiE '(^|;[[:space:]]*|&&[[:space:]]*|[|][|][[:space:]]*|[|][[:space:]]*)rm[[:space:]]' && echo \"$CMD\" | grep -qiE '(^|[[:space:]])-[a-zA-Z]*[rR]|--recursive' && echo \"$CMD\" | grep -qiE '(^|[[:space:]])-[a-zA-Z]*[fF]|--force'; then echo 'BLOCKED: Use trash instead of rm -rf' >&2; exit 2; fi"
-          },
+            "command": "/Users/barrydobson/.claude/hooks/enterworktree-wt.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "ExitWorktree",
+        "hooks": [
           {
             "type": "command",
-            "command": "CMD=$(jq -r '.tool_input.command'); if echo \"$CMD\" | grep -qE 'git[[:space:]]+push.*(main|master)'; then echo 'BLOCKED: Use feature branches, not direct push to main' >&2; exit 2; fi"
+            "command": "/Users/barrydobson/.claude/hooks/exitworktree-wt.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/barrydobson/.claude/hooks/caveman-activate.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading caveman mode..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/barrydobson/.claude/hooks/caveman-mode-tracker.js\"",
+            "timeout": 5,
+            "statusMessage": "Tracking caveman mode..."
           }
         ]
       }
@@ -100,42 +109,38 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "claude-code-setup@claude-plugins-official": true,
-    "personal-brand@barrydobson": true,
     "knowledge-capture@barrydobson": true,
-    "parallel@parallel-agent-skills": true,
-    "claude-mem@thedotmack": false,
-    "tote-github-skills@tote-skills": true
+    "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
-      }
+      },
+      "autoUpdate": true
     },
     "skills-curated": {
       "source": {
         "source": "github",
         "repo": "thetote/skills-curated"
-      }
+      },
+      "autoUpdate": true
     },
     "thetote": {
       "source": {
         "source": "github",
         "repo": "thetote/skills"
-      }
+      },
+      "autoUpdate": true
     },
     "obsidian-skills": {
       "source": {
         "source": "github",
         "repo": "kepano/obsidian-skills"
-      }
+      },
+      "autoUpdate": true
     },
     "barrydobson": {
       "source": {
@@ -144,22 +149,24 @@
       },
       "autoUpdate": true
     },
-    "parallel-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "parallel-web/parallel-agent-skills"
-      }
-    },
     "thedotmack": {
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
-      }
+      },
+      "autoUpdate": true
     },
-    "tote-skills": {
+    "worktrunk": {
       "source": {
-        "source": "directory",
-        "path": "/Users/barrydobson/_git/tote/skills"
+        "source": "github",
+        "repo": "max-sixty/worktrunk"
+      },
+      "autoUpdate": true
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
       }
     }
   },
@@ -176,5 +183,16 @@
   "theme": "custom:voltaic-dark",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "model": "opus"
+  "skillOverrides": {
+    "caveman-compress": "name-only",
+    "caveman-stats": "name-only",
+    "zoom-out": "name-only"
+  },
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  },
+  "disabledMcpjsonServers": ["claude_ai_Lucid"]
 }

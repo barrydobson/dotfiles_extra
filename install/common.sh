@@ -161,6 +161,18 @@ install_tpm() {
     fi
 }
 
+# Install Tavily CLI
+install_tavily_cli() {
+    print_status "Installing Tavily CLI..."
+    if command -v tvly >/dev/null 2>&1; then
+        print_status "Tavily CLI is already installed"
+        return
+    fi
+
+    curl -fsSL https://cli.tavily.com/install.sh | bash
+    print_success "Tavily CLI installed"
+}
+
 # Common post-installation setup: default shell and standard directories
 post_install_setup() {
     print_status "Performing post-installation setup..."

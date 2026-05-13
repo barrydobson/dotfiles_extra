@@ -12,8 +12,6 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs",
       "Bash(python3:*)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
@@ -57,27 +55,15 @@
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
+  "disabledMcpjsonServers": [
+    "claude_ai_Lucid"
+  ],
+  "skillOverrides": {
+    "caveman-compress": "name-only",
+    "caveman-stats": "name-only",
+    "zoom-out": "name-only"
+  },
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "EnterWorktree",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/barrydobson/.claude/hooks/enterworktree-wt.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "ExitWorktree",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/barrydobson/.claude/hooks/exitworktree-wt.sh"
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "hooks": [
@@ -103,6 +89,7 @@
       }
     ]
   },
+  "disableAgentView": false,
   "statusLine": {
     "type": "command",
     "command": "bunx --silent ccstatusline@latest",
@@ -110,7 +97,6 @@
   },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
-    "knowledge-capture@barrydobson": true,
     "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
@@ -121,45 +107,10 @@
       },
       "autoUpdate": true
     },
-    "skills-curated": {
-      "source": {
-        "source": "github",
-        "repo": "thetote/skills-curated"
-      },
-      "autoUpdate": true
-    },
-    "thetote": {
-      "source": {
-        "source": "github",
-        "repo": "thetote/skills"
-      },
-      "autoUpdate": true
-    },
-    "obsidian-skills": {
-      "source": {
-        "source": "github",
-        "repo": "kepano/obsidian-skills"
-      },
-      "autoUpdate": true
-    },
-    "barrydobson": {
-      "source": {
-        "source": "github",
-        "repo": "barrydobson/claude-plugins"
-      },
-      "autoUpdate": true
-    },
     "thedotmack": {
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
-      },
-      "autoUpdate": true
-    },
-    "worktrunk": {
-      "source": {
-        "source": "github",
-        "repo": "max-sixty/worktrunk"
       },
       "autoUpdate": true
     },
@@ -183,16 +134,5 @@
   "theme": "custom:voltaic-dark",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "skillOverrides": {
-    "caveman-compress": "name-only",
-    "caveman-stats": "name-only",
-    "zoom-out": "name-only"
-  },
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
-    }
-  },
-  "disabledMcpjsonServers": ["claude_ai_Lucid"]
+  "mcpServers": {}
 }

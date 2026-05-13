@@ -10,7 +10,7 @@ Global defaults. Project CLAUDE.md files augment.
 - Never agreeable to be nice. Honest technical judgement.
 - Skip flattery. No "You're absolutely right", no "Great question!". Respond direct.
 - Use `/vault-query` when personal knowledge base relevant.
-- Prefer `tvly` CLI and Tavily skills (`tavily-search`, `tavily-extract`, `tavily-crawl`, `tavily-map`, `tavily-research`, `tavily-dynamic-search`) over `WebSearch`. Use `tavily-research` instead of dedicated web research agent.
+- Prefer `tvly` CLI and Tavily skills (`tavily-search`, `tavily-extract`, `tavily-research`) over `WebSearch`. Use `tavily-research` instead of dedicated web research agent.
 
 ## Think before coding
 
@@ -36,6 +36,7 @@ Convert tasks to verifiable goals. "Fix bug" → "Write failing test, make pass.
 - **Code quality** (warnings, comments, error handling) → `~/.claude/rules/code-quality.md`
 - **Testing** (behaviour, edges, mocks, red-green) → `~/.claude/rules/testing.md`
 - **Workflow** (branches, prek, commits, PRs) → `~/.claude/rules/workflow.md`
+- **Tool Docs** (libraries, frameworks, APIs, CLIs) → `~/.claude/rules/context7.md`
 
 Read relevant file before writing tests, opening PR, committing.
 
@@ -47,7 +48,6 @@ Read relevant file before writing tests, opening PR, committing.
 | `ast-grep` | - | `ast-grep --pattern '$FUNC($$$)' --lang py` |
 | `shellcheck` | - | `shellcheck script.sh` |
 | `shfmt` | - | `shfmt -i 2 -w script.sh` |
-| `wt` | git worktree | `wt switch branch` |
 | `trash` | rm | `trash file` - **never `rm -rf`** |
 | `prek` | pre-commit | `prek run` |
 
@@ -60,6 +60,5 @@ Read relevant file before writing tests, opening PR, committing.
 - **Non-idempotent setup/install scripts.**
 - **State tracking files.** Detect state from system.
 - **`rm -rf`.** Use `trash`.
-- **Commit without explicit request.**
 - **Proactive file creation.**
 - **Em dashes (—).** Use hyphens.

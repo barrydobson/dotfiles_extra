@@ -46,3 +46,8 @@ usage-data/
 *.bak
 CLAUDE.local.md
 *.db
+.claude/daemon.log
+.claude/daemon/
+.claude/.caveman-*
+.claude/image-cache/
+.claude/jobs

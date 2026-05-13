@@ -21,5 +21,5 @@ github-cli = { version = "latest", os = ["linux"] }
 kubectx = { version = "latest", os = ["macos"] }
 kubens = { version = "latest", os = ["macos"] }
 usage = 'latest'
-node = 'lts'
+node = "24.13.1"
 "npm:ccstatusline" = 'latest'

@@ -1,66 +1,6 @@
 {
   "version": 3,
   "skills": {
-    "grill-me": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/productivity/grill-me/SKILL.md",
-      "skillFolderHash": "2a1ad17028306ebe45f0e49703fa28b9b2e7f499",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.690Z",
-      "updatedAt": "2026-05-07T11:07:15.124Z"
-    },
-    "grill-with-docs": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "skillFolderHash": "2969a1224c70fe41b9dd2ddbe32c2ec62f2815bd",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.690Z",
-      "updatedAt": "2026-05-07T11:07:15.125Z"
-    },
-    "improve-codebase-architecture": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
-      "skillFolderHash": "3ad8fa787b3b9b622d1f5a3d0afc27812ac782fa",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.691Z",
-      "updatedAt": "2026-05-07T11:07:15.127Z"
-    },
-    "setup-matt-pocock-skills": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "77638955bebe492948244f1338e54ca1a9445c29",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.691Z",
-      "updatedAt": "2026-05-07T11:07:15.128Z"
-    },
-    "triage": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/triage/SKILL.md",
-      "skillFolderHash": "de4f182c30876a2460ca307e2f601b9b892527e5",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.694Z",
-      "updatedAt": "2026-05-06T07:06:14.694Z"
-    },
-    "zoom-out": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/engineering/zoom-out/SKILL.md",
-      "skillFolderHash": "6ecebabdea814d12888f56a611da7bf182b5fb26",
-      "pluginName": "mattpocock-skills",
-      "installedAt": "2026-05-06T07:06:14.695Z",
-      "updatedAt": "2026-05-07T11:07:15.130Z"
-    },
     "tavily-cli": {
       "source": "tavily-ai/skills",
       "sourceType": "github",
@@ -70,24 +10,6 @@
       "installedAt": "2026-05-08T08:03:55.934Z",
       "updatedAt": "2026-05-08T08:03:55.934Z"
     },
-    "tavily-crawl": {
-      "source": "tavily-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/tavily-ai/skills.git",
-      "skillPath": "skills/tavily-crawl/SKILL.md",
-      "skillFolderHash": "c61d2277d4279fc44c5dcb50d2e8801ce2e16f1f",
-      "installedAt": "2026-05-08T08:03:55.936Z",
-      "updatedAt": "2026-05-08T08:03:55.936Z"
-    },
-    "tavily-dynamic-search": {
-      "source": "tavily-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/tavily-ai/skills.git",
-      "skillPath": "skills/tavily-dynamic-search/SKILL.md",
-      "skillFolderHash": "41c64e339c7480409424a7a6f15fc1cc7c9a1c37",
-      "installedAt": "2026-05-08T08:03:55.936Z",
-      "updatedAt": "2026-05-08T08:03:55.936Z"
-    },
     "tavily-extract": {
       "source": "tavily-ai/skills",
       "sourceType": "github",
@@ -96,15 +18,6 @@
       "skillFolderHash": "5de24876e7faa5789ba64c4c07ed32e4bcfe2f4b",
       "installedAt": "2026-05-08T08:03:55.937Z",
       "updatedAt": "2026-05-08T08:03:55.937Z"
-    },
-    "tavily-map": {
-      "source": "tavily-ai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/tavily-ai/skills.git",
-      "skillPath": "skills/tavily-map/SKILL.md",
-      "skillFolderHash": "ab5d8fa7f3db58ebee1907357b66159a54bcd1a2",
-      "installedAt": "2026-05-08T08:03:55.938Z",
-      "updatedAt": "2026-05-08T08:03:55.938Z"
     },
     "tavily-research": {
       "source": "tavily-ai/skills",

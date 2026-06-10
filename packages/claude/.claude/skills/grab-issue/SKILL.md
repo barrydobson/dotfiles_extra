@@ -29,18 +29,29 @@ Check `labels[].name` for the literal string `ready-for-agent`.
 
 ### 3. Create an isolated worktree
 
-**REQUIRED:** Use the `superpowers:using-git-worktrees` skill to create the worktree. Never work on `main`.
+Never work on `main`. Use a branch name of `issue-<number>-<slug>`, where `<slug>` is the issue title lowercased, non-alphanumerics replaced with `-`, trimmed to a few words.
 
-Use a branch name of `issue-<number>-<slug>`, where `<slug>` is the issue title lowercased, non-alphanumerics replaced with `-`, trimmed to a few words.
+Prefer a native worktree tool if one is available (a tool or command named like `EnterWorktree`, `WorktreeCreate`, `/worktree`, or a `--worktree` flag) - it handles placement and cleanup. Otherwise fall back to git:
+
+```bash
+git worktree add ".worktrees/issue-<number>-<slug>" -b "issue-<number>-<slug>"
+cd ".worktrees/issue-<number>-<slug>"
+```
+
+Before creating a project-local worktree dir, make sure it is git-ignored so its contents are not tracked:
+
+```bash
+git check-ignore -q .worktrees || { echo ".worktrees/" >> .gitignore; }
+```
 
 ### 4. Delegate the implementation to a subagent
 
 Dispatch a single subagent to implement the issue end-to-end **inside the worktree directory**. Give it the issue title, body, and URL as its brief, plus these instructions:
 
-- Implement following TDD (`~/.claude/rules/testing.md`) and code-quality rules.
-- Run `prek run` and the relevant tests before committing; fix everything.
-- Use conventional commits; one logical change per commit.
-- **Do not push or open a PR** - return when the issue is complete (tests green, lints clean).
+- Implement the issue, following the repo's local development workflow and conventions (its CLAUDE.md / AGENTS.md, contributing guide, test and lint setup).
+- Write tests, and run the project's tests and any pre-commit / lint checks before committing; fix everything.
+- Commit in the repo's usual style (e.g. conventional commits if that's the convention); one logical change per commit.
+- **Do not push or open a PR** - return when the issue is complete (tests green, checks clean).
 
 Wait for the subagent to finish.
 
@@ -50,12 +61,12 @@ From the worktree:
 
 ```bash
 git push -u origin issue-<number>-<slug>
-gh pr create --title "<conventional title>" --body "Closes #<number>
+gh pr create --title "<title>" --body "Closes #<number>
 
 <plain factual description of what the code now does>"
 ```
 
-`Closes #<number>` links and auto-closes the issue on merge. Keep the PR body plain and factual per `~/.claude/rules/workflow.md` - no "robust", "comprehensive", "critical". Use the repo PR template if one exists.
+`Closes #<number>` links and auto-closes the issue on merge. Keep the PR body plain and factual - describe what the code does now, not the journey. Use the repo's PR template if one exists.
 
 Report the PR URL to the user.
 

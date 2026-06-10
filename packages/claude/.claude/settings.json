@@ -6,7 +6,8 @@
     "DISABLE_ERROR_REPORTING": "1",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_MEM_EXCLUDED_PROJECTS": "observer-sessions"
+    "CLAUDE_MEM_EXCLUDED_PROJECTS": "observer-sessions",
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -55,39 +56,20 @@
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
-  "disabledMcpjsonServers": [
-    "claude_ai_Lucid"
-  ],
+  "disabledMcpjsonServers": [],
   "skillOverrides": {
-    "caveman-compress": "name-only",
-    "caveman-stats": "name-only",
-    "zoom-out": "name-only"
+    "grill-me": "off",
+    "grill-with-docs": "off",
+    "handoff": "off",
+    "improve-codebase-architecture": "off",
+    "to-issues": "off",
+    "to-prd": "off",
+    "triage": "off",
+    "zoom-out": "off"
   },
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/barrydobson/.claude/hooks/caveman-activate.js\"",
-            "timeout": 5,
-            "statusMessage": "Loading caveman mode..."
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/barrydobson/.claude/hooks/caveman-mode-tracker.js\"",
-            "timeout": 5,
-            "statusMessage": "Tracking caveman mode..."
-          }
-        ]
-      }
-    ]
+    "SessionStart": [],
+    "UserPromptSubmit": []
   },
   "disableAgentView": false,
   "statusLine": {
@@ -97,7 +79,11 @@
   },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "gopls-lsp@claude-plugins-official": false,
+    "humanizer@barrydobson": true,
+    "warp@claude-code-warp": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -114,10 +100,16 @@
       },
       "autoUpdate": true
     },
-    "caveman": {
+    "tote-skills": {
       "source": {
         "source": "github",
-        "repo": "JuliusBrussee/caveman"
+        "repo": "thetote/skills"
+      }
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
       }
     }
   },

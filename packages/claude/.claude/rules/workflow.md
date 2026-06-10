@@ -6,6 +6,7 @@ Detail for the summary in `~/.claude/CLAUDE.md`. Consult before committing, open
 
 - Never make changes directly on `main` / `master`. Stop and switch to a worktree.
 - Parallel subagents require worktrees - each in its own directory. Never share working directories.
+- Create worktrees in the projects `.claude/worktrees` directory. This keeps them out of the way and makes it easy to find them later.
 
 ## Pre-commit hooks (`prek`)
 

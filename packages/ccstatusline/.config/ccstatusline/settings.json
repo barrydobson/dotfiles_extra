@@ -27,8 +27,8 @@
         "type": "separator"
       },
       {
-        "id": "a6bd1187-5db3-475b-a284-14aad1738387",
-        "type": "session-clock"
+        "id": "bb00e88d-d44e-4ecd-abc5-d46592832b9e",
+        "type": "tokens-total"
       }
     ],
     [
@@ -43,9 +43,16 @@
       {
         "id": "45905daf-f370-4e75-988c-87c0d17c9a11",
         "type": "git-worktree"
+      },
+      {
+        "id": "ca659423-dc60-4950-b8e6-4436f5907140",
+        "type": "separator"
+      },
+      {
+        "id": "5c6f7811-9dac-4c0a-b0d0-fd171fdfc831",
+        "type": "current-working-dir"
       }
-    ],
-    []
+    ]
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,

@@ -17,7 +17,13 @@
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
       "Bash(git push:*)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(gh pr ready:*)",
+      "Bash(gh pr comment:*)",
+      "Bash(gh issue close:*)",
+      "Bash(gh issue edit:*)",
+      "Bash(gh issue comment:*)",
+      "Bash(acli jira workitem assign:*)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -57,19 +63,20 @@
   },
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [],
-  "skillOverrides": {
-    "grill-me": "off",
-    "grill-with-docs": "off",
-    "handoff": "off",
-    "improve-codebase-architecture": "off",
-    "to-issues": "off",
-    "to-prd": "off",
-    "triage": "off",
-    "zoom-out": "off"
-  },
   "hooks": {
     "SessionStart": [],
-    "UserPromptSubmit": []
+    "UserPromptSubmit": [],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
   },
   "disableAgentView": false,
   "statusLine": {
@@ -80,10 +87,13 @@
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "claude-mem@thedotmack": true,
-    "gopls-lsp@claude-plugins-official": false,
     "humanizer@barrydobson": true,
-    "warp@claude-code-warp": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "drawio@365-skills": true,
+    "afk-issues@afk-issues": true,
+    "skill-creator@claude-plugins-official": true,
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -106,10 +116,30 @@
         "repo": "thetote/skills"
       }
     },
-    "claude-code-warp": {
+    "ponytail": {
       "source": {
         "source": "github",
-        "repo": "warpdotdev/claude-code-warp"
+        "repo": "DietrichGebert/ponytail"
+      },
+      "autoUpdate": true
+    },
+    "365-skills": {
+      "source": {
+        "source": "github",
+        "repo": "Agents365-ai/365-skills"
+      }
+    },
+    "afk-issues": {
+      "source": {
+        "source": "github",
+        "repo": "barrydobson/afk-issues-skill"
+      },
+      "autoUpdate": true
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
       }
     }
   },
@@ -123,6 +153,7 @@
   },
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "custom:voltaic-dark",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,

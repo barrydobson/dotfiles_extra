@@ -8,12 +8,6 @@ Detail for the summary in `~/.claude/CLAUDE.md`. Consult before committing, open
 - Parallel subagents require worktrees - each in its own directory. Never share working directories.
 - Create worktrees in the projects `.claude/worktrees` directory. This keeps them out of the way and makes it easy to find them later.
 
-## Pre-commit hooks (`prek`)
-
-- `prek install` in every repo when starting work there.
-- `prek run` before committing.
-- `prek auto-update --cooldown-days 7` to keep hooks current without churn.
-
 ## Before committing
 
 1. Re-read the diff for unnecessary complexity, redundant code, unclear naming.

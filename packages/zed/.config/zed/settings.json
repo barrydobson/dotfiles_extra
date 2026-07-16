@@ -1,0 +1,126 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "edit_predictions": {
+    "allow_data_collection": "no",
+  },
+  "disable_ai": false,
+  "git_panel": {
+    "file_icons": true,
+    "tree_view": true,
+    "dock": "right",
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "proxy": "",
+  "format_on_save": "on",
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "git_status_indicator": true,
+    "bold_folder_labels": true,
+    "entry_spacing": "standard",
+    "dock": "left",
+    "auto_fold_dirs": true,
+  },
+  "agent": {
+    "enabled": true,
+    "button": true,
+    "favorite_models": [],
+    "default_model": {
+      "provider": "openrouter",
+      "model": "z-ai/glm-5.2",
+    },
+    "model_parameters": [],
+    "commit_message_model": {
+      "provider": "openrouter",
+      "model": "z-ai/glm-5.2",
+    },
+    "commit_message_instructions": "Use the Conventional Commits format: <type>(<scope>): <description>.",
+  },
+  "gutter": {
+    "line_numbers": true,
+  },
+  "load_direnv": "shell_hook",
+  "linked_edits": true,
+  "use_on_type_format": false,
+  "soft_wrap": "editor_width",
+  "minimap": {
+    "show": "never",
+  },
+  "line_ending": "enforce_lf",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "terminal": {
+    "option_as_meta": true,
+    "env": {
+      "FIG_NEW_SESSION": "\"1\"",
+    },
+    "font_size": 12.0,
+    "font_family": "JetBrainsMono Nerd Font",
+    "line_height": {
+      "custom": 1.3,
+    },
+    "copy_on_select": false,
+  },
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "cursor_shape": "bar",
+  "cursor_blink": true,
+  "buffer_font_weight": 400.0,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "file_types": {
+    "jsonc": ["*.json5"],
+    "gotmpl": ["*.yaml.tmpl"],
+    "jinja-js": ["**/scaffolder/templates/**/*.cjs"],
+    "jinja-yaml": ["**/scaffolder/templates/**/*.yaml"],
+    "powershell": ["*.ps1.tmpl"],
+    "bat": ["*.bat.tmpl"],
+    "toml": ["*.toml.tmpl"],
+    "shellscript": [
+      "*.sh.tmpl",
+      "dot_bashrc*",
+      "dot_profile*",
+      "**/profile.d/*",
+      "dot_zshenv*",
+      "dot_zprofile*",
+      "dot_zshrc*",
+      "**/private_dot_local/bin/*.tmpl",
+      "**/shell/functions/*",
+    ],
+    "http": ["*.rest"],
+    "javascript": ["*.dbclient-js"],
+    "dotenv": [".env", ".env.*", ".env*"],
+    "terraform": ["*.hcl", "*.hcl"],
+    "hcl": ["*.river", "*.river", "**.river", "**.river.txt", "*.alloy"],
+    "helm": [
+      "*.gotmpl",
+      "*.gotmpl",
+      "**/charts/**/templates/*.yaml",
+      "**/helmfile.yaml",
+      "**.yaml.gotmpl",
+    ],
+  },
+  "colorize_brackets": true,
+  "auto_indent_on_paste": true,
+  "show_edit_predictions": true,
+  "tab_size": 2,
+  "base_keymap": "VSCode",
+  "agent_servers": {},
+  "ui_font_size": 16,
+  "buffer_font_size": 13.0,
+  "theme": {
+    "mode": "system",
+    "light": "Voltaic — Light",
+    "dark": "Voltaic — Dark",
+  },
+}

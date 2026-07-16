@@ -1,18 +1,75 @@
+# Theme
 theme = dark:voltaic-dark,light:voltaic-light
-font-family = JetBrainsMono Nerd Font Mono
-
-font-size = 16
-font-thicken = true
+background-opacity = 0.9
 background-blur-radius = 20
-mouse-hide-while-typing = true
-window-decoration = true
-macos-option-as-alt = true
-shell-integration = zsh
+window-padding-x = 10
+window-padding-y = 8
+window-theme = auto
 
+# Fonts
+font-family = JetBrainsMonoNerdFont
+font-size = 14
+font-thicken = true
+
+# Cursor. A bar is less distracting than a block when reading long
+# output.
+cursor-style = bar
+cursor-style-blink = true
+cursor-opacity = 0.8
+
+# Mouse. Hide the cursor while typing so it does not overlap Claude's
+# output stream. copy-on-select puts selected text into the clipboard
+# immediately, which matters when grabbing file paths or commands.
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# Shell integration. Gives Ghostty semantic knowledge of your prompt:
+# working directory tracking across splits, better scrollback
+# navigation.
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Performance. Claude Code generates long outputs. 100000 lines is
+# generous. Disable the resize overlay; it flickers on fast redraws.
+scrollback-limit = 100000
+resize-overlay = never
+
+# Split keybindings. SAND pattern (Split, Across, Navigate, Destroy).
+# super+d splits right. super+shift+d splits down. super+w closes a
+# pane. ctrl with vim keys navigates between panes.
+keybind = super+d=new_split:right
+keybind = super+shift+d=new_split:down
+keybind = super+w=close_surface
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+j=goto_split:bottom
+
+# Tab keybindings
+keybind = super+t=new_tab
+keybind = super+1=goto_tab:1
+keybind = super+2=goto_tab:2
+keybind = super+3=goto_tab:3
+keybind = super+4=goto_tab:4
+keybind = super+5=goto_tab:5
+
+adjust-cell-height = 2
+macos-option-as-alt = true
 macos-non-native-fullscreen = true
 macos-titlebar-style = tabs
-window-save-state = never
+window-save-state = always
 
-keybind = shift+enter=text:\n
+# keybind = shift+enter=text:\n
 
-copy-on-select = true
+# Unbind tmux-style keys that conflict with Ghostty
+keybind = super+t=unbind
+keybind = super+n=unbind
+keybind = super+w=unbind
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+q=quit
+# Fix Shift+Enter inside tmux
+keybind = shift+enter=text:\x1b[13;2u
+
+# Cmd+A sends Ctrl-A (tmux prefix)
+keybind = cmd+a=text:\x01

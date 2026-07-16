@@ -25,6 +25,11 @@
 .claude/.caveman-active
 .claude/policy-limits.json
 
+.claude/.last-update-result.json
+.claude/.ponytail-active
+.claude/daemon*
+.claude/gh-pr-status-cache.json
+
 # .claude/*
 # !.claude/settings.json
 # !.claude/CLAUDE.md

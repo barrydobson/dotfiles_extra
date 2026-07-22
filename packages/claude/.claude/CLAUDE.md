@@ -31,25 +31,9 @@ Senior-engineer test: look overcomplicated?
 
 Convert tasks to verifiable goals. "Fix bug" → "Write failing test, make pass." Multi-step work: state plan with verification per step.
 
-# Project Memory (Obsidian)
+# High-risk changes (migrations, auth, refactors, breaking)
 
-Vault path: `~/vault/`
-
-At session start, Claude will:
-
-1. Detect the project name from the current folder.
-2. Find or create `~/vault/Projects/<project-name>/`.
-3. Read PROJECT.md, MISTAKES.md, and CONTRACT.md before doing anything.
-
-- PROJECT.md — what this project is. Max 30 lines. Overwrite each session, no history.
-- MISTAKES.md — mistakes to avoid. Claude appends to it automatically when corrected. Remove resolved ones.
-- CONTRACT.md — plan for risky changes. Created before implementing. Claude deletes it after the change is implemented and user verifies.
-
-# High-Risk Changes
-<!-- Applies to: migrations, auth, major refactors, breaking changes -->
-
-1. Research first. No code yet.
-2. Write CONTRACT.md: what changes, why, risks, rollback plan, open questions.
+Research first, no code. State the plan - what changes, risks, rollback - and get sign-off before implementing.
 
 ## Detailed rules (load when relevant)
 
@@ -85,7 +69,7 @@ Tracer bullets comes from the Pragmatic Programmer. When building systems, you w
 - **Non-idempotent setup/install scripts.**
 - **State tracking files.** Detect state from system.
 - **`rm -rf`.** Use `trash`.
-- **Branches without a worktree.** Always isolate work in its own git worktree; never `git checkout -b` / switch the main checkout onto a feature branch. Keeps the primary working dir on its branch and avoids `git stash` clobbering in-progress changes.
+- **Branches without a worktree — for ticket/feature work on shared repos.** Isolate in a git worktree; never `git checkout -b` on the main checkout (avoids `git stash` clobbering in-progress work). Exceptions, work on `main` directly, no need to ask: small doc/config/template edits, and repos where I'm the sole user. Unsure which case? Ask.
 - **Proactive file creation.**
 - **Em dashes (—).** Use hyphens.
 

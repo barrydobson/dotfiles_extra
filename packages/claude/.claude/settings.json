@@ -86,15 +86,15 @@
   },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
-    "claude-mem@thedotmack": true,
     "humanizer@barrydobson": true,
     "superpowers@claude-plugins-official": true,
     "ponytail@ponytail": true,
     "drawio@365-skills": true,
-    "afk-issues@afk-issues": true,
     "skill-creator@claude-plugins-official": true,
     "caveman@caveman": true,
-    "mattpocock-skills@mattpocock": true
+    "mattpocock-skills@mattpocock": true,
+    "engineering-workflow@barrydobson": true,
+    "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -104,18 +104,12 @@
       },
       "autoUpdate": true
     },
-    "thedotmack": {
-      "source": {
-        "source": "github",
-        "repo": "thedotmack/claude-mem"
-      },
-      "autoUpdate": true
-    },
     "tote-skills": {
       "source": {
         "source": "github",
         "repo": "thetote/skills"
-      }
+      },
+      "autoUpdate": true
     },
     "ponytail": {
       "source": {
@@ -128,12 +122,6 @@
       "source": {
         "source": "github",
         "repo": "Agents365-ai/365-skills"
-      }
-    },
-    "afk-issues": {
-      "source": {
-        "source": "github",
-        "repo": "barrydobson/afk-issues-skill"
       },
       "autoUpdate": true
     },
@@ -141,7 +129,8 @@
       "source": {
         "source": "github",
         "repo": "JuliusBrussee/caveman"
-      }
+      },
+      "autoUpdate": true
     },
     "mattpocock": {
       "source": {
@@ -149,6 +138,19 @@
         "repo": "mattpocock/skills"
       },
       "autoUpdate": true
+    },
+    "barrydobson": {
+      "source": {
+        "source": "github",
+        "repo": "barrydobson/claude-plugins"
+      },
+      "autoUpdate": true
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
     }
   },
   "alwaysThinkingEnabled": true,

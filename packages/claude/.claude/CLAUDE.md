@@ -50,13 +50,13 @@ When building features, build a tiny end-to-end slice through every layer first,
 
 ## CLI tools
 
-| tool | replaces | usage |
-| ---- | -------- | ----- |
-| `rg` (ripgrep) | grep | `rg "pattern"` |
-| `ast-grep` | - | `ast-grep --pattern '$FUNC($$$)' --lang py` |
-| `shellcheck` | - | `shellcheck script.sh` |
-| `shfmt` | - | `shfmt -i 2 -w script.sh` |
-| `trash` | rm | `trash file` - **never `rm -rf`** |
+| tool           | replaces | usage                                       |
+| -------------- | -------- | ------------------------------------------- |
+| `rg` (ripgrep) | grep     | `rg "pattern"`                              |
+| `ast-grep`     | -        | `ast-grep --pattern '$FUNC($$$)' --lang py` |
+| `shellcheck`   | -        | `shellcheck script.sh`                      |
+| `shfmt`        | -        | `shfmt -i 2 -w script.sh`                   |
+| `trash`        | rm       | `trash file` - **never `rm -rf`**           |
 
 `ast-grep` for code structure. `rg` for literals, log messages. Always look up current stable versions when adding dependencies, CI actions, tool versions.
 
@@ -75,5 +75,15 @@ When building features, build a tiny end-to-end slice through every layer first,
 
 - When I merge pull requests I use squash-merge. This means that the commit history of the PR is not preserved in the main branch.
 
+## AI & Automation Rules
+
+- Minimize API calls. Batch where possible.
+- Design for idempotency. Same input = same result.
+- Add retries with exponential backoff on transient errors.
+- Always validate AI output structure before using it.
+- Never trust raw LLM output. Parse and validate every field.
+- Prefer structured outputs (JSON schema) over free text.
+- Log meaningful errors with context, not just "AI call failed".
+- Ground responses in available data. Avoid hallucination by limiting scope.
+
 @RTK.md
-@rules/ai-agents.md

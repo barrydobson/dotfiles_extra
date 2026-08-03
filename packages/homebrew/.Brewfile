@@ -1,6 +1,5 @@
 tap "aws/tap"
 tap "homebrew/autoupdate"
-# tap "felixkratz/formulae" # Sketchybar tap
 
 # Core system tools
 brew "ca-certificates"          # CA certificates
@@ -9,7 +8,6 @@ brew "gcc"                      # C compiler
 brew "git"                      # Version control
 brew "gnu-getopt", link: true   # GNU getopt
 brew "gnupg"                    # GPG for signing commits
-brew "imagemagick"              # Image conversion and editing
 brew "pinentry-mac"             # Pinentry for GPG
 brew "stow"                     # Symlink farm manager
 
@@ -19,7 +17,6 @@ brew "zsh-completions"          # Zsh completions
 brew "starship"                 # Cross-shell prompt
 
 # Filesystem and networking tools
-brew "doge"                     # Modern dig alternative
 brew "eza"                      # Modern ls replacement
 brew "wget"                     # File downloader
 brew "grpcurl"                  # cURL for gRPC services
@@ -43,7 +40,6 @@ brew "oras"               # OCI registry tool
 brew "tmux"               # Terminal multiplexer
 brew "uv"                 # Python version management utility
 brew "yq"                 # YAML processor
-brew "dyff"               # YAML diff tool
 
 # Languages/Tools
 brew "shellcheck"         # Shell script linter
@@ -53,10 +49,8 @@ brew "go"                 # Go language
 brew "golangci-lint"      # Go linter
 brew "awscli"             # AWS CLI
 brew "worktrunk"          # Git Worktree management
-brew "prek"               # pre-commit tool (Rust implementation, no Python)
 
 # brew "mas"                # Mac App Store CLI
-# brew "sketchybar"
 
 # GUI applications
 
@@ -67,27 +61,9 @@ cask "ghostty"
 cask "obsidian"
 cask "orbstack"
 cask "raycast"
-cask "visual-studio-code"
-
-# AI
-# cask "claude-code"
 
 # Fonts
 cask "font-damion"                    # Design/display font
 cask "font-fira-code-nerd-font"       # Alternative programming font
 cask "font-hack-nerd-font"            # Alternative programming font
 cask "font-jetbrains-mono-nerd-font"  # Primary programming font
-
-
-# cask "httpie-desktop"
-# cask "iterm2"
-# cask "logi-options+"
-# cask "mitmproxy"
-# cask "ngrok"
-# cask "slack"
-# cask "spotify"
-
-# mas "CleanMyMac", id: 1339170533
-# mas "Slack", id: 803453959
-# mas "Xcode", id: 497799835
-# mas "Yubico Authenticator", id: 1497506650

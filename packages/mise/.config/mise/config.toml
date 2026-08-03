@@ -1,14 +1,5 @@
 [settings]
-activate_aggressive = true
-always_keep_download = false             # deleted after install by default
-always_keep_install = true               # deleted on failure by default
-jobs = 4
-not_found_auto_install = true
-env_file = '.env'
-asdf_compat = true                       # set to true to ensure .tool-versions will be compatible with asdf, see `MISE_ASDF_COMPAT`
-http_timeout = '10'                      # set the timeout for http requests in seconds, see `MISE_HTTP_TIMEOUT`
-experimental = true
-idiomatic_version_file_enable_tools = []
+activate_aggressive = true               # mise shims win over other PATH entries
 
 [tools]
 atuin = { version = "latest", os = ["linux"] }
@@ -21,6 +12,7 @@ github-cli = { version = "latest", os = ["linux"] }
 kubectx = { version = "latest", os = ["macos"] }
 kubens = { version = "latest", os = ["macos"] }
 usage = 'latest'
+go = 'latest'
+golangci-lint = 'latest'
 node = "24.13.1"
 "npm:ccstatusline" = 'latest'
-hugo = "0.164.0"

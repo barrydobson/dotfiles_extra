@@ -1,23 +1,19 @@
-tap "aws/tap"
-tap "homebrew/autoupdate"
+# Global tools only. Anything a project should pin (helm, kustomize, terraform,
+# terragrunt, language runtimes) belongs in that project's mise config.
 
 # Core system tools
-brew "ca-certificates"          # CA certificates
-brew "coreutils"                # GNU core utilities
-brew "gcc"                      # C compiler
 brew "git"                      # Version control
-brew "gnu-getopt", link: true   # GNU getopt
 brew "gnupg"                    # GPG for signing commits
 brew "pinentry-mac"             # Pinentry for GPG
 brew "stow"                     # Symlink farm manager
 
 # Shell
-brew "zsh"                      # Z shell (though macOS has it by default)
-brew "zsh-completions"          # Zsh completions
+brew "zsh"                      # Z shell (newer than the macOS system build)
 brew "starship"                 # Cross-shell prompt
 
 # Filesystem and networking tools
 brew "eza"                      # Modern ls replacement
+brew "fd"                       # find replacement; backs FZF_DEFAULT_COMMAND
 brew "wget"                     # File downloader
 brew "grpcurl"                  # cURL for gRPC services
 brew "websocat"                 # socat for WebSockets
@@ -28,11 +24,11 @@ brew "atuin"              # Enhanced history manager
 brew "fzf"                # Fuzzy finder
 brew "procs"              # Process viewer
 brew "ripgrep"            # Fast grep replacement
-brew "gnu-sed"            # GNU sed
 brew "ast-grep"           # AST-based code search tool
 
 # Development tools
 brew "jq"                 # JSON processor
+brew "kubernetes-cli"     # kubectl
 brew "k9s"                # Kubernetes CLI UI
 brew "mise"               # CLI tool to manage tool versions
 brew "neovim"             # Text editor
@@ -44,13 +40,9 @@ brew "yq"                 # YAML processor
 # Languages/Tools
 brew "shellcheck"         # Shell script linter
 brew "shfmt"              # Shell script formatter
-brew "gh"
-brew "go"                 # Go language
-brew "golangci-lint"      # Go linter
+brew "gh"                 # GitHub CLI
 brew "awscli"             # AWS CLI
 brew "worktrunk"          # Git Worktree management
-
-# brew "mas"                # Mac App Store CLI
 
 # GUI applications
 

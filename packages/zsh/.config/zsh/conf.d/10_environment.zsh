@@ -1,5 +1,5 @@
 #=============================================================================
-# Environment Variables & PATH
+# Environment Variables
 #=============================================================================
 
 # XDG Base Directory Specification
@@ -12,11 +12,11 @@ export SSH_DATA_HOME="$XDG_DATA_HOME/ssh"
 export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
 
 # Terminal settings
-export TERM=xterm-256color
+# TERM is deliberately not set here — the terminal emulator and tmux each
+# advertise their own, and overriding it loses their capabilities.
 export EDITOR=nvim
 export VISUAL=nvim
 export LANG=en_GB.UTF-8
-export LC_ALL="en_GB.UTF-8"
 
 # Tool configurations
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
@@ -25,33 +25,43 @@ export WORDCHARS=''
 
 # History configuration
 HISTSIZE=10000000
-HISTFILE=~/.zsh_history
+HISTFILE="$HOME/.zsh_history"
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 
-# History options
-setopt appendhistory
-setopt sharehistory
+# History options — atuin owns recall, so no share_history here
+setopt inc_append_history
+setopt extended_history
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
+setopt hist_expire_dups_first
 setopt hist_save_no_dups
-setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt hist_reduce_blanks
 setopt hist_verify
-setopt inc_append_history
+
+# Shell behaviour
+setopt auto_cd
+setopt extended_glob
+setopt glob_dots
+setopt numeric_glob_sort
+setopt interactive_comments
+setopt no_beep
+
+# Directory stack — makes `cd -<TAB>` useful
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushd_silent
+
+# Completion behaviour
+setopt complete_in_word
+setopt always_to_end
 
 #=============================================================================
 # Local Environment
 #=============================================================================
 
-# Load local environment variables from ~/.env
-load_env() {
-    if [[ -s ~/.env ]]; then
-        set -a  # automatically export all variables
-        source ~/.env
-        set +a  # turn off automatic export
-    fi
-}
-
-load_env
+# ~/.env uses explicit `export` per line, so no `set -a` here — a blanket
+# auto-export would push every future entry into every child process.
+if [[ -s ~/.env ]]; then
+    source ~/.env
+fi

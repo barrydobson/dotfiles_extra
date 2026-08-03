@@ -2,12 +2,8 @@
 # Keybindings
 #=============================================================================
 
-bindkey -e  # Use emacs keybindings
+# Not optional: $EDITOR is "nvim", which contains "vi", so zsh would otherwise
+# start in vi mode.
+bindkey -e
 
-# Option + Left/Right = move by word
-bindkey '^[b' backward-word
-bindkey '^[f' forward-word
-
-# Home/End (used by Cmd+Left/Right)
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
+# Word movement and line start/end are emacs-mode defaults — nothing to bind.

@@ -2,43 +2,25 @@
 # Completion System
 #=============================================================================
 
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Case-insensitive, plus partial-word matching on . _ - boundaries
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$HOME/.zcompcache"
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 
-#=============================================================================
-# fpath Setup
-#=============================================================================
+# fzf-tab requires zsh's own menu to be off, and needs group-name/format set
+# before it will render grouped results.
+zstyle ':completion:*' menu no
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '[%d]'
 
-fpath=(
-    $HOME/.config/zsh/functions
-    $HOME/.config/zsh/widgets
-    "${fpath[@]}"
-)
-
-typeset -U fpath
-
-# Brew completions — $HOMEBREW_PREFIX is already set by 00_platform.zsh (no subprocess)
-if [[ -n "$HOMEBREW_PREFIX" ]]; then
-    fpath=($HOMEBREW_PREFIX/share/zsh-completions $HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
-fi
-
-# Docker Desktop writes completions here separately from the CLI
-if [[ -d "$HOME/.docker/completions" ]]; then
-    fpath=($HOME/.docker/completions $fpath)
-fi
-
-if [[ -d "$HOME/.zsh/completion" ]]; then
-    fpath=($HOME/.zsh/completion $fpath)
-fi
-
-# bun completions
-[ -s "/Users/barrydobson/.bun/_bun" ] && source "/Users/barrydobson/.bun/_bun"
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-flags --height=60% --border
+zstyle ':fzf-tab:complete:(cd|__zoxide_z|ls|eza):*' fzf-preview 'eza --icons --colour=always --long --header $realpath'
+zstyle ':fzf-tab:complete:git-(add|diff|restore|checkout):*' fzf-preview 'git diff --color=always -- $word'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview 'git show --color=always $word'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview 'ps -p $word -o comm=,args='
+zstyle ':fzf-tab:complete:(-command-|export|unset):*' fzf-preview 'echo ${(P)word}'
 
 #=============================================================================
 # Tool Completions (Zinit)
@@ -82,21 +64,36 @@ zinit ice lucid wait has'uvx' id-as'uvx-completion' \
 zinit light zdharma-continuum/null
 
 #=============================================================================
-# Autoload Functions & Widgets
+# fpath
+#=============================================================================
+# $ZDOTDIR/functions is already on fpath from .zshrc (it has to be, so conf.d
+# can autoload from it).
+
+# Brew completions — $HOMEBREW_PREFIX is already set by 00_platform.zsh (no subprocess)
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+    fpath=($HOMEBREW_PREFIX/share/zsh-completions $HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+fi
+
+# Docker Desktop writes completions here separately from the CLI
+if [[ -d "$HOME/.docker/completions" ]]; then
+    fpath=($HOME/.docker/completions $fpath)
+fi
+
+if [[ -d "$HOME/.zsh/completion" ]]; then
+    fpath=($HOME/.zsh/completion $fpath)
+fi
+
+typeset -U fpath
+
+#=============================================================================
+# Autoload Functions
 #=============================================================================
 
 autoload -Uz zmv
 
-if [[ -d $HOME/.config/zsh/functions ]]; then
-    for func in $HOME/.config/zsh/functions/*(:t); do
+if [[ -d "${ZDOTDIR}/functions" ]]; then
+    for func in "${ZDOTDIR}"/functions/*(:t); do
         autoload -U $func
-    done
-fi
-
-if [[ -d $HOME/.config/zsh/widgets ]]; then
-    for func in $HOME/.config/zsh/widgets/*(:t); do
-        autoload -U $func
-        zle -N $func
     done
 fi
 
@@ -104,13 +101,16 @@ fi
 # Initialise Completion System
 #=============================================================================
 
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+[[ -d "${ZSH_COMPDUMP:h}" ]] || mkdir -p "${ZSH_COMPDUMP:h}"
+
 # Skip the full fpath scan when the dump file is less than 24 hours old (-C).
 # On the first shell of a new day (or after zinit update), a full rebuild runs.
 autoload -Uz compinit
-if [[ -n ${HOME}/.zcompdump(#qN.mh-24) ]]; then
-    compinit -C -i -d ~/.zcompdump
+if [[ -n ${ZSH_COMPDUMP}(#qN.mh-24) ]]; then
+    compinit -C -i -d "$ZSH_COMPDUMP"
 else
-    compinit -i -d ~/.zcompdump
+    compinit -i -d "$ZSH_COMPDUMP"
 fi
 
 # Replay Zinit compdefs (must run after compinit)

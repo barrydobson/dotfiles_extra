@@ -15,7 +15,9 @@ else
     return 1
 fi
 
-# zsh-completions must load synchronously: its fpath additions must precede compinit (15_completion.zsh)
+# zsh-completions must load synchronously: its fpath additions must precede
+# compinit (15_completion.zsh). blockf stops it appending to fpath itself.
+zinit ice blockf atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
 # Configure autosuggestions before the plugin loads
@@ -23,15 +25,17 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # UI plugins — turbo (deferred until after first prompt).
 # Order matters: fzf-tab before autosuggestions and syntax-highlighting.
+# autosuggestions needs the atload kicker, or it stays dead until a keypress.
 zinit wait lucid for \
     Aloxaf/fzf-tab \
+  atload'_zsh_autosuggest_start' \
     zsh-users/zsh-autosuggestions \
     zsh-users/zsh-syntax-highlighting
 
 # Oh My Zsh snippets — turbo (aliases and functions, safe to defer)
+# OMZP::git is deliberately absent: it redefines gp/gl/gc/gca after
+# aliases/git.zsh has been sourced, silently swapping pull and push.
 zinit wait lucid for \
-    OMZP::command-not-found \
-    OMZP::git \
     OMZP::sudo \
     OMZP::encode64
 

@@ -15,10 +15,11 @@ if [ "$(command -v eza)" ]; then
     alias tree="eza --tree --all --git-ignore"
 fi
 
-# ripgrep - modern replacement for grep
+# ripgrep — search everything, including ignored, hidden and binary files.
+# grep itself is left alone: rg uses a different regex dialect and different
+# recursion and exit-code semantics, so aliasing it breaks pipelines.
 if [ -x "$(command -v rg)" ]; then
   alias rga='rg -uuu'
-  alias grep='rga'
 fi
 
 # procs - modern replacement for ps

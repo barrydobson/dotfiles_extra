@@ -5,7 +5,7 @@
 # =============================================================================
 # Detects the OS, installs dependencies, stows configs, and installs tools.
 
-set -e
+set -eo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./install/common.sh
@@ -45,14 +45,21 @@ MAC_PACKAGES=(
 detect_os() {
     if [[ "$(uname)" == "Darwin" ]]; then
         echo "macos"
-    elif [[ -f /etc/os-release ]]; then
-        # shellcheck disable=SC1091
-        source /etc/os-release
-        echo "${ID}"
-    else
-        print_error "Cannot detect OS"
+        return
+    fi
+
+    if [[ ! -f /etc/os-release ]]; then
+        print_error "Cannot detect OS: no /etc/os-release" >&2
         exit 1
     fi
+
+    # shellcheck disable=SC1091
+    source /etc/os-release
+    # ID_LIKE catches the Debian derivatives (Mint, Pop!_OS, Kali, ...)
+    case " ${ID} ${ID_LIKE:-} " in
+        *" debian "*|*" ubuntu "*) echo "debian" ;;
+        *) echo "${ID}" ;;
+    esac
 }
 
 # Install packages from Homebrew. This is called after stowing, so the Brewfile should be in place.
@@ -88,7 +95,7 @@ install_linux_extras() {
 main() {
     local os
     os=$(detect_os)
-    print_status "Detected OS: ${os}"
+    print_status "Detected OS family: ${os}"
 
     case "${os}" in
         macos)
@@ -97,18 +104,23 @@ main() {
             install_homebrew_packages
             setup_macos_1password
             ;;
-        ubuntu|debian)
+        debian)
             bash "${DOTFILES_DIR}/install/ubuntu.sh"
             stow_packages "${COMMON_PACKAGES[@]}"
             install_linux_extras
             ;;
         *)
-            print_error "Unsupported OS: ${os}. Supported: macos, ubuntu, debian"
+            print_error "Unsupported OS: ${os}. Supported: macos, debian/ubuntu"
             exit 1
             ;;
     esac
 
     install_tpm
+
+    if ! command -v mise >/dev/null 2>&1; then
+        print_error "mise is not on PATH, cannot install tool versions"
+        exit 1
+    fi
     MISE_AQUA_GITHUB_ATTESTATIONS=false mise install
     print_success "Done! Restart your terminal or run: exec zsh"
 }

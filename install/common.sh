@@ -35,13 +35,10 @@ check_sudo_access() {
 }
 
 _sudo() {
-    if check_sudo_access; then
-        sudo "$@"
-    elif [[ $EUID -eq 0 ]]; then
+    if [[ ${EUID} -eq 0 ]]; then
         "$@"
     else
-        print_warning "Sudo access not available, running command without sudo: $*"
-        "$@"
+        sudo "$@"
     fi
 }
 

@@ -7,7 +7,7 @@
 # Runs as the remote (non-root) user. Assumes system prerequisites are already
 # present in the image — see DEVCONTAINERS.md.
 
-set -e
+set -eo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # shellcheck source=./common.sh

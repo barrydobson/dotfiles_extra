@@ -5,7 +5,7 @@
 # =============================================================================
 # Installs Homebrew. Package installation happens via Brewfile after stowing.
 
-set -e
+set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./common.sh
@@ -20,7 +20,7 @@ check_macos() {
 
 install_homebrew() {
     print_status "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     if [[ -f "/opt/homebrew/bin/brew" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -52,7 +52,7 @@ main() {
 
     if command -v brew >/dev/null 2>&1; then
         print_status "Homebrew is already installed"
-        brew update && brew upgrade
+        brew update
     else
         install_homebrew
     fi

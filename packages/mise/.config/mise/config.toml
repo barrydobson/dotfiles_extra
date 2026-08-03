@@ -8,6 +8,9 @@ eza = { version = "latest", os = ["linux"] }
 zoxide = { version = "latest", os = ["linux"] }
 jq = { version = "latest", os = ["linux"] }
 yq = { version = "latest", os = ["linux"] }
+neovim = { version = "latest", os = ["linux"] }
+tmux = { version = "latest", os = ["linux"] }
+yamlfmt = { version = "latest", os = ["linux"] }
 github-cli = { version = "latest", os = ["linux"] }
 kubectx = { version = "latest", os = ["macos"] }
 kubens = { version = "latest", os = ["macos"] }

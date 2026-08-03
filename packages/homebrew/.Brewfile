@@ -36,6 +36,7 @@ brew "oras"               # OCI registry tool
 brew "tmux"               # Terminal multiplexer
 brew "uv"                 # Python version management utility
 brew "yq"                 # YAML processor
+brew "yamlfmt"            # YAML formatter; used by nvim conform
 
 # Languages/Tools
 brew "shellcheck"         # Shell script linter

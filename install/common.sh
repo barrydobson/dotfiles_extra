@@ -94,18 +94,9 @@ install_1password_cli() {
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
     sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
-  # Install 1Password CLI:
-  if command -v apt-get >/dev/null 2>&1; then
-    print_status "Installing 1Password CLI with apt-get..."
-    sudo apt-get update
-    sudo apt-get install -y --no-install-recommends 1password-cli
-  elif command -v apk >/dev/null 2>&1; then
-    print_status "Installing 1Password CLI with apk..."
-    apk add --no-cache 1password-cli
-  else
-    print_error "distribution not supported"
-    exit 1
-  fi
+  print_status "Installing 1Password CLI with apt-get..."
+  sudo apt-get update
+  sudo apt-get install -y --no-install-recommends 1password-cli
 }
 
 install_starship() {
@@ -118,33 +109,6 @@ install_starship() {
 
     curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
     print_success "Starship prompt installed"
-}
-
-install_zoxide() {
-    print_status "Installing zoxide (zsh directory jumper)..."
-
-    if command -v zoxide >/dev/null 2>&1; then
-        print_status "zoxide is already installed"
-        return
-    fi
-
-    curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-    print_success "zoxide installed"
-}
-
-# Install Zinit (Zsh plugin manager)
-install_zinit() {
-    print_status "Installing Zinit (Zsh plugin manager)..."
-
-    local zinit_home="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-    if [[ ! -d "${zinit_home}" ]]; then
-        mkdir -p "$(dirname "${zinit_home}")"
-        git clone https://github.com/zdharma-continuum/zinit.git "${zinit_home}"
-        print_success "Zinit installed"
-    else
-        print_status "Zinit is already installed"
-    fi
 }
 
 # Install TPM (Tmux Plugin Manager)
@@ -175,13 +139,14 @@ install_tavily_cli() {
     print_success "Tavily CLI installed"
 }
 
-# Common post-installation setup: default shell and standard directories
+# ~/.local/bin is on PATH before anything is installed into it
 post_install_setup() {
-    print_status "Performing post-installation setup..."
-
     mkdir -p "${HOME}/.local/bin"
-    mkdir -p "${HOME}/.local/share"
-    mkdir -p "${HOME}/.config"
+}
 
-    print_success "Post-installation setup completed"
+# Restow so re-runs pick up new files. Callers must set DOTFILES_DIR.
+stow_packages() {
+    print_status "Stowing: $*"
+    (cd "${DOTFILES_DIR}/packages" && stow -v -R -t "${HOME}" "$@")
+    print_success "Packages stowed"
 }

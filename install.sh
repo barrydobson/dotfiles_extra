@@ -42,10 +42,6 @@ MAC_PACKAGES=(
     zed
 )
 
-GLOBAL_NPM_PACKAGES=(
-    ccstatusline
-)
-
 detect_os() {
     if [[ "$(uname)" == "Darwin" ]]; then
         echo "macos"
@@ -59,28 +55,16 @@ detect_os() {
     fi
 }
 
-stow_packages() {
-    local packages=("$@")
-    print_status "Stowing: ${packages[*]}"
-    cd "${DOTFILES_DIR}/packages" && stow -v -t "${HOME}" "${packages[@]}"
-    cd "${DOTFILES_DIR}"
-    print_success "Packages stowed"
-}
-
 # Install packages from Homebrew. This is called after stowing, so the Brewfile should be in place.
 install_homebrew_packages() {
-    print_status "Installing packages from Homebrew..."
-    local brewfile_path=""
-
-    if [[ -f "${HOME}/.Brewfile" ]]; then
-        brewfile_path="${HOME}/.Brewfile"
-    else
+    if [[ ! -f "${HOME}/.Brewfile" ]]; then
         print_warning "No Brewfile found, skipping package installation"
         return
     fi
-    brew bundle check --file "${brewfile_path}" || brew bundle install --file "${brewfile_path}"
 
-    print_success "Homebrew packages installation completed"
+    print_status "Installing packages from Homebrew..."
+    brew bundle install --file "${HOME}/.Brewfile"
+    print_success "Homebrew packages installed"
 }
 
 setup_macos_1password() {
@@ -99,17 +83,6 @@ install_linux_extras() {
     export PATH="${HOME}/.local/bin:${PATH}"
     install_starship
     install_1password_cli
-}
-
-install_npm_packages() {
-    print_status "Installing global npm packages..."
-    mise exec node@lts -- npm install -g "${GLOBAL_NPM_PACKAGES[@]}"
-    # if ! command -v npm >/dev/null 2>&1; then
-    #     print_warning "npm is not installed, skipping global npm packages installation"
-    #     return
-    # fi
-    # npm install -g "${GLOBAL_NPM_PACKAGES[@]}"
-    print_success "Global npm packages installation completed"
 }
 
 main() {
@@ -135,10 +108,8 @@ main() {
             ;;
     esac
 
-    install_zinit
     install_tpm
     MISE_AQUA_GITHUB_ATTESTATIONS=false mise install
-    # install_npm_packages
     print_success "Done! Restart your terminal or run: exec zsh"
 }
 

@@ -40,14 +40,6 @@ check_prerequisites() {
     print_success "All prerequisites present"
 }
 
-stow_packages() {
-    local packages=("$@")
-    print_status "Stowing: ${packages[*]}"
-    cd "${DOTFILES_DIR}/packages" && stow -v -R -t "${HOME}" "${packages[@]}"
-    cd "${DOTFILES_DIR}"
-    print_success "Packages stowed"
-}
-
 main() {
     print_status "Configuring devcontainer dotfiles..."
     check_prerequisites

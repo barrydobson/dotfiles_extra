@@ -9,11 +9,7 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 - **🧠 Neovim AI Assistant**: Built-in CodeCompanion plugin supporting multiple AI providers:
   - **Anthropic Claude** (default): Industry-leading code generation and analysis
 
-- **📝 AI-Generated Git Commits**: LazyGit integration with Claude Code:
-  - Press `C` in LazyGit to auto-generate contextual commit messages
-  - Analyzes staged changes to create meaningful commit descriptions
-  - Generates both summary line and detailed commit body
-  - Streamlines git workflow with intelligent commit message suggestions
+- **🤖 Claude Code**: Global config, skills, agents and rules in `packages/claude/.claude/`, symlinked to `~/.claude`
 
 **📖 See [CLAUDE.md](CLAUDE.md) for detailed Claude Code integration setup**
 
@@ -23,7 +19,7 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 - **Modern CLI Tools**: Replaces traditional tools with faster, feature-rich alternatives
 - **Consistent Theming**: Catppuccin Mocha theme across all applications
 - **Modern Editor**: Neovim configuration with Lazy.nvim and AI integration
-- **Git Workflow**: Enhanced git experience with delta diffs and lazygit UI
+- **Git Workflow**: Enhanced git experience with delta diffs and worktree tooling
 - **Shell Enhancement**: Zsh with modern completions and smart directory navigation
 
 ## Quick Start
@@ -45,29 +41,24 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
    cd ~/dotfiles
    ```
 
-2. **Install system-specific tools:**
+2. **Bootstrap** (detects the OS, installs tools, stows configs):
 
    ```bash
-   # macOS
-   ./install/macos.sh
-
-   # Ubuntu/Debian Linux
-   ./install/ubuntu.sh
-
-   # Arch Linux
-   ./install/arch-linux.sh
+   ./install.sh
    ```
 
-3. **Deploy dotfiles:**
+   To run only the platform tool installation, without stowing:
 
    ```bash
-   make stow
+   ./install/mac.sh          # macOS
+   ./install/ubuntu.sh       # Ubuntu/Debian
+   ./install/arch-linux.sh   # Arch
    ```
 
-4. **Verify installation:**
+3. **Reload the shell:**
 
    ```bash
-   make check
+   exec zsh
    ```
 
 ## Key Tools and Replacements
@@ -87,7 +78,7 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 ### Shell (Zsh)
 
 - **Plugin Manager**: Zinit for fast plugin loading
-- **Prompt**: Powerlevel10k with custom configuration
+- **Prompt**: Starship, configured in `packages/starship/`
 - **Completions**: Modern tab completion system
 - **Aliases**: Shortcuts for modern CLI tools
 
@@ -95,8 +86,8 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 
 Configurations provided for:
 
-- **Alacritty**: GPU-accelerated terminal
 - **Ghostty**: Fast, feature-rich terminal
+- **Warp**: Themes only
 
 All terminals use:
 
@@ -115,7 +106,7 @@ Features:
 - **AI-Powered Development**: CodeCompanion integration with multiple AI providers
 - **LSP integration**: Full language server support for multiple languages
 - **Fuzzy finding**: Telescope with extensive search capabilities
-- **Git integration**: Gitsigns, conflict resolution, and Lazygit integration
+- **Git integration**: Gitsigns and conflict resolution
 - **Modern UI**: Consistent theming with Catppuccin Mocha
 - **Advanced Code Intelligence**: Treesitter, autocompletion, and code folding
 - **Session Management**: Use `:mksession` to create initial session files for mini.sessions
@@ -132,22 +123,20 @@ Features:
 ### Daily Commands
 
 ```bash
-# Management
-make stow          # Deploy dotfiles
-make unstow        # Remove dotfiles
-make restow        # Redeploy dotfiles
-make backup        # Create timestamped backup
-make restore       # Restore from latest backup
+# Deployment (run from packages/)
+cd packages
+stow -v -t "${HOME}" git zsh    # Deploy specific packages
+stow -v -D -t "${HOME}" git     # Remove a package
+stow -v -R -t "${HOME}" git     # Redeploy a package
 
 # Development
-make lint          # Run shellcheck on scripts
-make test          # Run tests (when implemented)
+shellcheck install.sh install/*.sh    # Lint shell scripts
 ```
 
 ### Git Integration
 
-- Use `lazygit` for terminal-based git UI
 - Delta provides enhanced diff viewing
+- `wt` switches between git worktrees
 - Extensive alias collection for common operations
 - Context-aware configuration for work vs personal
 
@@ -187,9 +176,10 @@ make test          # Run tests (when implemented)
 
 ### Adding New Tools
 
-1. Add installation commands to appropriate install script
-2. Create configuration file in `src/`
-3. Update README with tool information
+1. Create `packages/<tool>/` with the config at its real dotfile path
+2. Add the package name to `COMMON_PACKAGES` or `MAC_PACKAGES` in `install.sh`
+3. Add installation commands to the appropriate install script
+4. Update README with tool information
 
 ### Theme Customization
 
@@ -200,9 +190,10 @@ All applications use Catppuccin Mocha. To change:
 
 ### Local Overrides
 
-- Git: Use `.gitconfig-local` for machine-specific settings
-- Environment: Use `.env` for local environment variables
-- Shell: Add local customizations to `.zshrc.local`
+All gitignored:
+
+- Git: `.gitconfig-local` for machine-specific settings, `.gitconfig-private` for work/personal context
+- Shell: `packages/zsh/.config/zsh/conf.d/99_private-environment.zsh` - loaded automatically by the `conf.d` glob
 
 ## Troubleshooting
 
@@ -211,10 +202,11 @@ All applications use Catppuccin Mocha. To change:
 **Stow conflicts:**
 
 ```bash
-make unstow    # Remove existing links
-make clean     # Clean up broken links
-make stow      # Redeploy
+cd packages
+stow -v -R -t "${HOME}" <package>   # Restow (unstow + stow)
 ```
+
+Stow refuses to overwrite a real file. Move or delete the conflicting file, then restow.
 
 **Font not displaying:**
 

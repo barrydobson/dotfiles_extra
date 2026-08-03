@@ -34,7 +34,6 @@ MAC_PACKAGES=(
     homebrew
     ghostty
     k9s
-    sketchybar
     ssh
     vscode
 )

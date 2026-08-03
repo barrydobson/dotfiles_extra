@@ -16,19 +16,23 @@ packages/
 │   └── .<filename>          # Stows to ~/.<filename>
 ```
 
-**Key principle**: Packages use real dotfile names. Stow is invoked with `-t "${HOME}"` so the directory structure mirrors home directly. For example:
+**Key principle**: Packages use real dotfile names, so the directory structure mirrors home directly. For example:
 - `packages/zsh/.zshenv` → `~/.zshenv`
 - `packages/nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
+
+`packages/.stowrc` already sets `--target=~/` and ignores `.stowrc`, `./install`, `./.claude`. The `-t "${HOME}"` in the commands below is redundant but matches what the install scripts do.
 
 ### Major Components
 
 - **Shell**: Zsh with Zinit plugin management and Starship prompt
-- **Editor**: Neovim (LazyVim-based) with CodeCompanion AI integration
+- **Editor**: Neovim (LazyVim-based) with CodeCompanion AI integration; also `zed`, `vscode`
 - **Terminal**: Ghostty and Warp configs with Catppuccin Mocha theme
 - **Git**: Modular config with Delta diffs and extensive aliases from GitAlias.com
-- **Tools**: Modern CLI replacements (eza, bat, fd, ripgrep, delta, zoxide, atuin, mise)
-- **Claude**: Config and skills at `packages/claude/.claude/`
-- **Other**: 1Password, k9s, sketchybar, tmux, starship, ssh, vscode
+- **Tools**: `atuin`, `eza`, `mise`, `k9s`, `homebrew` (Brewfile), `yamllint`, `editorconfig`, `worktrunk`, `ccstatusline`
+- **Claude**: Config, skills, agents and rules at `packages/claude/.claude/` - see gotcha below
+- **Other**: `1Password`, `ssh`, `tmux`, `starship`, `claude-mem`, `agents`, `skills`
+
+**Deployment source of truth**: the `COMMON_PACKAGES` / `MAC_PACKAGES` arrays in `install.sh` and `DEVCONTAINER_PACKAGES` in `install/devcontainer.sh`. A directory under `packages/` is not deployed unless it is listed there. Currently unstowed by any script: `agents`, `skills`, `warp`, `worktrunk`, `zed`.
 
 ## Common Development Commands
 
@@ -49,15 +53,20 @@ stow -v -R -t "${HOME}" git                   # Restow (unstow + stow)
 ### Linting
 
 ```bash
-shellcheck install/*.sh   # Lint install scripts
+shellcheck install/*.sh install.sh   # Shell scripts - the only linter installed
 ```
+
+`.markdownlint.json` exists (MD013 off, MD007 indent 2) but no markdownlint CLI is installed; it is only honoured by editor extensions. Match those rules when writing markdown here, don't try to run it.
 
 ### Platform-Specific Installation
 
+Called by `install.sh` after OS detection; `install/common.sh` is sourced (not executed) and provides the `print_*` output functions plus the `install_*` helpers.
+
 ```bash
-./install/mac.sh       # macOS: Homebrew + GUI apps
-./install/ubuntu.sh    # Ubuntu/Debian: apt + manual installs
-./install/arch-linux.sh  # Arch: pacman + AUR
+./install/mac.sh          # macOS: Homebrew + GUI apps
+./install/ubuntu.sh       # Ubuntu/Debian: apt + manual installs
+./install/arch-linux.sh   # Arch: pacman + AUR
+./install/devcontainer.sh # Devcontainer: stows a 4-package subset, see DEVCONTAINERS.md
 ```
 
 ## Key Integration Points
@@ -86,20 +95,24 @@ See `KEYMAPS.md` for complete keymap reference.
 
 Shell setup in `packages/zsh/.config/zsh/`:
 
-- `conf.d/` - Numbered config files loaded in order (environment, tools, etc.)
+- `conf.d/` - Numbered config files, glob-loaded in order by `.zshrc` (`00_platform` → `50_tools`)
 - `aliases/` - Per-topic alias files (git, docker, modern-tools, etc.)
-- `functions/` - Shell functions including `w` (worktree manager)
-- `.zprofile` - Environment setup
+- `functions/` - Shell functions, added to `fpath` before `conf.d` loads
 - `.zshenv` at `packages/zsh/.zshenv` - Sets `ZDOTDIR`
 
 Aliases map traditional tools to modern alternatives (e.g., `ls` → `eza`, `cat` → `bat`).
 
-### LazyGit Integration
+Gitignored, so absent on a fresh clone: `.zprofile`, `.zsh_history`, `99_private-environment.zsh` (machine-local secrets/env - picked up automatically by the `conf.d` glob).
 
-LazyGit has **AI-powered commit message generation** via Claude Code:
+### Claude Configuration
 
-- Press `C` in LazyGit to generate contextual commit messages
-- Analyzes staged changes to create meaningful descriptions
+**`~/.claude` is a directory symlink to `packages/claude/.claude`.** Consequences:
+
+- Edits under `packages/claude/.claude/` take effect immediately. No stow step.
+- Claude Code's live runtime state (`history.jsonl`, `projects/`, `plugins/`, `cache/`, `daemon*`) writes into the repo working tree. `packages/claude/.gitignore` excludes it - check that file before assuming a new path is committable, and never `git add -A` here without reading the diff.
+- Only ~24 files are tracked: `CLAUDE.md`, `RTK.md`, `settings.json`, `rules/`, `skills/`, `agents/`, `themes/`, `scheduled-tasks/`.
+
+`packages/claude/.claude/CLAUDE.md` is the global user instruction file, not project context. Changing it changes Claude's behaviour in every repo.
 
 ## Important Patterns
 
@@ -107,9 +120,12 @@ LazyGit has **AI-powered commit message generation** via Claude Code:
 
 1. Create `packages/<app-name>/` directory
 2. Add configs using real dotfile names (`.config/<app>/` for XDG, `.<filename>` for home-dir dotfiles)
-3. Add installation commands to appropriate `install/*.sh` script
-4. Stow the new package: `cd packages && stow -v -t "${HOME}" <app-name>`
-5. Document in README.md if user-facing
+3. Add the package name to the relevant array in `install.sh` (`COMMON_PACKAGES` or `MAC_PACKAGES`) - otherwise it never deploys
+4. Add installation commands to appropriate `install/*.sh` script
+5. Stow the new package: `cd packages && stow -v -t "${HOME}" <app-name>`
+6. Document in README.md if user-facing
+
+When **removing** a package, delete its name from the `install.sh` arrays too. Stow aborts the whole run on a missing package, and a stale symlink in `~/.config` is left dangling.
 
 ### When Modifying Install Scripts
 
@@ -130,25 +146,6 @@ LazyGit has **AI-powered commit message generation** via Claude Code:
 Before committing changes to configs:
 
 1. **Test deployment**: `cd packages && stow -v -R -t "${HOME}" <package>`
-2. **Verify symlinks**: Check that files appear in correct locations (`ls -la ~/.<config>`)
-3. **Test functionality**: Open relevant application and verify config loads
-4. **Check for conflicts**: Stow will error if files already exist without symlinks
-
-## Architecture Decisions
-
-### Why Stow?
-
-GNU Stow provides:
-
-- Clean separation of configs per tool
-- Easy deployment/rollback via symlinks
-- No custom scripts needed for symlinking logic
-
-### Why Packages Structure?
-
-Each tool is self-contained, making it easy to:
-
-- Add/remove tools independently
-- Share configs between machines selectively
-- Understand what files belong to which tool
-- Maintain tool-specific documentation
+2. **Verify symlinks**: `ls -la ~/.config/<app>` - confirm it resolves into this repo, not dangling
+3. **Test functionality**: shell changes with `exec zsh`; others by opening the application
+4. **Check for conflicts**: Stow errors if a real file already exists where a symlink should go

@@ -223,7 +223,6 @@ This document provides a comprehensive guide to all custom keymaps in this Neovi
 
 | Keymap       | Action   | Description                                                  |
 | ------------ | -------- | ------------------------------------------------------------ |
-| `<leader>g`  | LazyGit  | **[G]it lazygit toggle** - Open LazyGit in floating terminal |
 | `<leader>tt` | Terminal | **[T]erminal [T]oggle** - Open floating terminal             |
 
 ---

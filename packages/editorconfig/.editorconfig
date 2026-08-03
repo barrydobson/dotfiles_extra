@@ -8,36 +8,43 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
-# YAML settings
+# Matches yamllint line-length
 [*.{yml,yaml}]
-indent_size = 2
+max_line_length = 100
 
 # JavaScript/TypeScript settings
-[*.{js,ts,jsx,tsx,json}]
-indent_size = 2
+[*.{js,ts,jsx,tsx}]
 max_line_length = 100
 
 # Markdown settings
 [*.md]
 trim_trailing_whitespace = false
 
-# Lua-specific settings
+# Lua settings (stylua column width)
 [*.lua]
-indent_size = 2
-max_line_length = 80
+max_line_length = 120
 
-# Tab-specific settings
-[Makefile]
+# Go: gofmt uses tabs
+[*.go]
 indent_style = tab
 
-[*.gitconfig]
-indent_style = tab
+# .NET conventions
+[*.{cs,csx}]
 indent_size = 4
 
-[.gitconfig]
-indent_style = tab
+# PEP 8
+[*.py]
 indent_size = 4
 
-[.gitconfig-*]
+# Trailing whitespace and missing final newlines are significant in patches
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# Make recipes require tabs
+[{Makefile,makefile,GNUmakefile,*.mk}]
+indent_style = tab
+
+[{.gitconfig,.gitconfig-*,.gitalias,.config/git/config}]
 indent_style = tab
 indent_size = 4

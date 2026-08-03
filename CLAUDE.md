@@ -20,14 +20,14 @@ packages/
 - `packages/zsh/.zshenv` → `~/.zshenv`
 - `packages/nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
-`packages/.stowrc` already sets `--target=~/` and ignores `.stowrc` and `./install`. The `-t "${HOME}"` in the commands below is redundant but matches what the install scripts do.
+`packages/.stowrc` already sets `--target=~/` and ignores `.stowrc` and `.DS_Store`. The `-t "${HOME}"` in the commands below is redundant but matches what the install scripts do.
 
 ### Major Components
 
 - **Shell**: Zsh with Zinit plugin management and Starship prompt
-- **Editor**: Neovim (LazyVim-based) with CodeCompanion AI integration; also `zed`, `vscode`
-- **Terminal**: Ghostty and Warp configs with Catppuccin Mocha theme
-- **Git**: Modular config with Delta diffs and extensive aliases from GitAlias.com
+- **Editor**: Neovim (LazyVim plus four small plugin overrides, Copilot for AI); also `zed`, `vscode`
+- **Terminal**: Ghostty (`voltaic-dark`/`voltaic-light`)
+- **Git**: Modular config - `config` includes `.gitalias` (short single-letter aliases) and a gitignored `.gitconfig-local`
 - **Tools**: `atuin`, `eza`, `mise`, `k9s`, `homebrew` (Brewfile), `yamllint`, `editorconfig`, `worktrunk`, `ccstatusline`
 - **Claude**: Config, skills, agents and rules at `packages/claude/.claude/` - see gotcha below
 - **Other**: `1Password`, `ssh`, `tmux`, `starship`, `claude-mem`, `agents`, `skills`
@@ -67,7 +67,7 @@ Called by `install.sh` after OS detection; `install/common.sh` is sourced (not e
 ```bash
 ./install/mac.sh          # macOS: Homebrew + GUI apps
 ./install/ubuntu.sh       # Ubuntu/Debian: apt + manual installs
-./install/devcontainer.sh # Devcontainer: stows a 4-package subset, see DEVCONTAINERS.md
+./install/devcontainer.sh # Devcontainer: stows a 5-package subset, see DEVCONTAINERS.md
 ```
 
 ## Key Integration Points
@@ -76,21 +76,23 @@ Called by `install.sh` after OS detection; `install/common.sh` is sourced (not e
 
 Git config is **modular**:
 
-- `packages/git/.config/git/config` - Main config with conditional includes
-- `.gitconfig-local` - Machine-specific overrides (gitignored)
-- `.gitconfig-private` - Personal/work context switching (gitignored)
+- `packages/git/.config/git/config` - Main config, with `[include]` paths at the bottom
+- `.gitalias` - Short single-letter aliases plus `git cleanup`
+- `.gitconfig-local` - Machine-specific overrides (gitignored, included by `config`)
 
-When modifying git config, preserve the conditional include structure.
+Commits are signed with `gpg.format = ssh` and verified against `~/.ssh/allowed_signers`. Delta is present in the config but commented out, and is not installed - don't re-enable it without adding the binary.
 
 ### Neovim Configuration
 
-Built on LazyVim with custom plugins in `packages/nvim/.config/nvim/`:
+LazyVim with a thin override layer in `packages/nvim/.config/nvim/`:
 
-- `init.lua` - Entry point
+- `init.lua` - Entry point (`require("config.lazy")`)
+- `lazyvim.json` - Enabled LazyVim extras (Copilot, Go, Docker, Helm, JSON, YAML, Markdown, DAP, REST, mini-surround, mini-files)
 - `lazy-lock.json` - Plugin versions (commit this)
-- Key AI features via CodeCompanion (Anthropic Claude integration)
+- `lua/plugins/` - Only four files: `colorschemes`, `conform`, `copilot`, `git`
+- `lua/config/keymaps.lua` - Only `jj`/`jk` to escape insert mode
 
-See `KEYMAPS.md` for complete keymap reference.
+AI in the editor is GitHub Copilot, not CodeCompanion. See `KEYMAPS.md`.
 
 ### Zsh Configuration
 
@@ -99,9 +101,10 @@ Shell setup in `packages/zsh/.config/zsh/`:
 - `conf.d/` - Numbered config files, glob-loaded in order by `.zshrc` (`00_platform` → `50_tools`)
 - `aliases/` - Per-topic alias files (git, docker, modern-tools, etc.)
 - `functions/` - Shell functions, added to `fpath` before `conf.d` loads
-- `.zshenv` at `packages/zsh/.zshenv` - Sets `ZDOTDIR`
+- `packages/zsh/.local/bin/` - Standalone scripts (`extract`, `+x`) stowed to `~/.local/bin`
+- `.zshenv` at `packages/zsh/.zshenv` - Sets `ZDOTDIR` and `PATH`, so non-interactive shells get the same `PATH`
 
-Aliases map traditional tools to modern alternatives (e.g., `ls` → `eza`, `cat` → `bat`).
+Aliases map traditional tools to modern alternatives (`ls`/`ll`/`la` → `eza`, `ps` → `procs`, `rm` → `trash`); zoxide takes over `cd` outright. `grep` and `cat` are deliberately not aliased, and neither `bat` nor `delta` is installed.
 
 Gitignored, so absent on a fresh clone: `.zprofile`, `.zsh_history`, `99_private-environment.zsh` (machine-local secrets/env - picked up automatically by the `conf.d` glob).
 
@@ -140,9 +143,9 @@ When **removing** a package, delete its name from the `install.sh` arrays too. S
 ### Cross-Platform Considerations
 
 - **macOS**: Uses Homebrew for everything, GUI apps to `~/Applications`
-- **Linux**: Mix of system package managers and manual GitHub releases
-- **Fonts**: JetBrainsMono Nerd Font is required; installed differently per platform
-- **Theme**: Catppuccin Mocha is standard across all tools
+- **Linux**: apt for the bare minimum (curl, fzf, git, gnupg, stow, zsh), then mise for the tools; the `os = ["linux"]` entries in `packages/mise/.config/mise/config.toml` exist because macOS gets those from Homebrew
+- **Fonts**: JetBrainsMono Nerd Font is required; installed by Homebrew on macOS, not installed at all on Linux
+- **Theme**: Mixed - Catppuccin Mocha in Neovim, tmux and Starship; `voltaic-dark` in Ghostty and k9s. Don't assume one theme when editing configs
 
 ## Testing Changes
 

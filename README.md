@@ -1,15 +1,11 @@
 # Personal Dotfiles
 
-A comprehensive, cross-platform dotfiles configuration for macOS, Windows, and Linux environments. This configuration emphasizes modern tooling, consistent theming, and AI-assisted developer productivity.
+A cross-platform dotfiles configuration for macOS, Windows (WSL2), and Linux. This configuration emphasizes modern tooling and AI-assisted developer productivity.
 
-## 🤖 AI-Powered Development Features
+## 🤖 AI Development Features
 
-This dotfiles setup includes integrated AI assistance for enhanced development workflows:
-
-- **🧠 Neovim AI Assistant**: Built-in CodeCompanion plugin supporting multiple AI providers:
-  - **Anthropic Claude** (default): Industry-leading code generation and analysis
-
-- **🤖 Claude Code**: Global config, skills, agents and rules in `packages/claude/.claude/`, symlinked to `~/.claude`
+- **Neovim**: GitHub Copilot inline suggestions via the LazyVim `ai.copilot` extra
+- **Claude Code**: Global config, skills, agents and rules in `packages/claude/.claude/`, symlinked into `~/.claude`
 
 **📖 See [CLAUDE.md](CLAUDE.md) for detailed Claude Code integration setup**
 
@@ -17,20 +13,20 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 
 - **Cross-Platform Support**: Works on macOS, Windows (WSL2), and Linux
 - **Modern CLI Tools**: Replaces traditional tools with faster, feature-rich alternatives
-- **Consistent Theming**: Catppuccin Mocha theme across all applications
-- **Modern Editor**: Neovim configuration with Lazy.nvim and AI integration
-- **Git Workflow**: Enhanced git experience with delta diffs and worktree tooling
+- **Theming**: Catppuccin Mocha in Neovim, tmux and Starship; voltaic-dark in Ghostty and k9s
+- **Modern Editor**: LazyVim-based Neovim configuration
+- **Git Workflow**: Signed commits, linear-history defaults and worktree tooling
 - **Shell Enhancement**: Zsh with modern completions and smart directory navigation
 
 ## Quick Start
 
 ### Prerequisites
 
-- **OS**: macOS 10.15+, Ubuntu/Debian 20.04+, or Windows 10+ with WSL2
+- **OS**: macOS, Ubuntu/Debian, or Windows 10+ with WSL2
 - **Git**: For cloning the repository
-- **Stow**: Installed automatically if missing
+- **Stow**: Installed by the bootstrap (Homebrew on macOS, apt on Debian)
 - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
-- **Linux**: Build essentials (`build-essential`)
+- **Debian/Ubuntu**: `sudo` for the apt step; without it the bootstrap prints the packages to install manually
 
 ### Installation
 
@@ -41,13 +37,16 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
    cd ~/dotfiles
    ```
 
-2. **Bootstrap** (detects the OS, installs tools, stows configs):
+2. **Bootstrap** (detects the OS, installs prerequisites, stows configs, then installs tools):
 
    ```bash
    ./install.sh
    ```
 
-   To run only the platform tool installation, without stowing:
+   `install.sh` runs the platform script first (Homebrew or apt, plus stow, zsh
+   and git), stows the packages, and only then installs tools - the Brewfile and
+   mise config have to be symlinked into `$HOME` before they can be used. The
+   platform scripts are runnable on their own if you only want the prerequisites:
 
    ```bash
    ./install/mac.sh          # macOS
@@ -64,13 +63,13 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 
 | Traditional | Modern Alternative | Purpose |
 |-------------|-------------------|---------|
-| `ls` | `eza` | Directory listing with icons |
-| `cat` | `bat` | Syntax highlighting and paging |
-| `find` | `fd` | Fast file finder |
-| `grep` | `ripgrep` | Fast text search |
-| `cd` | `zoxide` | Smart directory navigation |
-| `git diff` | `delta` | Enhanced git diffs |
-| `top/htop` | Built-in | Process monitoring |
+| `ls`, `ll`, `la`, `tree` | `eza` | Directory listing with icons and git status |
+| `find` | `fd` | Fast file finder; backs fzf |
+| `grep` | `ripgrep` (`rg`, `rga`) | Fast text search - `grep` itself is not aliased |
+| `cd` | `zoxide` | Smart directory navigation (`--cmd cd`, so `cd` is zoxide) |
+| `ps` | `procs` | Process viewer |
+| `rm` | `trash` | Recoverable deletes when `trash` is installed |
+| `Ctrl-R` | `atuin` | Searchable, synced shell history |
 
 ## Configuration Highlights
 
@@ -81,41 +80,37 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 - **Completions**: Modern tab completion system
 - **Aliases**: Shortcuts for modern CLI tools
 
-### Terminal Emulators
+### Terminal
 
-Configurations provided for:
-
-- **Ghostty**: Fast, feature-rich terminal
-- **Warp**: Themes only
-
-All terminals use:
+**Ghostty** is the only terminal with a config here (`packages/ghostty/`):
 
 - **Font**: JetBrainsMono Nerd Font (consistent across platforms)
-- **Theme**: Catppuccin Mocha
-- **Key bindings**: Standardized shortcuts
+- **Theme**: `voltaic-dark` / `voltaic-light`, following the system appearance
+- **Splits**: `super+d` right, `super+shift+d` down, `ctrl+hjkl` to navigate
+- **tmux friendly**: `cmd+a` sends the `Ctrl-A` prefix, and Shift+Enter is fixed up
 
 ### Text Editors
 
 #### Neovim
 
-Modern Neovim configuration with Lazy.nvim plugin management.
+[LazyVim](https://www.lazyvim.org/) with a thin layer of overrides in
+`packages/nvim/.config/nvim/`:
 
-Features:
+- **Copilot**: inline suggestions, auto-triggered, also in markdown and help
+- **Language extras**: Go, Docker, Helm, JSON, YAML, Markdown, plus DAP and REST
+- **YAML formatting**: `yamlfmt` with indentless arrays, Kubernetes-friendly
+- **Git**: gitsigns from LazyVim plus `git-conflict.nvim` for conflict resolution
+- **Colourscheme**: `catppuccin-mocha`
 
-- **AI-Powered Development**: CodeCompanion integration with multiple AI providers
-- **LSP integration**: Full language server support for multiple languages
-- **Fuzzy finding**: Telescope with extensive search capabilities
-- **Git integration**: Gitsigns and conflict resolution
-- **Modern UI**: Consistent theming with Catppuccin Mocha
-- **Advanced Code Intelligence**: Treesitter, autocompletion, and code folding
-- **Session Management**: Use `:mksession` to create initial session files for mini.sessions
+LSP, Treesitter, completion and fuzzy finding are all LazyVim defaults - see
+[KEYMAPS.md](KEYMAPS.md).
 
 ### Git Configuration
 
-- **Modular Config**: Separate files for personal/work contexts
-- **Enhanced Diffs**: Delta for syntax-highlighted diffs
-- **Extensive Aliases**: GitAlias.com collection (1,749 aliases)
-- **Conditional Includes**: Context-aware configuration
+- **Modular Config**: `config` includes `.gitalias` and a gitignored `.gitconfig-local`
+- **Signed Commits**: SSH-format signing, 1Password agent supplies the key
+- **Linear History**: `pull.rebase`, `rebase.autosquash`, `fetch.prune`, `push.autoSetupRemote`
+- **Short Aliases**: single-letter aliases (`a`, `b`, `c`, `d`, ...) plus `git cleanup`
 
 ## Development Workflow
 
@@ -129,47 +124,47 @@ stow -v -D -t "${HOME}" git     # Remove a package
 stow -v -R -t "${HOME}" git     # Redeploy a package
 
 # Development
-shellcheck install.sh install/*.sh    # Lint shell scripts
+shellcheck -x --source-path=SCRIPTDIR install.sh install/*.sh   # Lint shell scripts (same as CI)
 ```
 
 ### Git Integration
 
-- Delta provides enhanced diff viewing
-- `wt` switches between git worktrees
-- Extensive alias collection for common operations
-- Context-aware configuration for work vs personal
+- `wt` ([worktrunk](https://worktrunk.dev)) manages worktrees; its shell hook is wired up in `.zshrc`
+- Single-letter aliases plus `git cleanup` to prune merged branches
+- `.gitconfig-local` for machine-specific settings (gitignored)
 
 ### Shell Productivity
 
-- `z <partial-path>` - Smart directory jumping
-- `ll`, `la` - Enhanced directory listings
-- `bathelp <command>` - Colorized help pages
-- `fzf` integration for command history and file search
+- `cd <partial-path>` - zoxide-backed jumping (zoxide takes over `cd`)
+- `ll`, `la`, `tree` - eza listings
+- `Ctrl-R` - atuin history search; `Ctrl-T` file search and `Alt-C` directory jump via fzf
+- `ea`, `ez`, `ev` - edit the alias, zsh and Neovim configs
+- `mnt` - autoloaded function for mounting external drives; `extract` and `+x` in `~/.local/bin`
 
 ### Key Bindings and Shortcuts
 
-- **📖 [Complete Keybinding Reference](KEYMAPS.md)** - Comprehensive guide to all keybindings
-- **Neovim**: 50+ AI-enhanced keybindings for development workflow
-- **Shell**: Modern CLI shortcuts and productivity commands
-- **Git**: Efficient version control with extensive alias collection
+- **📖 [Neovim Keymap Reference](KEYMAPS.md)** - custom keymaps and where LazyVim's defaults live
+- **Ghostty**: split and tab bindings in `packages/ghostty/.config/ghostty/config`
+- **tmux**: `Ctrl-A` prefix, `|` and `-` to split, `r` to reload
 
 ## Platform-Specific Notes
 
 ### macOS
 
-- GUI applications installed to `~/Applications`
-- Homebrew manages all CLI tools and fonts
+- Homebrew manages CLI tools, casks and fonts via `~/.Brewfile`
+- The 1Password SSH agent socket is linked into `~/.1password/agent.sock`
+- Extra packages stowed only here: `1Password`, `claude`, `ghostty`, `k9s`, `ssh`, `vscode`, `zed`, and the Claude helpers (see `MAC_PACKAGES` in `install.sh`)
 
 ### Linux
 
-- System package managers used for base tools
-- Manual installation of newer tools from GitHub releases
-- Font installation to `~/.local/share/fonts`
+- apt installs the minimum (curl, fzf, git, gnupg, stow, zsh); everything else comes from mise
+- Starship and the 1Password CLI are installed by `install.sh` after stowing, into `~/.local/bin` where relevant
+- No fonts are installed - install JetBrainsMono Nerd Font yourself if the terminal needs it
 
 ### Windows
 
-- Works via WSL2 with Ubuntu configuration
-- Windows Terminal configuration can be added
+- Works via WSL2 with the Debian/Ubuntu path
+- No Windows Terminal configuration in this repo
 
 ## Customization
 
@@ -182,17 +177,21 @@ shellcheck install.sh install/*.sh    # Lint shell scripts
 
 ### Theme Customization
 
-All applications use Catppuccin Mocha. To change:
+Themes are set per application, so changing one means editing each config:
 
-1. Update theme references in configs
-2. Rebuild bat cache: `bat cache --build`
+- Neovim: `packages/nvim/.config/nvim/lua/plugins/colorschemes.lua`
+- tmux: the `@catppuccin_*` settings in `packages/tmux/.config/tmux/tmux.conf`
+- Starship: `palette` in `packages/starship/.config/starship/starship.toml`
+- Ghostty: `theme` in `packages/ghostty/.config/ghostty/config`
+- k9s: `ui.skin` in `packages/k9s/.config/k9s/config.yaml`, skins under `skins/`
 
 ### Local Overrides
 
 All gitignored:
 
-- Git: `.gitconfig-local` for machine-specific settings, `.gitconfig-private` for work/personal context
+- Git: `packages/git/.config/git/.gitconfig-local` - included by the main config for machine-specific settings
 - Shell: `packages/zsh/.config/zsh/conf.d/99_private-environment.zsh` - loaded automatically by the `conf.d` glob
+- Shell: `~/.env` - sourced by `10_environment.zsh` if present, one `export` per line
 
 ## Troubleshooting
 
@@ -216,11 +215,12 @@ Stow refuses to overwrite a real file. Move or delete the conflicting file, then
 **Shell completions missing:**
 
 - Reload shell: `exec zsh`
-- Check plugin installation in `~/.zinit`
+- Check plugin installation in `${XDG_DATA_HOME:-~/.local/share}/zinit/zinit.git`
+- Delete the completion cache and restart: `rm "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"`
 
 ## Notes
 
-- **Caveman Hooks Only**: `bash <(curl -s <https://raw.githubusercontent.com/JuliusBrussee/caveman/main/hooks/install.sh>)`
+- **Caveman hooks only**: `bash <(curl -s https://raw.githubusercontent.com/JuliusBrussee/caveman/main/hooks/install.sh)`
 
 ## Contributing
 

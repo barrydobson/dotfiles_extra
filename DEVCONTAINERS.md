@@ -46,14 +46,30 @@ listing what's absent.
 
 ## What gets installed
 
-Only the configuration for two packages is stowed into `$HOME`:
+`DEVCONTAINER_PACKAGES` in `install/devcontainer.sh` is the source of truth.
+Five packages are stowed into `$HOME`:
 
 - **`zsh`** — `~/.zshenv`, `~/.config/zsh/` (zshrc, conf.d, aliases, functions)
 - **`starship`** — `~/.config/starship/starship.toml`
+- **`claude`** — `~/.claude/` config, rules, agents, skills and `settings.json`
+- **`agents`** — `~/.agents/skills/` (the tavily skills; `packages/claude`'s
+  skill symlinks point here, so it must be stowed alongside `claude`)
+- **`ccstatusline`** — `~/.config/ccstatusline/settings.json` for the Claude
+  Code status line
 
 The zsh config is defensively gated with `command -v` checks, so missing
 optional tools (atuin, zoxide, fzf, mise, etc.) are silently skipped — the
 shell still starts cleanly with just zsh and starship.
+
+`post_install_setup` creates `~/.local/bin` before stowing, so it is on `PATH`
+whether or not anything ends up in it.
+
+Unlike a workstation, a fresh container has no `~/.claude`, so stow symlinks the
+whole directory into the repo rather than creating the per-file symlinks
+described in [CLAUDE.md](CLAUDE.md). Claude Code then writes its runtime state
+(`projects/`, `history.jsonl`, ...) inside the repo checkout, where
+`packages/claude/.gitignore` does not cover it. That is fine for a throwaway
+container, but do not commit from it without checking `git status`.
 
 ## What is **not** installed
 
@@ -62,7 +78,12 @@ Deliberately out of scope to keep the script portable and fast:
 - System packages (apt/apk/dnf) — no sudo available
 - Default shell change via `chsh` — needs root or a passwd entry change
 - Tool binaries (starship, mise, eza, atuin, zoxide, etc.)
-- Plugin managers (zinit, tpm)
+- Plugin managers (tpm). Zinit is the exception: `conf.d/05_zinit.zsh` clones it
+  into `$XDG_DATA_HOME/zinit/zinit.git` on first shell start
+- `bun`, which the Claude Code status line needs (`bunx ccstatusline`); without
+  it the status line is simply absent
+- `rtk`, referenced by a hook in `settings.json` — the hook fails harmlessly if
+  the binary is not there
 - Anything from `Brewfile`
 
 If you want starship's prompt to actually render, install the binary

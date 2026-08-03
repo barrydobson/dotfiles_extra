@@ -26,11 +26,11 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
 
 ### Prerequisites
 
-- **OS**: macOS 10.15+, Ubuntu 20.04+, Arch Linux, or Windows 10+ with WSL2
+- **OS**: macOS 10.15+, Ubuntu/Debian 20.04+, or Windows 10+ with WSL2
 - **Git**: For cloning the repository
 - **Stow**: Installed automatically if missing
 - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
-- **Linux**: Build essentials (`build-essential` on Ubuntu, `base-devel` on Arch)
+- **Linux**: Build essentials (`build-essential`)
 
 ### Installation
 
@@ -52,7 +52,6 @@ This dotfiles setup includes integrated AI assistance for enhanced development w
    ```bash
    ./install/mac.sh          # macOS
    ./install/ubuntu.sh       # Ubuntu/Debian
-   ./install/arch-linux.sh   # Arch
    ```
 
 3. **Reload the shell:**

@@ -95,11 +95,9 @@ setup_macos_1password() {
     print_success "1Password SSH agent socket linked"
 }
 
-install_other_linux() {
-    print_status "Installing tools from mise config..."
+install_linux_extras() {
     export PATH="${HOME}/.local/bin:${PATH}"
     install_starship
-    install_zoxide
     install_1password_cli
 }
 
@@ -129,15 +127,10 @@ main() {
         ubuntu|debian)
             bash "${DOTFILES_DIR}/install/ubuntu.sh"
             stow_packages "${COMMON_PACKAGES[@]}"
-            install_other_linux
-            ;;
-        arch|manjaro)
-            bash "${DOTFILES_DIR}/install/arch-linux.sh"
-            stow_packages "${COMMON_PACKAGES[@]}"
-            install_other_linux
+            install_linux_extras
             ;;
         *)
-            print_error "Unsupported OS: ${os}. Supported: macos, ubuntu, debian, arch"
+            print_error "Unsupported OS: ${os}. Supported: macos, ubuntu, debian"
             exit 1
             ;;
     esac

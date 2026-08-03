@@ -67,7 +67,6 @@ Called by `install.sh` after OS detection; `install/common.sh` is sourced (not e
 ```bash
 ./install/mac.sh          # macOS: Homebrew + GUI apps
 ./install/ubuntu.sh       # Ubuntu/Debian: apt + manual installs
-./install/arch-linux.sh   # Arch: pacman + AUR
 ./install/devcontainer.sh # Devcontainer: stows a 4-package subset, see DEVCONTAINERS.md
 ```
 

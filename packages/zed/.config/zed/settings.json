@@ -34,7 +34,7 @@
     "favorite_models": [],
     "default_model": {
       "provider": "openrouter",
-      "model": "z-ai/glm-5.2",
+      "model": "anthropic/claude-haiku-4.5",
     },
     "model_parameters": [],
     "commit_message_model": {

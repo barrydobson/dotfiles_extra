@@ -84,14 +84,15 @@ install_homebrew_packages() {
 }
 
 setup_macos_1password() {
-    if command -v op >/dev/null 2>&1; then
-        print_status "1Password CLI is available"
-        return 0
-    else
-        print_warning "1Password CLI is not installed"
-        return 1
+    if ! command -v op >/dev/null 2>&1; then
+        print_warning "1Password CLI is not installed, skipping SSH agent socket"
+        return
     fi
-    mkdir -p ~/.1password && ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+
+    mkdir -p "${HOME}/.1password"
+    ln -sfn "${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" \
+        "${HOME}/.1password/agent.sock"
+    print_success "1Password SSH agent socket linked"
 }
 
 install_other_linux() {

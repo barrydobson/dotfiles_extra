@@ -54,7 +54,7 @@ change_shell() {
         print_status "Changing default shell to zsh..."
         local zsh_path
         zsh_path=$(command -v zsh)
-        if _sudo chsh -s "${zsh_path}" 2>/dev/null; then
+        if _sudo chsh -s "${zsh_path}" "${USER}" 2>/dev/null; then
             print_success "Default shell changed to zsh (restart required)"
         else
             print_warning "Could not change default shell automatically"

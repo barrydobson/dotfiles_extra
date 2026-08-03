@@ -1,58 +1,7 @@
-# Claude Code runtime data (machine-specific, ephemeral)
-.claude/history.jsonl
-.claude/stats-cache.json
-.claude/projects/
-.claude/todos/
-.claude/tasks/
-.claude/teams/
-.claude/debug/
-.claude/file-history/
-.claude/shell-snapshots/
-.claude/session-env/
-.claude/sessions/
-.claude/backups/
-.claude/telemetry/
-.claude/statsig/
-.claude/paste-cache/
-.claude/cache/
-.claude/ide/
-.claude/downloads/
-.claude/plugins/
-.claude/mcp-needs-auth-cache.json
-.claude/remote-settings.json
-.claude/chrome
-.claude/.last-cleanup
-.claude/.caveman-active
-.claude/policy-limits.json
-
-.claude/.last-update-result.json
-.claude/.ponytail-active
-.claude/daemon*
-.claude/gh-pr-status-cache.json
-
-# .claude/*
-# !.claude/settings.json
-# !.claude/CLAUDE.md
-# !.claude/agents
-# !.claude/commands
-# !.claude/plugins
-# .claude/plugins/cache
-# .claude/plugins/marketplaces
-# !.claude/skills
-# !.claude/hooks
-# !.claude/rules
-# !.claude/scripts
-# .claude/skills/.search-log.jsonl
-# .claude/plugins/marketplaces/*
-
-.claude/skills/gstack/
-.claude/skills/gstack-*
-usage-data/
-*.bak
-CLAUDE.local.md
-*.db
-.claude/daemon.log
-.claude/daemon/
-.claude/.caveman-*
-.claude/image-cache/
-.claude/jobs
+# Claude Code runtime state lives in the real ~/.claude directory, outside this
+# repo - see "Claude Configuration" in the root CLAUDE.md. Only the folded
+# directory symlinks (agents/, rules/, skills/, themes/, scheduled-tasks/) can
+# still receive writes from Claude Code or skill installers, so this list only
+# needs to cover those. If a new runtime path shows up in git status here, the
+# migration has been undone rather than a rule being missing.
+.claude/skills/.search-log.jsonl

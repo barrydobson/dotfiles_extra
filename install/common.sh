@@ -66,7 +66,8 @@ install_1password_cli() {
   fi
 
   print_status "Installing 1Password CLI..."
-  local arch="$(dpkg --print-architecture)"
+  local arch
+  arch="$(dpkg --print-architecture)"
 
   # Add the key for the 1Password apt repository:
   if [[ -f /usr/share/keyrings/1password-archive-keyring.gpg ]]; then
@@ -94,11 +95,11 @@ install_1password_cli() {
     sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
   # Install 1Password CLI:
-  if command -v apt-get 2>&1 >/dev/null; then
+  if command -v apt-get >/dev/null 2>&1; then
     print_status "Installing 1Password CLI with apt-get..."
     sudo apt-get update
     sudo apt-get install -y --no-install-recommends 1password-cli
-  elif command -v apk 2>&1 >/dev/null; then
+  elif command -v apk >/dev/null 2>&1; then
     print_status "Installing 1Password CLI with apk..."
     apk add --no-cache 1password-cli
   else
@@ -150,10 +151,11 @@ install_zinit() {
 install_tpm() {
     print_status "Installing TPM (Tmux Plugin Manager)..."
 
-    local tpm_dir="${HOME}/.tmux/plugins/tpm"
+    # Must match the `run` line at the bottom of tmux.conf
+    local tpm_dir="${HOME}/.config/tmux/plugins/tpm"
 
     if [[ ! -d "${tpm_dir}" ]]; then
-        mkdir -p "${HOME}/.tmux/plugins"
+        mkdir -p "${HOME}/.config/tmux/plugins"
         git clone https://github.com/tmux-plugins/tpm "${tpm_dir}"
         print_success "TPM installed"
     else

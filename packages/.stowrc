@@ -1,6 +1,5 @@
 --target=~/
 --ignore=.stowrc
---ignore=./.claude
 --ignore=./install
 --ignore=DS_Store
 --dotfiles

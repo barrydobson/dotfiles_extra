@@ -20,7 +20,7 @@ packages/
 - `packages/zsh/.zshenv` → `~/.zshenv`
 - `packages/nvim/.config/nvim/init.lua` → `~/.config/nvim/init.lua`
 
-`packages/.stowrc` already sets `--target=~/` and ignores `.stowrc`, `./install`, `./.claude`. The `-t "${HOME}"` in the commands below is redundant but matches what the install scripts do.
+`packages/.stowrc` already sets `--target=~/` and ignores `.stowrc` and `./install`. The `-t "${HOME}"` in the commands below is redundant but matches what the install scripts do.
 
 ### Major Components
 
@@ -108,11 +108,13 @@ Gitignored, so absent on a fresh clone: `.zprofile`, `.zsh_history`, `99_private
 
 ### Claude Configuration
 
-**`~/.claude` is a directory symlink to `packages/claude/.claude`.** Consequences:
+**`~/.claude` is a real directory holding stow symlinks.** Claude Code's runtime state stays in your home directory and never enters the working tree.
 
-- Edits under `packages/claude/.claude/` take effect immediately. No stow step.
-- Claude Code's live runtime state (`history.jsonl`, `projects/`, `plugins/`, `cache/`, `daemon*`) writes into the repo working tree. `packages/claude/.gitignore` excludes it - check that file before assuming a new path is committable, and never `git add -A` here without reading the diff.
-- Only ~24 files are tracked: `CLAUDE.md`, `RTK.md`, `settings.json`, `rules/`, `skills/`, `agents/`, `themes/`, `scheduled-tasks/`.
+- `CLAUDE.md`, `RTK.md` and `settings.json` are individual file symlinks into `packages/claude/.claude/`.
+- `agents/`, `rules/`, `skills/`, `themes/` and `scheduled-tasks/` are folded directory symlinks, so files you author in them are live immediately with no stow step.
+- Everything else in `~/.claude` (`projects/`, `history.jsonl`, `plugins/`, `shell-snapshots/`, `statsig/`, ...) is a real path outside this repo.
+- Only after adding a **new top-level entry** to the package does stow need re-running: `cd packages && stow -R -t "${HOME}" claude`.
+- If a runtime path ever appears in `git status` under `packages/claude/`, the arrangement has been undone - re-check `~/.claude` is still a real directory rather than adding a gitignore rule.
 
 `packages/claude/.claude/CLAUDE.md` is the global user instruction file, not project context. Changing it changes Claude's behaviour in every repo.
 

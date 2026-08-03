@@ -13,6 +13,7 @@ source "${DOTFILES_DIR}/install/common.sh"
 
 # Packages stowed on every platform
 COMMON_PACKAGES=(
+    agents
     atuin
     editorconfig
     eza
@@ -34,8 +35,11 @@ MAC_PACKAGES=(
     homebrew
     ghostty
     k9s
+    skills
     ssh
     vscode
+    worktrunk
+    zed
 )
 
 GLOBAL_NPM_PACKAGES=(

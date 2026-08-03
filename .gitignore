@@ -13,11 +13,14 @@ Session.vim
 **/.config/git/.gitconfig-private
 **/.config/git/.gitconfig-local
 
-packages/tmux/.config/tmux/plugins/*
+packages/tmux/.config/tmux/plugins/
 packages/tmux/.config/tmux/resurrect
-!packages/tmux/.config/tmux/plugins/tpm
 packages/tmux/.config/tmux/notify/*.pid
 packages/ccstatusline/**/*.bak
+
+# Machine-local state written by running apps, not config
+packages/worktrunk/.config/worktrunk/config.toml.lock
+packages/zed/.config/zed/prompts/prompts-library-db.*/
 
 packages/zsh/.config/zsh/.zsh_history
 packages/zsh/.config/zsh/.zprofile

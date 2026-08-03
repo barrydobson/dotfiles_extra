@@ -32,7 +32,9 @@ packages/
 - **Claude**: Config, skills, agents and rules at `packages/claude/.claude/` - see gotcha below
 - **Other**: `1Password`, `ssh`, `tmux`, `starship`, `claude-mem`, `agents`, `skills`
 
-**Deployment source of truth**: the `COMMON_PACKAGES` / `MAC_PACKAGES` arrays in `install.sh` and `DEVCONTAINER_PACKAGES` in `install/devcontainer.sh`. A directory under `packages/` is not deployed unless it is listed there. Currently unstowed by any script: `agents`, `skills`, `warp`, `worktrunk`, `zed`.
+**Deployment source of truth**: the `COMMON_PACKAGES` / `MAC_PACKAGES` arrays in `install.sh` and `DEVCONTAINER_PACKAGES` in `install/devcontainer.sh`. A directory under `packages/` is not deployed unless it is listed there. Every directory in `packages/` is currently listed; `.github/workflows/lint.yml` fails the build if an array names a package that does not exist.
+
+`packages/agents` must be stowed wherever `packages/claude` is - the tavily skills under `.claude/skills/` are symlinks into `~/.agents/skills/`.
 
 ## Common Development Commands
 
@@ -53,7 +55,7 @@ stow -v -R -t "${HOME}" git                   # Restow (unstow + stow)
 ### Linting
 
 ```bash
-shellcheck install/*.sh install.sh   # Shell scripts - the only linter installed
+shellcheck -x --source-path=SCRIPTDIR install.sh install/*.sh   # Same command CI runs; must exit 0
 ```
 
 `.markdownlint.json` exists (MD013 off, MD007 indent 2) but no markdownlint CLI is installed; it is only honoured by editor extensions. Match those rules when writing markdown here, don't try to run it.

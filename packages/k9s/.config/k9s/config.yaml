@@ -11,7 +11,7 @@ k9s:
     crumbsless: true
     reactive: true
     noIcons: false
-    skin: catppuccin-mocha
+    skin: voltaic-dark
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:

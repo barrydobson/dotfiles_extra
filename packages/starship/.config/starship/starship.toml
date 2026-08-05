@@ -137,7 +137,7 @@ disabled = true
 [custom.claude]
 detect_files = ["CLAUDE.md"]
 detect_folders = [".claude"]
-symbol = "󱙺"
+symbol = ""
 format = '[//](surface2) [$symbol Claude](#d97757) '
 
 # Matches packages/k9s/.config/k9s/skins/voltaic-dark.yaml

@@ -64,8 +64,26 @@
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [],
   "hooks": {
-    "SessionStart": [],
-    "UserPromptSubmit": [],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Idle || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Working || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -73,6 +91,64 @@
           {
             "type": "command",
             "command": "rtk hook claude"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Working || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Auto || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' ToolFail || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Waiting || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Idle || true # notchbar-agents-claude-hook"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Ended || true # notchbar-agents-claude-hook"
           }
         ]
       }
@@ -154,7 +230,7 @@
     "enabled": true,
     "mode": "hold"
   },
-  "autoMemoryEnabled": true,
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "custom:voltaic-dark",

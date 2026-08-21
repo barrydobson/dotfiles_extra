@@ -1,6 +1,6 @@
 ---
 name: til
-description: Capture a hard-won lesson from the current session as a single wiki article in the Obsidian vault at ~/vault/wiki, filed under the right topic with indexes updated. Use this whenever the user says "/til", "TIL", "save this", "capture that", "write that up", "add that to the wiki", "don't want to lose this", "remember how we fixed that", or "that took ages to work out" - and also proactively offer it right after a genuinely painful debugging session ends, because the knowledge is most recoverable in the minutes after the fix lands and is gone by tomorrow. Do not use for general note-taking, daily logs, task capture, or compiling clipped articles from raw/ (that is the compile skill).
+description: Capture a hard-won lesson from the current session as a single wiki article in the Obsidian vault at ~/vault/wiki, filed under the right topic with indexes updated. Use this whenever the user says "/til", "TIL", "save this", "capture that", "write that up", "add that to the wiki", "don't want to lose this", "remember how we fixed that", or "that took ages to work out" - and also proactively offer it whenever something transferable has just been worked out - a tool or technology understood for the first time, a process finding that holds beyond this repo, a durable behaviour that will bite again elsewhere, or a conclusion that changes how a class of problem gets approached. Offer it while the detail is still fresh, because it is gone by tomorrow. Do not use it for one-off incidents whose fix already lives in a commit, PR or ticket, and not for general note-taking, daily logs, task capture, or compiling clipped articles from raw/ (that is the compile skill).
 ---
 
 # TIL
@@ -19,7 +19,13 @@ The vault is at `~/vault` (an Obsidian vault). The wiki lives in `~/vault/wiki`.
 
 Prefer specifics over summary throughout. Exact error strings, versions, flags, file paths, and the counter-intuitive bit. Generic advice ("check your config") is the failure mode here.
 
-**Sanity check before writing.** Would this save time in six months, or is it something you'd re-derive in thirty seconds anyway? If it's thin, say so in one line and ask what the non-obvious part was, rather than filing something that dilutes the wiki. Don't be precious about it though - if there's a real lesson in there, write it.
+**Sanity check before writing.** The bar is transferability. Two questions settle it: would this help someone who has never seen this repo, and would it still be true in a year?
+
+That rules out incidents, which is most of what a hard day produces. A bot re-triggering its own release, a sidecar breaking one app in preprod, a script that misfired once - those hurt, they got fixed, and the reasoning is already preserved in the commit, the PR, the ADR or the ticket. The repo remembers them. What belongs here is what survives being lifted out of that repo: a tool or technology understood for the first time, a process finding that holds generally, a durable behaviour that will bite again anywhere, a principle that changes how a class of problem gets approached.
+
+"Stacked PRs don't survive a merge queue" is knowledge. "PR 431 got stuck" is not - and filing the second kind is how a wiki fills with things nobody ever reads again.
+
+If what's offered is an incident, say so in one line and ask whether there's a general lesson underneath it - there often is, and it's usually the more interesting article. If it's genuinely thin, don't file it. Don't be precious though: when there's a real lesson there, write it.
 
 ## 2. Check it isn't already written
 

@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 365,
   "env": {
-    "DISABLE_TELEMETRY": "1",
     "DISABLE_ERROR_REPORTING": "1",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
@@ -64,26 +63,6 @@
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [],
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Idle || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Working || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -93,68 +72,11 @@
             "command": "rtk hook claude"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Working || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Auto || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' ToolFail || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Waiting || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Idle || true # notchbar-agents-claude-hook"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "test -x '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' && '/Users/barrydobson/Library/Application Support/Bartender/NotchBar/AgentStatus/hooks/claude-event-hook.sh' Ended || true # notchbar-agents-claude-hook"
-          }
-        ]
       }
     ]
   },
   "disableAgentView": false,
+  "enableWorkflows": false,
   "statusLine": {
     "type": "command",
     "command": "bunx --silent ccstatusline@latest",
@@ -163,13 +85,12 @@
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "humanizer@barrydobson": true,
-    "superpowers@claude-plugins-official": true,
     "ponytail@ponytail": true,
-    "drawio@365-skills": true,
+    "drawio@365-skills": false,
     "skill-creator@claude-plugins-official": true,
     "caveman@caveman": true,
-    "mattpocock-skills@mattpocock": true,
-    "engineering-workflow@barrydobson": true
+    "engineering-workflow@barrydobson": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -207,17 +128,17 @@
       },
       "autoUpdate": true
     },
-    "mattpocock": {
-      "source": {
-        "source": "github",
-        "repo": "mattpocock/skills"
-      },
-      "autoUpdate": true
-    },
     "barrydobson": {
       "source": {
         "source": "github",
         "repo": "barrydobson/claude-plugins"
+      },
+      "autoUpdate": true
+    },
+    "go-skills": {
+      "source": {
+        "source": "github",
+        "repo": "spf13/go-skills"
       },
       "autoUpdate": true
     }
@@ -226,14 +147,18 @@
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
   "plansDirectory": ".claude/plans",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
-  "autoMemoryEnabled": false,
+  "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "custom:voltaic-dark",
+  "teammateMode": "in-process",
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
   "mcpServers": {}

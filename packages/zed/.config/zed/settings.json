@@ -103,10 +103,9 @@
     "http": ["*.rest"],
     "javascript": ["*.dbclient-js"],
     "dotenv": [".env", ".env.*", ".env*"],
-    "terraform": ["*.hcl", "*.hcl"],
-    "hcl": ["*.river", "*.river", "**.river", "**.river.txt", "*.alloy"],
+    "terraform": ["*.hcl"],
+    "hcl": ["*.river", "**.river.txt", "*.alloy"],
     "helm": [
-      "*.gotmpl",
       "*.gotmpl",
       "**/charts/**/templates/*.yaml",
       "**/helmfile.yaml",
@@ -118,7 +117,11 @@
   "show_edit_predictions": true,
   "tab_size": 2,
   "base_keymap": "VSCode",
-  "agent_servers": {},
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
   "ui_font_size": 16,
   "buffer_font_size": 13.0,
   "theme": {

@@ -13,116 +13,117 @@ source "${DOTFILES_DIR}/install/common.sh"
 
 # Packages stowed on every platform
 COMMON_PACKAGES=(
-    agents
-    atuin
-    editorconfig
-    eza
-    git
-    mise
-    nvim
-    starship
-    tmux
-    yamllint
-    zsh
+  agents
+  atuin
+  editorconfig
+  eza
+  herdr
+  git
+  mise
+  nvim
+  starship
+  tmux
+  yamllint
+  zsh
 )
 
 # Packages stowed on macOS only
 MAC_PACKAGES=(
-    1Password
-    ccstatusline
-    claude
-    claude-mem
-    homebrew
-    ghostty
-    k9s
-    skills
-    ssh
-    vscode
-    worktrunk
-    zed
+  1Password
+  ccstatusline
+  claude
+  claude-mem
+  homebrew
+  ghostty
+  k9s
+  skills
+  ssh
+  vscode
+  worktrunk
+  zed
 )
 
 detect_os() {
-    if [[ "$(uname)" == "Darwin" ]]; then
-        echo "macos"
-        return
-    fi
+  if [[ "$(uname)" == "Darwin" ]]; then
+    echo "macos"
+    return
+  fi
 
-    if [[ ! -f /etc/os-release ]]; then
-        print_error "Cannot detect OS: no /etc/os-release" >&2
-        exit 1
-    fi
+  if [[ ! -f /etc/os-release ]]; then
+    print_error "Cannot detect OS: no /etc/os-release" >&2
+    exit 1
+  fi
 
-    # shellcheck disable=SC1091
-    source /etc/os-release
-    # ID_LIKE catches the Debian derivatives (Mint, Pop!_OS, Kali, ...)
-    case " ${ID} ${ID_LIKE:-} " in
-        *" debian "*|*" ubuntu "*) echo "debian" ;;
-        *) echo "${ID}" ;;
-    esac
+  # shellcheck disable=SC1091
+  source /etc/os-release
+  # ID_LIKE catches the Debian derivatives (Mint, Pop!_OS, Kali, ...)
+  case " ${ID} ${ID_LIKE:-} " in
+  *" debian "* | *" ubuntu "*) echo "debian" ;;
+  *) echo "${ID}" ;;
+  esac
 }
 
 # Install packages from Homebrew. This is called after stowing, so the Brewfile should be in place.
 install_homebrew_packages() {
-    if [[ ! -f "${HOME}/.Brewfile" ]]; then
-        print_warning "No Brewfile found, skipping package installation"
-        return
-    fi
+  if [[ ! -f "${HOME}/.Brewfile" ]]; then
+    print_warning "No Brewfile found, skipping package installation"
+    return
+  fi
 
-    print_status "Installing packages from Homebrew..."
-    brew bundle install --file "${HOME}/.Brewfile"
-    print_success "Homebrew packages installed"
+  print_status "Installing packages from Homebrew..."
+  brew bundle install --file "${HOME}/.Brewfile"
+  print_success "Homebrew packages installed"
 }
 
 setup_macos_1password() {
-    if ! command -v op >/dev/null 2>&1; then
-        print_warning "1Password CLI is not installed, skipping SSH agent socket"
-        return
-    fi
+  if ! command -v op >/dev/null 2>&1; then
+    print_warning "1Password CLI is not installed, skipping SSH agent socket"
+    return
+  fi
 
-    mkdir -p "${HOME}/.1password"
-    ln -sfn "${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" \
-        "${HOME}/.1password/agent.sock"
-    print_success "1Password SSH agent socket linked"
+  mkdir -p "${HOME}/.1password"
+  ln -sfn "${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" \
+    "${HOME}/.1password/agent.sock"
+  print_success "1Password SSH agent socket linked"
 }
 
 install_linux_extras() {
-    export PATH="${HOME}/.local/bin:${PATH}"
-    install_starship
-    install_1password_cli
+  export PATH="${HOME}/.local/bin:${PATH}"
+  install_starship
+  install_1password_cli
 }
 
 main() {
-    local os
-    os=$(detect_os)
-    print_status "Detected OS family: ${os}"
+  local os
+  os=$(detect_os)
+  print_status "Detected OS family: ${os}"
 
-    case "${os}" in
-        macos)
-            bash "${DOTFILES_DIR}/install/mac.sh"
-            stow_packages "${COMMON_PACKAGES[@]}" "${MAC_PACKAGES[@]}"
-            install_homebrew_packages
-            setup_macos_1password
-            ;;
-        debian)
-            bash "${DOTFILES_DIR}/install/ubuntu.sh"
-            stow_packages "${COMMON_PACKAGES[@]}"
-            install_linux_extras
-            ;;
-        *)
-            print_error "Unsupported OS: ${os}. Supported: macos, debian/ubuntu"
-            exit 1
-            ;;
-    esac
+  case "${os}" in
+  macos)
+    bash "${DOTFILES_DIR}/install/mac.sh"
+    stow_packages "${COMMON_PACKAGES[@]}" "${MAC_PACKAGES[@]}"
+    install_homebrew_packages
+    setup_macos_1password
+    ;;
+  debian)
+    bash "${DOTFILES_DIR}/install/ubuntu.sh"
+    stow_packages "${COMMON_PACKAGES[@]}"
+    install_linux_extras
+    ;;
+  *)
+    print_error "Unsupported OS: ${os}. Supported: macos, debian/ubuntu"
+    exit 1
+    ;;
+  esac
 
-    install_tpm
+  install_tpm
 
-    if ! command -v mise >/dev/null 2>&1; then
-        print_error "mise is not on PATH, cannot install tool versions"
-        exit 1
-    fi
-    MISE_AQUA_GITHUB_ATTESTATIONS=false mise install
-    print_success "Done! Restart your terminal or run: exec zsh"
+  if ! command -v mise >/dev/null 2>&1; then
+    print_error "mise is not on PATH, cannot install tool versions"
+    exit 1
+  fi
+  MISE_AQUA_GITHUB_ATTESTATIONS=false mise install
+  print_success "Done! Restart your terminal or run: exec zsh"
 }
 
 main "$@"

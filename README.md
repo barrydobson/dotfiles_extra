@@ -112,6 +112,45 @@ LSP, Treesitter, completion and fuzzy finding are all LazyVim defaults - see
 - **Linear History**: `pull.rebase`, `rebase.autosquash`, `fetch.prune`, `push.autoSetupRemote`
 - **Short Aliases**: single-letter aliases (`a`, `b`, `c`, `d`, ...) plus `git cleanup`
 
+### Claude Session Backups (macOS)
+
+`packages/restic` backs up `~/.claude` to Backblaze B2 with restic, on a launchd
+agent at 12:30 daily. Claude Code deletes transcripts once they pass
+`cleanupPeriodDays` (365 in `settings.json`), so the sessions are on a rolling
+delete whatever the disk does.
+
+restic encrypts client-side, so the bucket holds opaque blobs. **The repository
+passphrase must live in 1Password as well as the login Keychain** - the only
+copy sitting on the machine being backed up is not a backup.
+
+One-time setup, after `brew bundle` and stowing:
+
+```bash
+# In the B2 console: create a private bucket, then a bucket-scoped application key.
+# Set the bucket lifecycle to "keep prior versions for 30 days" - that is the
+# recovery path if the laptop's key is ever used to delete the repo.
+claude-backup setup
+```
+
+| Command | Purpose |
+| ------- | ------- |
+| `claude-backup setup` | Store secrets in Keychain, `restic init`, load the launchd agent |
+| `claude-backup run` | What the agent runs: backup, retention, then prune and integrity check on Sundays |
+| `claude-backup check` | Verify repository integrity against 5% of the data (also runs Sundays) |
+| `claude-backup restore-test` | Restore one file and `cmp` it against the original |
+| `claude-backup status` | Recent snapshots, repository size, agent state |
+
+Retention is 14 daily, 8 weekly, 24 monthly, 5 yearly. Excludes live in
+`packages/restic/.config/restic/claude-exclude` - `plugins/` and `file-history/`
+are the two that matter, being 473 MB of reinstallable or already-in-git content.
+Failures raise a macOS notification; the log is `~/Library/Logs/claude-backup.log`.
+The script sets its own `PATH` because launchd hands a job only
+`/usr/bin:/bin:/usr/sbin:/sbin` - nothing from Homebrew is on it. Verify changes
+with `launchctl kickstart -k gui/$UID/com.barrydobson.claude-backup`, never with an
+interactive run; the two contexts differ in exactly the ways that break a schedule.
+Override the bucket or endpoint per machine in `~/.config/restic/claude.conf`
+(gitignored) with `CLAUDE_BACKUP_BUCKET` / `CLAUDE_BACKUP_ENDPOINT`.
+
 ## Development Workflow
 
 ### Daily Commands
@@ -153,7 +192,8 @@ shellcheck -x --source-path=SCRIPTDIR install.sh install/*.sh   # Lint shell scr
 
 - Homebrew manages CLI tools, casks and fonts via `~/.Brewfile`
 - The 1Password SSH agent socket is linked into `~/.1password/agent.sock`
-- Extra packages stowed only here: `1Password`, `claude`, `ghostty`, `k9s`, `ssh`, `vscode`, `zed`, and the Claude helpers (see `MAC_PACKAGES` in `install.sh`)
+- Extra packages stowed only here: `1Password`, `claude`, `ghostty`, `k9s`, `restic`, `ssh`, `vscode`, `zed`, and the Claude helpers (see `MAC_PACKAGES` in `install.sh`)
+- `restic` carries a launchd agent, so it is macOS-only - see Claude Session Backups above
 
 ### Linux
 

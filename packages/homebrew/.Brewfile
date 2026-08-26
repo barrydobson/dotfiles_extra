@@ -6,6 +6,7 @@ brew "git"                      # Version control
 brew "gnupg"                    # GPG for signing commits
 brew "pinentry-mac"             # Pinentry for GPG
 brew "stow"                     # Symlink farm manager
+brew "restic"                   # Encrypted backups; see claude-backup
 
 # Shell
 brew "zsh"                      # Z shell (newer than the macOS system build)

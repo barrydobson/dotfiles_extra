@@ -36,6 +36,7 @@ MAC_PACKAGES=(
   homebrew
   ghostty
   k9s
+  restic
   skills
   ssh
   vscode

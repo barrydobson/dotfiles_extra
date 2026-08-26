@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+# Encrypted off-site backup of ~/.claude to Backblaze B2 via restic.
+#
+# Claude Code deletes transcripts older than `cleanupPeriodDays` (365 here), so
+# the sessions are on a rolling delete regardless of disk health. restic
+# encrypts client-side, which is what makes a personal bucket an acceptable
+# home for work session content.
+
+set -euo pipefail
+
+# launchd gives the job /usr/bin:/bin:/usr/sbin:/sbin, so restic is not on
+# PATH when the agent fires. Both Homebrew prefixes, for Intel and Apple silicon.
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+LABEL="com.barrydobson.claude-backup"
+SOURCE="$HOME/.claude"
+CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/restic"
+CONF="$CONFIG_HOME/claude.conf"
+EXCLUDES="$CONFIG_HOME/claude-exclude"
+LOG="$HOME/Library/Logs/claude-backup.log"
+
+KC_PASSWORD="claude-backup-restic"
+KC_KEY_ID="claude-backup-b2-id"
+KC_KEY_SECRET="claude-backup-b2-key"
+
+# shellcheck source=/dev/null
+[[ -r $CONF ]] && . "$CONF"
+: "${CLAUDE_BACKUP_BUCKET:=barrydobson-claude-sessions}"
+: "${CLAUDE_BACKUP_ENDPOINT:=s3.eu-central-003.backblazeb2.com}"
+
+die() {
+  echo "claude-backup: $*" >&2
+  exit 1
+}
+
+notify() {
+  osascript -e "display notification \"$1\" with title \"claude-backup\"" >/dev/null 2>&1 || true
+}
+
+kc_read() {
+  security find-generic-password -s "$1" -a "$USER" -w 2>/dev/null
+}
+
+kc_store() {
+  local service="$1" prompt="$2" value
+  if kc_read "$service" >/dev/null; then
+    echo "  $service already in Keychain"
+    return
+  fi
+  read -rsp "  $prompt: " value
+  echo
+  [[ -n $value ]] || die "$service cannot be empty"
+  security add-generic-password -s "$service" -a "$USER" -w "$value" -T /usr/bin/security
+}
+
+load_env() {
+  local key_id key_secret
+  key_id=$(kc_read "$KC_KEY_ID") || true
+  key_secret=$(kc_read "$KC_KEY_SECRET") || true
+  [[ -n ${key_id:-} && -n ${key_secret:-} ]] || die "B2 credentials missing - run: claude-backup setup"
+  [[ -r $EXCLUDES ]] || die "exclude file missing at $EXCLUDES - stow the restic package"
+
+  export AWS_ACCESS_KEY_ID="$key_id"
+  export AWS_SECRET_ACCESS_KEY="$key_secret"
+  export RESTIC_REPOSITORY="s3:https://$CLAUDE_BACKUP_ENDPOINT/$CLAUDE_BACKUP_BUCKET/claude"
+  export RESTIC_PASSWORD_COMMAND="security find-generic-password -s $KC_PASSWORD -a $USER -w"
+}
+
+cmd_setup() {
+  command -v restic >/dev/null || die "restic not installed - brew install restic"
+
+  echo "Keychain secrets:"
+  kc_store "$KC_PASSWORD" "restic repository passphrase (store it in 1Password first)"
+  kc_store "$KC_KEY_ID" "B2 application keyID"
+  kc_store "$KC_KEY_SECRET" "B2 applicationKey"
+
+  load_env
+  echo "Repository $RESTIC_REPOSITORY"
+  if restic cat config >/dev/null 2>&1; then
+    echo "  already initialised"
+  else
+    restic init
+  fi
+
+  local plist="$HOME/Library/LaunchAgents/$LABEL.plist"
+  [[ -f $plist ]] || die "$plist missing - stow the restic package first"
+  launchctl bootout "gui/$UID/$LABEL" 2>/dev/null || true
+  launchctl bootstrap "gui/$UID" "$plist"
+  echo "Scheduled: $LABEL (daily 12:30)"
+}
+
+cmd_run() {
+  load_env
+  mkdir -p "$(dirname "$LOG")"
+  exec >>"$LOG" 2>&1
+  trap 'notify "Backup FAILED - see ~/Library/Logs/claude-backup.log"' ERR
+
+  echo "=== $(date -Iseconds) start"
+  restic backup "$SOURCE" --tag claude --exclude-file "$EXCLUDES" --retry-lock 5m
+  restic forget --tag claude \
+    --keep-daily 14 --keep-weekly 8 --keep-monthly 24 --keep-yearly 5
+  # Prune rewrites pack files, which costs B2 transactions; weekly is plenty.
+  # Integrity checking is here rather than left manual, because manual means never.
+  if [[ $(date +%u) == 7 ]]; then
+    restic prune --max-unused 5%
+    restic check --read-data-subset=5%
+  fi
+  echo "=== $(date -Iseconds) ok"
+}
+
+cmd_check() {
+  load_env
+  restic check --read-data-subset=5%
+}
+
+cmd_restore_test() {
+  load_env
+  local oldest target restored
+  # Oldest transcript: written once and never touched again, so any difference
+  # after a round trip is a real fault rather than a live file changing.
+  oldest=$(find "$SOURCE/projects" -name '*.jsonl' -type f -exec stat -f '%m %N' {} + |
+    sort -n | head -1 | cut -d' ' -f2-)
+  [[ -n $oldest ]] || die "no transcripts found under $SOURCE/projects"
+
+  target=$(mktemp -d)
+  restic restore latest --target "$target" --include "$oldest"
+  restored="$target$oldest"
+  [[ -f $restored ]] || die "restore produced nothing at $restored"
+  cmp "$oldest" "$restored" || die "restored copy differs from source"
+  echo "Round trip verified: $(basename "$oldest")"
+  echo "Temp copy left at $target - delete it when you are done"
+}
+
+cmd_status() {
+  load_env
+  restic snapshots --tag claude --latest 5
+  restic stats --mode raw-data
+  echo
+  launchctl print "gui/$UID/$LABEL" 2>/dev/null | grep -E "state|last exit" || echo "agent not loaded"
+}
+
+case "${1:-}" in
+setup) cmd_setup ;;
+run) cmd_run ;;
+check) cmd_check ;;
+restore-test) cmd_restore_test ;;
+status) cmd_status ;;
+*)
+  cat <<'USAGE'
+claude-backup <command>
+
+  setup         Store secrets in Keychain, init the repo, load the launchd agent
+  run           Back up, apply the retention policy, prune on Sundays (scheduled)
+  check         Verify repository integrity, reading 5% of the data
+  restore-test  Restore one file and compare it against the original
+  status        Recent snapshots, repository size, agent state
+USAGE
+  exit 1
+  ;;
+esac

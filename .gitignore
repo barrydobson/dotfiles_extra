@@ -32,3 +32,6 @@ _skills_backup
 
 99_private-environment.zsh
 wt
+
+# restic local overrides (bucket/endpoint per machine)
+packages/restic/.config/restic/claude.conf

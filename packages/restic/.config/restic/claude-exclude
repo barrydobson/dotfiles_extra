@@ -1,0 +1,22 @@
+# Paths under ~/.claude that are not worth backing up.
+# Patterns match any path component, and the only source is ~/.claude.
+
+# Reinstallable from the marketplace manifests (377 MB)
+plugins
+
+# Local file snapshots Claude Code takes before edits; git already has this (96 MB)
+file-history
+
+# Caches and transient state
+cache
+paste-cache
+shell-snapshots
+session-env
+downloads
+
+# Logs and telemetry
+debug
+statsig
+usage-data
+
+.DS_Store

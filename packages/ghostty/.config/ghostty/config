@@ -7,7 +7,7 @@ window-padding-y = 8
 window-theme = auto
 
 # Fonts
-font-family = JetBrainsMonoNerdFont
+font-family = "MonaspiceNe Nerd Font"
 font-size = 14
 font-thicken = true
 

@@ -1,19 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """╭╴$os$username$hostname$directory $fill\
+format = """[╭╴](lime)$os$username$hostname$directory $fill\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
 $kubernetes\
-$docker_context\
 $golang\
-$helm\
-$nodejs\
-$python\
-$terraform\
-$aws\
-$custom\
 $cmd_duration\
 $status\
 $container
@@ -22,7 +15,7 @@ $character
 add_newline = false
 palette = "voltaic_dark"
 
-command_timeout = 1000
+command_timeout = 3000
 
 [fill]
 symbol = ' '
@@ -39,7 +32,7 @@ format = '[//](surface2) [$symbol$common_meaning$signal_name$maybe_int](bold red
 symbol = ' '
 
 [os]
-format = '[$symbol](bold text) '
+format = '[$symbol](bold text lime) '
 disabled = false
 
 [os.symbols]
@@ -100,7 +93,7 @@ deleted = ' '
 # Shows kubernetes context and namespace
 [kubernetes]
 symbol = ' '
-format = '[//](surface2) [$symbol$context\($namespace\)](bold red) '
+format = '[//](surface2) [$symbol$context](bold blue) '
 disabled = false
 # contexts = []
 

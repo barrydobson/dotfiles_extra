@@ -54,7 +54,7 @@ keybind = super+4=goto_tab:4
 keybind = super+5=goto_tab:5
 
 adjust-cell-height = 2
-macos-option-as-alt = right
+macos-option-as-alt = true
 macos-non-native-fullscreen = true
 macos-titlebar-style = tabs
 window-save-state = always

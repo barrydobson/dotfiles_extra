@@ -1,14 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "cleanupPeriodDays": 365,
+  "cleanupPeriodDays": 665,
   "env": {
     "DISABLE_ERROR_REPORTING": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_MEM_EXCLUDED_PROJECTS": "observer-sessions",
     "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
-  "includeCoAuthoredBy": false,
+  "includeCoAuthoredBy": true,
   "permissions": {
     "allow": [
       "Bash(ls:*)",
@@ -161,7 +158,7 @@
   "plansDirectory": ".claude/plans",
   "tui": "fullscreen",
   "voice": {
-    "enabled": true,
+    "enabled": false,
     "mode": "hold"
   },
   "autoMemoryEnabled": true,
@@ -172,6 +169,5 @@
   "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
   "mcpServers": {}
 }

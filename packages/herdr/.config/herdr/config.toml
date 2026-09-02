@@ -1,8 +1,20 @@
 onboarding = false
 
 [theme]
-name = "catppuccin"
+name = "terminal"
 auto_switch = false
+
+# voltaic - lime accent on zinc, matches ghostty voltaic-dark
+[theme.custom]
+sidebar_bg = "#0C0A09"
+panel_bg = "#18181B"
+active_row_bg = "#27272A"
+selection_bg = "rgb(30,48,5)"
+accent = "#CAEA28"
+green = "#10B981"
+blue = "#A3E635"
+red = "#FF6B80"
+yellow = "#F59E0B"
 
 [ui]
 agent_panel_sort = "spaces"

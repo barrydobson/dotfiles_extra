@@ -70,6 +70,7 @@ When building features, build a tiny end-to-end slice through every layer first,
 - **Branches without a worktree — for ticket/feature work on shared repos.** Isolate in a git worktree; never `git checkout -b` on the main checkout (avoids `git stash` clobbering in-progress work). Exceptions, work on `main` directly, no need to ask: small doc/config/template edits, and repos where I'm the sole user. Unsure which case? Ask.
 - **Proactive file creation.**
 - **Em dashes (—).** Use hyphens.
+- **`prek` / pre-commit frameworks.** Not used, don't propose them.
 
 ## Gotchas
 

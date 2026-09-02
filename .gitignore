@@ -35,3 +35,5 @@ wt
 
 # restic local overrides (bucket/endpoint per machine)
 packages/restic/.config/restic/claude.conf
+
+**/__pycache__/

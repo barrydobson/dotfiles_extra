@@ -33,7 +33,6 @@
       "Bash(wget *| bash*)",
       "Bash(git push --force*)",
       "Bash(git push *--force*)",
-      "Bash(git reset --hard*)",
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)"
@@ -51,6 +50,16 @@
           {
             "type": "command",
             "command": "rtk hook claude"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/barrydobson/.claude/hooks/deny-secret-reads.sh'",
+            "timeout": 5
           }
         ]
       }
@@ -79,7 +88,7 @@
   },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
-    "humanizer@barrydobson": true,
+    "humanizer@barrydobson": false,
     "ponytail@ponytail": true,
     "drawio@365-skills": false,
     "skill-creator@claude-plugins-official": true,

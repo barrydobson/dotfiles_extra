@@ -14,13 +14,15 @@ Detail for the summary in `~/.claude/CLAUDE.md`. Consult before committing, open
 2. Run relevant tests - not the full suite.
 3. Run linters and type checker. Fix everything.
 
+Unless the repo's CLAUDE.md says that hooks already run them.
+
 ## Commits
 
 - Conventional prefix: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`.
 - Imperative mood. Subject ≤72 chars.
 - One logical change per commit.
 - Never amend or rebase commits already pushed to a shared branch.
-- Never push directly to `main` - always via branch + PR.
+- Never push directly to `main` - always via branch + PR Unless the repo's CLAUDE.md says otherwise
 - Never commit secrets. `.env` is gitignored; use environment variables.
 
 ## Pull requests

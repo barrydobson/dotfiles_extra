@@ -14,6 +14,8 @@
       "Bash(git commit -m ':*)",
       "Bash(git push:*)",
       "Bash(curl *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
       "Bash(gh pr ready:*)",
       "Bash(gh pr comment:*)",
       "Bash(gh issue close:*)",
@@ -34,31 +36,13 @@
       "Bash(git reset --hard*)",
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
-      "Edit(~/.ssh/**)",
-      "Read(~/.ssh/**)",
-      "Read(~/.gnupg/**)",
-      "Read(~/.aws/**)",
-      "Read(~/.azure/**)",
-      "Read(~/.config/gh/**)",
-      "Read(~/.git-credentials)",
-      "Read(~/.docker/config.json)",
-      "Read(~/.kube/**)",
-      "Read(~/.npmrc)",
-      "Read(~/.npm/**)",
-      "Read(~/.pypirc)",
-      "Read(*/.env)",
-      "Read(~/.gem/credentials)",
-      "Read(~/Library/Keychains/**)",
-      "Read(~/Library/Application Support/**/metamask*/**)",
-      "Read(~/Library/Application Support/**/electrum*/**)",
-      "Read(~/Library/Application Support/**/exodus*/**)",
-      "Read(~/Library/Application Support/**/phantom*/**)",
-      "Read(~/Library/Application Support/**/solflare*/**)"
+      "Edit(~/.ssh/**)"
     ],
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [],
+  "disableClaudeAiConnectors": true,
   "hooks": {
     "PreToolUse": [
       {
@@ -85,7 +69,9 @@
     ]
   },
   "disableAgentView": false,
+  "enableArtifact": false,
   "enableWorkflows": false,
+  "workflowKeywordTriggerEnabled": false,
   "statusLine": {
     "type": "command",
     "command": "bunx --silent ccstatusline@latest",
@@ -97,7 +83,6 @@
     "ponytail@ponytail": true,
     "drawio@365-skills": false,
     "skill-creator@claude-plugins-official": true,
-    "caveman@caveman": true,
     "engineering-workflow@barrydobson": true,
     "mattpocock-skills@claude-plugins-official": true
   },
@@ -130,13 +115,6 @@
       },
       "autoUpdate": true
     },
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      },
-      "autoUpdate": true
-    },
     "barrydobson": {
       "source": {
         "source": "github",
@@ -150,6 +128,13 @@
         "repo": "spf13/go-skills"
       },
       "autoUpdate": true
+    },
+    "simple-english": {
+      "source": {
+        "source": "github",
+        "repo": "AminBlg/SimpleEnglish"
+      },
+      "autoUpdate": true
     }
   },
   "alwaysThinkingEnabled": true,
@@ -161,6 +146,7 @@
     "enabled": false,
     "mode": "hold"
   },
+  "timeFormat": "24-hour",
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
@@ -169,5 +155,6 @@
   "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "mcpServers": {}
+  "mcpServers": {},
+  "skillOverrides": { "gh-stack": "off", "tavily-cli": "off" }
 }

@@ -21,6 +21,8 @@ description: >-
 
 Retrieve current documentation and code examples for any library using the Context7 CLI.
 
+Do not use for: refactoring, writing scripts from scratch, debugging business logic, code review, or general programming concepts.
+
 Make sure the CLI is up to date before running commands:
 
 ```bash
@@ -52,6 +54,8 @@ IMPORTANT: Do not run these commands more than 3 times per question. If you cann
 ## Step 1: Resolve a Library
 
 Resolves a package/product name to a Context7-compatible library ID and returns matching libraries.
+
+Use the official library name with proper punctuation (e.g. "Next.js" not "nextjs", "Customer.io" not "customerio", "Three.js" not "threejs")
 
 ```bash
 ctx7 library react "How to clean up useEffect with async operations"
@@ -114,12 +118,12 @@ ctx7 docs /prisma/prisma "How to define one-to-many relations with cascade delet
 
 The query directly affects the quality of results. Be specific and include relevant details. Do not include any sensitive or confidential information such as API keys, passwords, credentials, personal data, or proprietary code in your query.
 
-| Quality | Example |
-|---------|---------|
-| Good | `"How to set up authentication with JWT in Express.js"` |
-| Good | `"React useEffect cleanup function with async operations"` |
-| Bad | `"auth"` |
-| Bad | `"hooks"` |
+| Quality | Example                                                    |
+| ------- | ---------------------------------------------------------- |
+| Good    | `"How to set up authentication with JWT in Express.js"`    |
+| Good    | `"React useEffect cleanup function with async operations"` |
+| Bad     | `"auth"`                                                   |
+| Bad     | `"hooks"`                                                  |
 
 Use the user's full question as the query when possible, vague one-word queries return generic results.
 
@@ -140,6 +144,7 @@ ctx7 login
 ## Error Handling
 
 If a command fails with a quota error ("Monthly quota reached" or "quota exceeded"):
+
 1. Inform the user their Context7 quota is exhausted
 2. Suggest they authenticate for higher limits: `ctx7 login`
 3. If they cannot or choose not to authenticate, answer from training knowledge and clearly note it may be outdated

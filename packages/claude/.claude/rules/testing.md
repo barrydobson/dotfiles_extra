@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*_test.go"
+  - "**/*.test.ts"
+  - "**/*.spec.ts"
+  - "**/test_*.py"
+---
+
 # Testing
 
 Detail for the summary in `~/.claude/CLAUDE.md`. Consult when writing or modifying tests.

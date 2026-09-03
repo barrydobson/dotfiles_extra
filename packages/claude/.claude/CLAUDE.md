@@ -40,7 +40,6 @@ Research first, no code. State the plan - what changes, risks, rollback - and ge
 - **Code quality** (warnings, comments, error handling) → `~/.claude/rules/code-quality.md`
 - **Testing** (behaviour, edges, mocks, red-green) → `~/.claude/rules/testing.md`
 - **Workflow** (branches, commits, PRs) → `~/.claude/rules/workflow.md`
-- **Tool Docs** (libraries, frameworks, APIs, CLIs) → `~/.claude/rules/context7.md`
 
 Read relevant file before writing tests, opening PR, committing.
 

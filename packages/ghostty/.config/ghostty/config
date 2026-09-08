@@ -27,7 +27,7 @@ copy-on-select = clipboard
 # working directory tracking across splits, better scrollback
 # navigation.
 shell-integration = detect
-shell-integration-features = cursor,sudo,title
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
 
 # Performance. Claude Code generates long outputs. 100000 lines is
 # generous. Disable the resize overlay; it flickers on fast redraws.

@@ -3,6 +3,7 @@
 Global defaults. Project CLAUDE.md files augment.
 
 @~/vault/Context/me.md
+@~/vault/Context/work.md
 
 ## How to talk to me
 

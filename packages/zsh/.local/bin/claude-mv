@@ -26,9 +26,9 @@ if [ -e "$NEW_DIR" ]; then
     exit 1
 fi
 
-# Convert paths to Claude's format (replace / and . with -)
+# Convert paths to Claude's format (any non-alphanumeric char becomes -)
 # Need to do this BEFORE moving the directory to check for existing context
-OLD_ENCODED=$(echo "$OLD_ABS" | sed 's/[\/.]/-/g')
+OLD_ENCODED="${OLD_ABS//[^a-zA-Z0-9]/-}"
 
 # Figure out what the new absolute path will be
 if [[ "$NEW_DIR" = /* ]]; then
@@ -45,7 +45,7 @@ else
     fi
 fi
 
-NEW_ENCODED=$(echo "$NEW_ABS_FUTURE" | sed 's/[\/.]/-/g')
+NEW_ENCODED="${NEW_ABS_FUTURE//[^a-zA-Z0-9]/-}"
 
 CLAUDE_DIR="$HOME/.claude"
 

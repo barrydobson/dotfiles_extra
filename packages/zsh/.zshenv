@@ -24,3 +24,20 @@ add_to_path "/opt/nvim/bin"
 add_to_path "$HOME/go/bin"
 add_to_path "${KREW_ROOT:-$HOME/.krew}/bin"
 add_to_path "$HOME/.bun/bin"
+
+#=============================================================================
+# Local Environment
+#=============================================================================
+# Here rather than conf.d for the same reason as PATH above. conf.d only loads
+# from .zshrc, so a key set there exists for interactive shells and nothing
+# else. Scheduled jobs, agent routines and git hooks all run non-interactively
+# and saw nothing, which reads at the far end as "not authenticated" rather
+# than as a config bug.
+#
+# ~/.env uses explicit `export` per line, so no `set -a` here — a blanket
+# auto-export would push every future entry into every child process.
+#
+# Sourced after PATH so entries can reference the binaries it adds.
+if [[ -s ~/.env ]]; then
+    source ~/.env
+fi

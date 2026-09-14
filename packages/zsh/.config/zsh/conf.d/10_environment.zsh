@@ -55,13 +55,3 @@ setopt pushd_silent
 # Completion behaviour
 setopt complete_in_word
 setopt always_to_end
-
-#=============================================================================
-# Local Environment
-#=============================================================================
-
-# ~/.env uses explicit `export` per line, so no `set -a` here — a blanket
-# auto-export would push every future entry into every child process.
-if [[ -s ~/.env ]]; then
-    source ~/.env
-fi

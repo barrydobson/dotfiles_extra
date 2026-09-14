@@ -7,9 +7,11 @@ description: Query the wiki knowledge base and optionally save results. Use when
 
 Answer questions by navigating the wiki's hierarchical indexes, reading relevant articles, and synthesizing an answer with citations.
 
-## Location of wiki
+## Where the wiki is
 
-The wiki is located in an Obsidian vault at `~/vault`
+The wiki lives in an Obsidian vault at `~/vault`, and this skill is user-level so the question usually gets asked from somewhere else entirely. **Every path below is absolute against `~/vault`** - relative paths only work in the minority case where the vault happens to be the working directory, and they fail silently the rest of the time by finding nothing and looking like an empty wiki.
+
+If a read or write to `~/vault` is refused, `permissions.additionalDirectories` in `~/.claude/settings.json` is missing `~/vault`. Say so rather than answering from memory as though the wiki were empty.
 
 ## Execution model
 
@@ -19,7 +21,7 @@ Handle queries directly (no subagent needed — queries are conversational and b
 
 ### 1. Navigate the indexes
 
-Read `wiki/_master-index.md` to identify which topics are relevant to the question. Then read those topics' index files to find specific articles. Read the articles that are most likely to contain the answer.
+Read `~/vault/wiki/_master-index.md` to identify which topics are relevant to the question. Each topic folder holds a hub note named after the topic (`~/vault/wiki/kafka/Kafka.md`, `~/vault/wiki/gitops/GitOps.md`) listing every article in that folder with a one-line description. Read the hub notes for the relevant topics, then the articles most likely to contain the answer.
 
 Don't read everything — be targeted. The index hierarchy exists to avoid full scans.
 
@@ -37,37 +39,28 @@ If the wiki doesn't have enough information to fully answer the question, say so
 
 ### 3. Offer to save
 
-After answering, if the synthesis produced something valuable (a comparison, an analysis, a connection between topics that wasn't previously documented), offer to save it. There are two options:
+After answering, if the synthesis produced something durable — a comparison, an analysis, a connection between topics that wasn't previously documented — offer to save it as a wiki article in the appropriate topic folder.
 
-**As a wiki article** — if the answer represents durable knowledge that will be useful in future queries. Save it in the appropriate topic folder following the standard article format. Use only canonical tags from CLAUDE.md — do not invent new tags. Update the topic index and master index.
+Read `~/vault/wiki/CLAUDE.md` first. It holds the article format and the closed canonical tag list, and from outside the vault it does not load on its own. Never invent a tag. Then update the topic hub note, and the master index only if you added a whole new topic.
 
-**As an output file** — if the answer is more situational (a one-off comparison, a report for a specific purpose). Save to `output/YYYY-MM-DD-descriptive-name.md` with frontmatter:
-
-```yaml
----
-tags: [output, topic-tag]
-created: YYYY-MM-DD
-query: "the original question"
----
-```
-
-If the user declines to save, that's fine — not every answer needs to be persisted.
+If the answer was situational rather than durable, don't save it. The vault has no home for one-off reports, and filing them anyway is how a wiki fills with things nobody reads again. Answering well in the conversation is the whole job most of the time.
 
 ### 4. Log the query
 
-Append an entry to `wiki/log.md`:
+Never edit the log by hand. `wiki/log.md` is a pointer, not the log itself; the real log is `wiki/logs/<year>.md`, and the script picks the right year file, creates it on rollover, and always appends in the same direction:
 
-```markdown
-## [YYYY-MM-DD] query | Brief description of the question
-
+```bash
+~/vault/.claude/scripts/wiki-log.sh query "<brief description of the question>" <<'BODY'
 - **Articles consulted**: [[Article 1]], [[Article 2]], ...
-- **Result**: answered / partial (gap identified) / saved as wiki article / saved as output
+- **Result**: answered | partial (gap identified) | saved as wiki article
+BODY
 ```
+
+Writing the entry by hand is what broke this log before: "append an entry" is ambiguous once a file has entries at both ends, so they drifted to both.
 
 ## Output formats
 
-The default output is inline markdown in the conversation. But if the user asks for a specific format, support:
+The default output is inline markdown in the conversation. If the user asks for something specific, support:
 
 - **Table** — comparison or structured data as a markdown table
-- **Report** — longer-form analysis saved to `output/`
-- **Article** — distilled into wiki article format for filing
+- **Article** — distilled into wiki article format and filed, as in step 3

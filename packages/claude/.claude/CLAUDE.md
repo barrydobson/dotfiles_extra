@@ -2,8 +2,8 @@
 
 Global defaults. Project CLAUDE.md files augment.
 
-@~~/vault/Context/me.md
-@~~/vault/Context/work.md
+@~/.claude/me.md
+@~/.claude/work.md
 
 ## Writing guidelines
 

@@ -37,7 +37,8 @@
       "Edit(~/.zshrc)",
       "Edit(~/.ssh/**)"
     ],
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "additionalDirectories": ["~/vault"]
   },
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [],

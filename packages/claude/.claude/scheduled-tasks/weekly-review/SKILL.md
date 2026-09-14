@@ -3,11 +3,21 @@ name: weekly-review
 description: Review the week just ended and promote its daily notes into the slower vault layers
 ---
 
-/assistant weekly review
+Work in the Obsidian vault at `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal`. All paths below are relative to it.
 
 **Review the week that just ended**, Monday to Sunday, not the current week. This runs Monday morning after `daily-log` has written Friday's and the weekend's notes, so the previous week is complete and every daily note exists. Do not review the day this runs on.
 
-The point of this run is promotion, step 7 in the skill. The review prose is secondary. Nothing else in the vault sweeps the slower layers, so if promotion does not happen here, the daily notes accumulate and everything above them goes stale.
+The point of this run is **promotion**. The review prose is secondary. Nothing else in the vault sweeps the slower layers, so if promotion does not happen here, the daily notes accumulate and everything above them goes stale.
+
+## The run
+
+1. Read every `Worklog/YYYY-MM/` note for the week that just ended.
+2. Scan `Projects/` for movement, and `Systems/` for repos that came up more than once.
+3. Write `Worklog/YYYY-MM/YYYY-MM-DD Weekly Review.md`, dated the Monday of the week reviewed, following `Templates/Weekly Review.md`.
+4. Promote, per the table below. This is the step that has to happen.
+5. Report what was promoted and where, and list anything left open.
+
+## Promotion
 
 Read the previous week's `Worklog/` notes, then move what has held up:
 
@@ -19,7 +29,18 @@ Read the previous week's `Worklog/` notes, then move what has held up:
 
 Every source gets exactly one roll-up, and no source is summarised in another source's tree. `Worklog/` rolls up weekly into the review note. `DailyNews/` rolls up monthly into the wiki. There is no briefings section in the review.
 
-Read the week's briefings anyway, for one question only: does any story change a live project or a `Systems/` note? If it does, write it into that note and say so in the report. If nothing does, say nothing. If this run is the first review of a new month, also compile the month just gone into `wiki/daily-briefings/{Month YYYY} AI and DevOps Trends.md`. The skill has the full procedure.
+Read the week's briefings anyway, for one question only: does any story change a live project or a `Systems/` note? If it does, write it into that note and say so in the report. If nothing does, say nothing.
+
+**First review of a new month.** Compile the month that just ended into a wiki article, the way `wiki/daily-briefings/March 2026 AI and DevOps Trends.md` was compiled:
+
+1. Read every briefing in `DailyNews/{last month}/`.
+2. Write `wiki/daily-briefings/{Month YYYY} AI and DevOps Trends.md`. Frontmatter: `tags: [daily-briefings]` plus the topic tags that actually earned a section, `created:` today, `source:` the list of briefing paths.
+3. Open with `## Key Takeaways`, then one `##` section per subject that ran through the month. A subject with two mentions is not a section.
+4. Link out to wiki articles that exist. Rule 1 applies: no dead links.
+5. Add the article to the list in `wiki/daily-briefings/Daily Briefings.md`.
+6. Log it: `.claude/scripts/wiki-log.sh compile "{Month YYYY} AI and DevOps Trends"`.
+
+Stay inside the briefings. The synthesis names what was reported, not what you think happened.
 
 Work through every unresolved `> [!question] Worth a /til?` callout in that week's notes. Each one is either promoted or explicitly dismissed with a reason. That backlog reached three months once before.
 
@@ -31,5 +52,3 @@ Two rules:
 
 - Leave anything still a one-off in the daily note. The test is whether it held up over the week, not whether it felt significant on the day.
 - Stay inside the evidence. If a daily note records a question but never its answer, do not promote it and do not invent the resolution. Say it is still open.
-
-Report what was promoted and where, and list anything left open.

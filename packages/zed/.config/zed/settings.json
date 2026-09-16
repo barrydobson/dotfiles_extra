@@ -126,7 +126,7 @@
   "buffer_font_size": 13.0,
   "theme": {
     "mode": "system",
-    "light": "Voltaic — Light",
-    "dark": "Voltaic — Dark",
+    "light": "Voltaic Light",
+    "dark": "Voltaic Dark",
   },
 }

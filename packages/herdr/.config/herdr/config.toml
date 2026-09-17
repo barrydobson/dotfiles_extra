@@ -4,17 +4,26 @@ onboarding = false
 name = "terminal"
 auto_switch = false
 
-# voltaic - lime accent on zinc, matches ghostty voltaic-dark
 [theme.custom]
-sidebar_bg = "#0C0A09"
-panel_bg = "#18181B"
-active_row_bg = "#27272A"
-selection_bg = "rgb(30,48,5)"
-accent = "#CAEA28"
-green = "#10B981"
-blue = "#A3E635"
-red = "#FF6B80"
-yellow = "#F59E0B"
+accent = "#c8ff00"  # volt
+panel_bg = "#18181b"  # surface
+sidebar_bg = "#09090b"  # base
+active_row_bg = "#27272a"  # overlay
+selection_bg = "#2f3a09"  # volt at tint over base
+surface0 = "#27272a"  # overlay
+surface1 = "#3f3f46"  # muted
+surface_dim = "#3f3f46"  # muted
+overlay0 = "#787881"  # subtle
+overlay1 = "#787881"  # subtle
+text = "#d4d4d8"  # text
+subtext0 = "#a1a1aa"  # soft
+mauve = "#bb9af7"  # violet
+green = "#10b981"  # jade
+yellow = "#e0af68"  # amber
+red = "#f7768e"  # ember
+blue = "#7aa2f7"  # blue
+teal = "#73daca"  # teal
+peach = "#b9a58c"  # bronze
 
 [ui]
 agent_panel_sort = "spaces"

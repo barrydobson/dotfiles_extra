@@ -5,3 +5,4 @@
 # needs to cover those. If a new runtime path shows up in git status here, the
 # migration has been undone rather than a rule being missing.
 .claude/skills/.search-log.jsonl
+.claude/skills/synced

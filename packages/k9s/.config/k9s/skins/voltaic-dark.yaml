@@ -1,101 +1,121 @@
-# Voltaic - Dark
+# Voltaic Dark. Generated from palette.json, do not edit.
 k9s:
   body:
-    fgColor: '#d4d4d8'
-    bgColor: '#09090b'
-    logoColor: '#caea28'
+    fgColor: "#d4d4d8"
+    bgColor: "#09090b"
+    logoColor: "#c8ff00"
+    logoColorMsg: "#d4d4d8"
+    logoColorInfo: "#7aa2f7"
+    logoColorWarn: "#e0af68"
+    logoColorError: "#f7768e"
   prompt:
-    fgColor: '#d4d4d8'
-    bgColor: '#18181b'
-    suggestColor: '#71717a'
+    fgColor: "#d4d4d8"
+    bgColor: "#18181b"
+    suggestColor: "#787881"
+    border:
+      command: "#c8ff00"
+      default: "#73daca"
   help:
-    fgColor: '#d4d4d8'
-    bgColor: '#09090b'
-    sectionColor: '#caea28'
-    keyColor: '#7aa2f7'
-    numKeyColor: '#e0af68'
+    fgColor: "#d4d4d8"
+    bgColor: "#09090b"
+    sectionColor: "#c8ff00"
+    keyColor: "#7aa2f7"
+    numKeyColor: "#e0af68"
+  info:
+    fgColor: "#a1a1aa"
+    sectionColor: "#d4d4d8"
+    cpuColor: "#7aa2f7"
+    memColor: "#73daca"
+    k9sRevColor: "#787881"
   frame:
     title:
-      fgColor: '#a3e635'
-      bgColor: '#09090b'
-      highlightColor: '#caea28'
-      counterColor: '#e0af68'
-      filterColor: '#73daca'
+      fgColor: "#a3e635"
+      bgColor: "#09090b"
+      highlightColor: "#c8ff00"
+      counterColor: "#7aa2f7"
+      filterColor: "#73daca"
     border:
-      fgColor: '#27272a'
-      focusColor: '#caea28'
+      fgColor: "#27272a"
+      focusColor: "#c8ff00"
     menu:
-      fgColor: '#d4d4d8'
-      keyColor: '#caea28'
-      numKeyColor: '#e0af68'
+      fgColor: "#d4d4d8"
+      keyColor: "#7aa2f7"
+      numKeyColor: "#e0af68"
     crumbs:
-      fgColor: '#09090b'
-      bgColor: '#caea28'
-      activeColor: '#a3e635'
+      fgColor: "#0c0a09"
+      bgColor: "#a1a1aa"
+      activeColor: "#c8ff00"
     status:
-      newColor: '#7aa2f7'
-      modifyColor: '#bb9af7'
-      addColor: '#caea28'
-      pendingColor: '#e0af68'
-      errorColor: '#f7768e'
-      highlightColor: '#73daca'
-      killColor: '#f7768e'
-      completedColor: '#52525b'
-  info:
-    fgColor: '#caea28'
-    sectionColor: '#a1a1aa'
+      newColor: "#7aa2f7"
+      modifyColor: "#e0af68"
+      addColor: "#10b981"
+      pendingColor: "#e0af68"
+      errorColor: "#f7768e"
+      highlightColor: "#a3e635"
+      killColor: "#f7768e"
+      completedColor: "#787881"
   views:
     table:
-      fgColor: '#d4d4d8'
-      bgColor: '#09090b'
-      cursorFgColor: '#09090b'
-      cursorBgColor: '#caea28'
-      markColor: '#e0af68'
+      fgColor: "#d4d4d8"
+      bgColor: "#09090b"
+      cursorFgColor: "#0c0a09"
+      cursorBgColor: "#c8ff00"
+      markColor: "#e0af68"
       header:
-        fgColor: '#a1a1aa'
-        bgColor: '#09090b'
-        sorterColor: '#caea28'
+        fgColor: "#a1a1aa"
+        bgColor: "#09090b"
+        sorterColor: "#c8ff00"
+        selectedSortColumnColor: "#a3e635"
     xray:
-      fgColor: '#d4d4d8'
-      bgColor: '#09090b'
-      cursorColor: '#27272a'
-      cursorTextColor: '#caea28'
-      graphicColor: '#caea28'
+      fgColor: "#27272a"
+      bgColor: "#09090b"
+      cursorColor: "#d4d4d8"
+      cursorTextColor: "#0c0a09"
+      graphicColor: "#3f3f46"
     charts:
-      bgColor: '#09090b'
-      chartBgColor: '#09090b'
-      dialBgColor: '#09090b'
+      bgColor: "#09090b"
+      chartBgColor: "#09090b"
+      dialBgColor: "#09090b"
+      focusFgColor: "#0c0a09"
+      focusBgColor: "#c8ff00"
       defaultDialColors:
-        - '#caea28'
-        - '#f7768e'
+        - "#10b981"
+        - "#f7768e"
       defaultChartColors:
-        - '#caea28'
-        - '#f7768e'
+        - "#10b981"
+        - "#f7768e"
+      # Exactly two entries. k9s reverse-looks-up these by tcell colour name to
+      # build the pulse legend, falls back to a safe default under three, and a
+      # hex matches no name, so a third entry empties the lookup and panics.
       resourceColors:
         cpu:
-          - '#caea28'
-          - '#a3e635'
+          - "#7aa2f7"
+          - "#e0af68"
         mem:
-          - '#7aa2f7'
-          - '#2ac3de'
+          - "#73daca"
+          - "#e0af68"
     yaml:
-      keyColor: '#caea28'
-      valueColor: '#d4d4d8'
-      colonColor: '#52525b'
+      keyColor: "#7aa2f7"
+      valueColor: "#d4d4d8"
+      colonColor: "#787881"
+    picker:
+      mainColor: "#d4d4d8"
+      focusColor: "#c8ff00"
+      shortcutColor: "#7aa2f7"
     logs:
-      fgColor: '#d4d4d8'
-      bgColor: '#09090b'
+      fgColor: "#d4d4d8"
+      bgColor: "#0c0a09"
       indicator:
-        fgColor: '#09090b'
-        bgColor: '#caea28'
-        toggleOnColor: '#caea28'
-        toggleOffColor: '#52525b'
+        fgColor: "#a1a1aa"
+        bgColor: "#18181b"
+        toggleOnColor: "#10b981"
+        toggleOffColor: "#787881"
   dialog:
-    fgColor: '#d4d4d8'
-    bgColor: '#18181b'
-    buttonFgColor: '#09090b'
-    buttonBgColor: '#52525b'
-    buttonFocusFgColor: '#09090b'
-    buttonFocusBgColor: '#caea28'
-    labelFgColor: '#caea28'
-    fieldFgColor: '#d4d4d8'
+    fgColor: "#d4d4d8"
+    bgColor: "#18181b"
+    buttonFgColor: "#d4d4d8"
+    buttonBgColor: "#27272a"
+    buttonFocusFgColor: "#0c0a09"
+    buttonFocusBgColor: "#c8ff00"
+    labelFgColor: "#a3e635"
+    fieldFgColor: "#d4d4d8"

@@ -1,0 +1,121 @@
+# Voltaic Light. Generated from palette.json, do not edit.
+k9s:
+  body:
+    fgColor: "#3f3f46"
+    bgColor: "#f0efed"
+    logoColor: "#4c790f"
+    logoColorMsg: "#3f3f46"
+    logoColorInfo: "#1d4ed8"
+    logoColorWarn: "#9c5f07"
+    logoColorError: "#be123c"
+  prompt:
+    fgColor: "#3f3f46"
+    bgColor: "#ffffff"
+    suggestColor: "#6c6c75"
+    border:
+      command: "#4c790f"
+      default: "#0f766e"
+  help:
+    fgColor: "#3f3f46"
+    bgColor: "#f0efed"
+    sectionColor: "#4c790f"
+    keyColor: "#1d4ed8"
+    numKeyColor: "#9c5f07"
+  info:
+    fgColor: "#52525b"
+    sectionColor: "#3f3f46"
+    cpuColor: "#1d4ed8"
+    memColor: "#0f766e"
+    k9sRevColor: "#6c6c75"
+  frame:
+    title:
+      fgColor: "#3f6212"
+      bgColor: "#f0efed"
+      highlightColor: "#4c790f"
+      counterColor: "#1d4ed8"
+      filterColor: "#0f766e"
+    border:
+      fgColor: "#e4e4e7"
+      focusColor: "#4c790f"
+    menu:
+      fgColor: "#3f3f46"
+      keyColor: "#1d4ed8"
+      numKeyColor: "#9c5f07"
+    crumbs:
+      fgColor: "#faf9f7"
+      bgColor: "#52525b"
+      activeColor: "#4c790f"
+    status:
+      newColor: "#1d4ed8"
+      modifyColor: "#9c5f07"
+      addColor: "#047857"
+      pendingColor: "#9c5f07"
+      errorColor: "#be123c"
+      highlightColor: "#3f6212"
+      killColor: "#be123c"
+      completedColor: "#6c6c75"
+  views:
+    table:
+      fgColor: "#3f3f46"
+      bgColor: "#f0efed"
+      cursorFgColor: "#faf9f7"
+      cursorBgColor: "#4c790f"
+      markColor: "#9c5f07"
+      header:
+        fgColor: "#52525b"
+        bgColor: "#f0efed"
+        sorterColor: "#4c790f"
+        selectedSortColumnColor: "#3f6212"
+    xray:
+      fgColor: "#e4e4e7"
+      bgColor: "#f0efed"
+      cursorColor: "#3f3f46"
+      cursorTextColor: "#faf9f7"
+      graphicColor: "#d4d4d8"
+    charts:
+      bgColor: "#f0efed"
+      chartBgColor: "#f0efed"
+      dialBgColor: "#f0efed"
+      focusFgColor: "#faf9f7"
+      focusBgColor: "#4c790f"
+      defaultDialColors:
+        - "#047857"
+        - "#be123c"
+      defaultChartColors:
+        - "#047857"
+        - "#be123c"
+      # Exactly two entries. k9s reverse-looks-up these by tcell colour name to
+      # build the pulse legend, falls back to a safe default under three, and a
+      # hex matches no name, so a third entry empties the lookup and panics.
+      resourceColors:
+        cpu:
+          - "#1d4ed8"
+          - "#9c5f07"
+        mem:
+          - "#0f766e"
+          - "#9c5f07"
+    yaml:
+      keyColor: "#1d4ed8"
+      valueColor: "#3f3f46"
+      colonColor: "#6c6c75"
+    picker:
+      mainColor: "#3f3f46"
+      focusColor: "#4c790f"
+      shortcutColor: "#1d4ed8"
+    logs:
+      fgColor: "#3f3f46"
+      bgColor: "#faf9f7"
+      indicator:
+        fgColor: "#52525b"
+        bgColor: "#ffffff"
+        toggleOnColor: "#047857"
+        toggleOffColor: "#6c6c75"
+  dialog:
+    fgColor: "#3f3f46"
+    bgColor: "#ffffff"
+    buttonFgColor: "#3f3f46"
+    buttonBgColor: "#e4e4e7"
+    buttonFocusFgColor: "#faf9f7"
+    buttonFocusBgColor: "#4c790f"
+    labelFgColor: "#3f6212"
+    fieldFgColor: "#3f3f46"

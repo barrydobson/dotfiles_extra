@@ -1,0 +1,21 @@
+# Voltaic Light for Atuin. Generated from palette.json, do not edit.
+
+[theme]
+name = "voltaic-light"
+
+[colors]
+AlertInfo = "#047857"
+AlertWarn = "#9c5f07"
+AlertError = "#be123c"
+Annotation = "#52525b"
+Base = "#3f3f46"
+Guidance = "#1d4ed8"
+Important = "#27272a"
+Title = "#3f6212"
+Muted = "#6c6c75"
+SyntaxCommand = "#4c790f"
+SyntaxFlag = "#9c5f07"
+SyntaxString = "#047857"
+SyntaxVariable = "#7c3aed"
+SyntaxOperator = "#52525b"
+SyntaxComment = "#6c6c75"

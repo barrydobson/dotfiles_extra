@@ -23,3 +23,6 @@ enter_accept = false
 
 [dotfiles]
 enabled = false
+
+[theme]
+name = "voltaic-dark"

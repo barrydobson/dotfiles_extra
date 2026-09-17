@@ -1,0 +1,21 @@
+# Voltaic Dark for Atuin. Generated from palette.json, do not edit.
+
+[theme]
+name = "voltaic-dark"
+
+[colors]
+AlertInfo = "#10b981"
+AlertWarn = "#e0af68"
+AlertError = "#f7768e"
+Annotation = "#a1a1aa"
+Base = "#d4d4d8"
+Guidance = "#7aa2f7"
+Important = "#fafafa"
+Title = "#a3e635"
+Muted = "#787881"
+SyntaxCommand = "#c8ff00"
+SyntaxFlag = "#e0af68"
+SyntaxString = "#10b981"
+SyntaxVariable = "#bb9af7"
+SyntaxOperator = "#89ddff"
+SyntaxComment = "#787881"

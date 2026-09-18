@@ -2,6 +2,7 @@
 
 Global defaults. Project CLAUDE.md files augment.
 
+<!-- prettier-ignore -->
 @~/.claude/me.md
 @~/.claude/work.md
 
@@ -48,7 +49,6 @@ Research first, no code. State the plan - what changes, risks, rollback - and ge
 
 ## Detailed rules (load when relevant)
 
-- **Code quality** (warnings, comments, error handling) → `~/.claude/rules/code-quality.md`
 - **Testing** (behaviour, edges, mocks, red-green) → `~/.claude/rules/testing.md`
 - **Workflow** (branches, commits, PRs) → `~/.claude/rules/workflow.md`
 
@@ -76,11 +76,7 @@ When building features, build a tiny end-to-end slice through every layer first,
 - **Complex heredocs.** Use Task tool.
 - **Non-idempotent setup/install scripts.**
 - **State tracking files.** Detect state from system.
-- **`rm -rf`.** Use `trash`.
-- **Branches without a worktree — for ticket/feature work on shared repos.** Isolate in a git worktree; never `git checkout -b` on the main checkout (avoids `git stash` clobbering in-progress work). Exceptions, work on `main` directly, no need to ask: small doc/config/template edits, and repos where I'm the sole user. Unsure which case? Ask.
-- **Proactive file creation.**
 - **Em dashes (—).** Use hyphens.
-- **`prek` / pre-commit frameworks.** Not used, don't propose them.
 
 ## Gotchas
 

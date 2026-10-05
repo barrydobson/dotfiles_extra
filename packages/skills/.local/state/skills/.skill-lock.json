@@ -6,46 +6,45 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/tavily-ai/skills.git",
       "skillPath": "skills/tavily-cli/SKILL.md",
-      "skillFolderHash": "6717ea654907d29e696c68fec83bd0548d93371a",
+      "skillFolderHash": "d57b97c553c870dadf2078d78d366cbc78b83cfc",
       "installedAt": "2026-05-08T08:03:55.934Z",
-      "updatedAt": "2026-05-08T08:03:55.934Z"
+      "updatedAt": "2026-10-05T07:30:03.364Z"
     },
     "tavily-extract": {
       "source": "tavily-ai/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/tavily-ai/skills.git",
       "skillPath": "skills/tavily-extract/SKILL.md",
-      "skillFolderHash": "5de24876e7faa5789ba64c4c07ed32e4bcfe2f4b",
+      "skillFolderHash": "a9b92610cdb8ead6d709182ff555a74227bdf0ef",
       "installedAt": "2026-05-08T08:03:55.937Z",
-      "updatedAt": "2026-05-08T08:03:55.937Z"
+      "updatedAt": "2026-10-05T07:30:04.772Z"
     },
     "tavily-research": {
       "source": "tavily-ai/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/tavily-ai/skills.git",
       "skillPath": "skills/tavily-research/SKILL.md",
-      "skillFolderHash": "fa87e5a0c7bb3f4cffe75a65189f16a4271f9c41",
+      "skillFolderHash": "a93ee382646e984e542ac141420768030059f7ff",
       "installedAt": "2026-05-08T08:03:55.939Z",
-      "updatedAt": "2026-05-08T08:03:55.939Z"
+      "updatedAt": "2026-10-05T07:30:06.088Z"
     },
     "tavily-search": {
       "source": "tavily-ai/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/tavily-ai/skills.git",
       "skillPath": "skills/tavily-search/SKILL.md",
-      "skillFolderHash": "74e6f8996fa49a3ebe8aa8f3dbddc4a2c2b5e5e4",
+      "skillFolderHash": "44719ad1e17b195435fab4c4a8128671e262b6ef",
       "installedAt": "2026-05-08T08:03:55.940Z",
-      "updatedAt": "2026-05-08T08:03:55.940Z"
+      "updatedAt": "2026-10-05T07:30:07.503Z"
     },
-
     "archify": {
       "source": "tt-a1i/archify",
       "sourceType": "github",
       "sourceUrl": "https://github.com/tt-a1i/archify.git",
       "skillPath": "archify/SKILL.md",
-      "skillFolderHash": "6e054b8bfc96784cd2e5a1cfc31dfa0e3b352bc1",
+      "skillFolderHash": "b39bcc918173641199e7ed3e4c54bf8fddd47848",
       "installedAt": "2026-09-07T11:44:51.532Z",
-      "updatedAt": "2026-09-07T11:44:51.532Z"
+      "updatedAt": "2026-10-05T07:30:11.656Z"
     }
   },
   "dismissed": {

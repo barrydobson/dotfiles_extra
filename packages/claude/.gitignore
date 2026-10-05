@@ -6,3 +6,4 @@
 # migration has been undone rather than a rule being missing.
 .claude/skills/.search-log.jsonl
 .claude/skills/synced
+.claude/skills/vault-query

@@ -77,10 +77,10 @@
     "ponytail@ponytail": true,
     "drawio@365-skills": false,
     "skill-creator@claude-plugins-official": true,
-    "mattpocock-skills@claude-plugins-official": true,
     "typesafe@typesafe-ai": true,
     "tote-issue-tracker@tote-skills": true,
-    "barrydobson-skills@barrydobson": true
+    "barrydobson-skills@barrydobson": true,
+    "mattpocock-skills@mattpocock": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -131,6 +131,12 @@
         "repo": "barrydobson/skills"
       },
       "autoUpdate": true
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
     }
   },
   "feedbackDrafts": "off",

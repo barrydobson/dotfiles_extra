@@ -5,20 +5,19 @@ activate_aggressive = true               # mise shims win over other PATH entrie
 credential_command = 'gh auth token'
 
 [tools]
-atuin = { version = "latest", os = ["linux"] }
-ripgrep = { version = "latest", os = ["linux"] }
-eza = { version = "latest", os = ["linux"] }
-zoxide = { version = "latest", os = ["linux"] }
-jq = { version = "latest", os = ["linux"] }
-yq = { version = "latest", os = ["linux"] }
-neovim = { version = "latest", os = ["linux"] }
-tmux = { version = "latest", os = ["linux"] }
-yamlfmt = { version = "latest", os = ["linux"] }
-github-cli = { version = "latest", os = ["linux"] }
-kubectx = { version = "latest", os = ["macos"] }
-kubens = { version = "latest", os = ["macos"] }
-usage = 'latest'
-go = 'latest'
-golangci-lint = 'latest'
+atuin = { version = "18.22.0", os = ["linux"] }
+ripgrep = { version = "15.2.0", os = ["linux"] }
+eza = { version = "0.23.5", os = ["linux"] }
+zoxide = { version = "0.10.0", os = ["linux"] }
+jq = { version = "1.8.2", os = ["linux"] }
+yq = { version = "4.54.1", os = ["linux"] }
+tmux = { version = "3.7c", os = ["linux"] }
+yamlfmt = { version = "0.21.0", os = ["linux"] }
+github-cli = { version = "2.101.0", os = ["linux"] }
+kubectx = { version = "0.9.5", os = ["macos"] }
+kubens = { version = "0.9.5", os = ["macos"] }
+usage = '6.12.0'
+go = '1.27.1'
+golangci-lint = '2.13.2'
 node = "24.13.1"
-"npm:ccstatusline" = 'latest'
+"npm:ccstatusline" = '2.0.29'
